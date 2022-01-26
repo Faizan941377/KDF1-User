@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_background"
+    tools:context=".Splash.SplashActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:text="KDF Foodies"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:textSize="40dp"/>
+
+
+    <ImageView
+        android:id="@+id/iv_burger"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/splash_burger"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"/>
+
+
+    <TextView
+        android:id="@+id/tv_enjoy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enjoy"
+        android:textColor="@color/colorWhite"
+        android:layout_below="@id/iv_burger"
+        android:layout_marginLeft="30dp"
+        android:textSize="40dp"/>
+
+    <TextView
+        android:id="@+id/tv_eating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eating"
+        android:textColor="@color/colorWhite"
+        android:layout_below="@id/tv_enjoy"
+        android:layout_marginLeft="30dp"
+        android:textSize="40dp"/>
+
+
+    <TextView
+        android:id="@+id/tv_tasty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="All the Tasty Foods in your phone"
+        android:textColor="@color/colorWhite"
+        android:layout_below="@id/tv_eating"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="30dp"
+        android:textSize="25dp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="36dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:text="Get Started"
+            android:textColor="@color/black"/>
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
