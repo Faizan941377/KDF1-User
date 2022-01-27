@@ -14,15 +14,17 @@ public class GetProductDataModel {
     String price;
     String stockstatus;
     String description;
-    String images;
+    String menu;
+    String image;
 
-    public GetProductDataModel(String id, String title, String price, String stockstatus, String description, String images) {
+    public GetProductDataModel(String id, String title, String price, String stockstatus, String description, String menu, String image) {
         this.id = id;
         this.title = title;
         this.price = price;
         this.stockstatus = stockstatus;
         this.description = description;
-        this.images = images;
+        this.menu = menu;
+        this.image = image;
     }
 
     public String getId() {
@@ -65,11 +67,19 @@ public class GetProductDataModel {
         this.description = description;
     }
 
-    public String getImages() {
-        return images;
+    public String getMenu() {
+        return menu;
     }
 
-    public void setImages(String images) {
-        this.images = images;
+    public void setMenu(String menu) {
+        this.menu = menu;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

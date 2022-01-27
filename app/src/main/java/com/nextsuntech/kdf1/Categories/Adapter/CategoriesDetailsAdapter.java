@@ -2,6 +2,7 @@ package com.nextsuntech.kdf1.Categories.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,9 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
         holder.productName.setText(productDataModelList.get(position).getTitle());
         holder.priceTV.setText(productDataModelList.get(position).getPrice());
 
-        String  path = RetrofitClient.IMAGE_BASE_URL1 + productDataModelList.get(position).getImages();
+
+
+        String  path = RetrofitClient.IMAGE_BASE_URL1 + productDataModelList.get(position).getTitle();
         Glide.with(mContext).load(path).into(holder.detailPizzaIV);
 
     }

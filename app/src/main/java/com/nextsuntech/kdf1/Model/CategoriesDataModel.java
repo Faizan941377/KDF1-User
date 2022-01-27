@@ -7,18 +7,18 @@ public class CategoriesDataModel {
     String title;
     String description;
     String image;
-    String createdAt;
+    String createAt;
     String status;
 
-    public CategoriesDataModel(String id, String userId, String user, String title, String description,
-                               String image, String createdAt, String status) {
+    public CategoriesDataModel(String id, String userId, String user,
+                               String title, String description, String image, String createAt, String status) {
         this.id = id;
         this.userId = userId;
         this.user = user;
         this.title = title;
         this.description = description;
         this.image = image;
-        this.createdAt = createdAt;
+        this.createAt = createAt;
         this.status = status;
     }
 
@@ -70,12 +70,12 @@ public class CategoriesDataModel {
         this.image = image;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public String getCreateAt() {
+        return createAt;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
     }
 
     public String getStatus() {

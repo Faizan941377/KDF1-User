@@ -67,7 +67,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
         holder.priceTV.setText(categoriesDataModelList.get(position).getId());
 
         holder.progressBar.setVisibility(View.VISIBLE);
-        String path = RetrofitClient.IMAGE_BASE_URL + categoriesDataModelList.get(position).getImage() + "";
+        String path = RetrofitClient.IMAGE_BASE_URL + categoriesDataModelList.get(position).getImage()+ "";
         Glide.with(mContext).load(path)
                 .listener(new RequestListener<Drawable>() {
                     @Override
