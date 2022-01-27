@@ -35,7 +35,7 @@ public class DashboardActivity extends AppCompatActivity {
     RecyclerView dealsRV;
     EditText searchET;
     DealsAdapter dealsAdapter;
-    private List<CategoriesDataModel> categoriesDetailDataModels;
+    List<CategoriesDataModel> categoriesDataModelsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +56,9 @@ public class DashboardActivity extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                setCategoriesAdapter();
+                //here we can pass to refresh the recycler view
                 setDealsAdapter();
-                searchET.setText("");
+                setDealsAdapter();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -76,7 +76,7 @@ public class DashboardActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-//                categoriesAdapter.getFilter().filter(s);
+                categoriesAdapter.getFilter().filter(s);
             }
         });
     }
@@ -105,14 +105,15 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<MenuResponse> call, Response<MenuResponse> response) {
                 if (response.isSuccessful()) {
-                    categoriesDetailDataModels = response.body().getResult();
-                    categoriesRV.setAdapter(new CategoriesAdapter(getApplicationContext(), categoriesDetailDataModels));
-                    categoriesAdapter = new CategoriesAdapter(getApplicationContext(), categoriesDetailDataModels);
+                    categoriesDataModelsList = response.body().getResult();
+                    categoriesRV.setAdapter(new CategoriesAdapter(getApplicationContext(), categoriesDataModelsList));
+                    categoriesAdapter = new CategoriesAdapter(getApplicationContext(), categoriesDataModelsList);
                     categoriesRV.setAdapter(categoriesAdapter);
                     progressDialog.dismiss();
                 } else {
                     Toast.makeText(DashboardActivity.this, "Check your internet connection!", Toast.LENGTH_SHORT).show();
                 }
+                progressDialog.dismiss();
             }
 
             @Override

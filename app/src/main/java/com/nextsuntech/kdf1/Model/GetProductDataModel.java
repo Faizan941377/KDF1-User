@@ -1,5 +1,12 @@
 package com.nextsuntech.kdf1.Model;
 
+import android.media.Image;
+
+import com.nextsuntech.kdf1.Response.GetProductResponse;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class GetProductDataModel {
 
     String id;
@@ -9,8 +16,7 @@ public class GetProductDataModel {
     String description;
     String images;
 
-    public GetProductDataModel(String id, String title, String price, String stockstatus,
-                               String description, String images) {
+    public GetProductDataModel(String id, String title, String price, String stockstatus, String description, String images) {
         this.id = id;
         this.title = title;
         this.price = price;

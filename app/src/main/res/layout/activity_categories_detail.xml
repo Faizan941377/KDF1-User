@@ -6,8 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".Categories.CategoriesDetailActivity">
 
+    <EditText
+        android:id="@+id/et_rowCategoryDetail"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edit_text_style"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_categoriesDetails"
+        android:layout_below="@+id/et_rowCategoryDetail"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

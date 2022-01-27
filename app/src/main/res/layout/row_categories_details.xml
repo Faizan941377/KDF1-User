@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/bt_row_categories_details"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="170dp"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="150dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,10 +23,9 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/iv_pizza"
-                    android:layout_width="match_parent"
+                    android:id="@+id/iv_rowCategoryDetailPizza"
+                    android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:layout_centerHorizontal="true"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:scaleType="centerCrop"
@@ -36,8 +35,9 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/iv_pizza"
-                    android:layout_centerHorizontal="true"
+                    android:layout_toRightOf="@+id/iv_rowCategoryDetailPizza"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -66,7 +66,7 @@
 
 
                         <TextView
-                            android:id="@+id/tv_rowCategories_price"
+                            android:id="@+id/tv_rowCategories_details_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="12dp"

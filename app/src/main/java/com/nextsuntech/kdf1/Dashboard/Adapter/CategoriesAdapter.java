@@ -2,6 +2,7 @@ package com.nextsuntech.kdf1.Dashboard.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.http.SslCertificate;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,29 +12,40 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.nextsuntech.kdf1.Categories.CategoriesDetailActivity;
 import com.nextsuntech.kdf1.Model.CategoriesDataModel;
+import com.nextsuntech.kdf1.Model.GetProductDataModel;
+import com.nextsuntech.kdf1.Network.RetrofitClient;
 import com.nextsuntech.kdf1.R;
 
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
 import javax.xml.namespace.QName;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> implements Filterable {
 
     Context mContext;
-    private List<CategoriesDataModel> categoriesDataModelList;
-    private List<CategoriesDataModel> fetchCategoriesDataModelList;
-
+     List<CategoriesDataModel> categoriesDataModelList;
+     List<CategoriesDataModel> fetchCategoriesDataModelList;
 
     public CategoriesAdapter(Context mContext, List<CategoriesDataModel> categoriesDataModelList) {
         this.mContext = mContext;
@@ -52,9 +64,25 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.productName.setText(categoriesDataModelList.get(position).getTitle());
-        holder.priceTV.setText(categoriesDataModelList.get(position).getStatus());
-       /* String path = RetrofitClient.IMAGE_BASE_URL + categoriesDetailsDataModelList.get(position).getImage() + "";
-        Glide.with(mContext).load(path).centerCrop().into(holder.menuIV);*/
+        holder.priceTV.setText(categoriesDataModelList.get(position).getId());
+
+        holder.progressBar.setVisibility(View.VISIBLE);
+        String path = RetrofitClient.IMAGE_BASE_URL + categoriesDataModelList.get(position).getImage() + "";
+        Glide.with(mContext).load(path)
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        holder.progressBar.setVisibility(View.VISIBLE);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        holder.progressBar.setVisibility(View.GONE);
+                        return false;
+                    }
+                })
+                .into(holder.menuIV);
 
 
         holder.categoriesBT.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +91,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
                 switch (v.getId()) {
                     case R.id.bt_row_categories:
                         Intent intent = new Intent(mContext.getApplicationContext(), CategoriesDetailActivity.class);
-                        Toast.makeText(mContext, "" +categoriesDataModelList.get(position).getId(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "" + categoriesDataModelList.get(position).getId(), Toast.LENGTH_SHORT).show();
                         intent.putExtra("id", categoriesDataModelList.get(position).getId());
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         mContext.getApplicationContext().startActivity(intent);
@@ -79,12 +107,11 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
         return categoriesDataModelList.size();
     }
 
-    @Override
     public Filter getFilter() {
         return filter;
     }
 
-    private Filter filter = new Filter() {
+    public Filter filter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             List<CategoriesDataModel> filterList = new ArrayList<>();
@@ -93,7 +120,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
             } else {
                 String filter = constraint.toString().toLowerCase().trim();
                 for (CategoriesDataModel dataItem : fetchCategoriesDataModelList) {
-                    if (dataItem.getTitle().toLowerCase().contains(filter)) {
+                    if (dataItem.getId().toLowerCase().contains(filter)) {
                         filterList.add(dataItem);
                     }
                 }
@@ -117,6 +144,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
         TextView productName;
         TextView priceTV;
         ImageView menuIV;
+        ProgressBar progressBar;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -124,6 +152,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
             productName = itemView.findViewById(R.id.tv_productName);
             menuIV = itemView.findViewById(R.id.iv_pizza);
             priceTV = itemView.findViewById(R.id.tv_rowCategories_price);
+            progressBar = itemView.findViewById(R.id.pb_rowCategory_image);
 
         }
     }

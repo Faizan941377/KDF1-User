@@ -21,84 +21,86 @@ public class GetProductResponse {
         this.getProductDataModels = getProductDataModels;
     }
 
+    public class ImageName {
 
-    @SerializedName("images")
-    @Expose
-    private String images;
+        @SerializedName("images")
+        @Expose
+        private String images;
 
-    public String getImages() {
-        return images;
+        public String getImages() {
+            return images;
+        }
+
+        public void setImages(String images) {
+            this.images = images;
+        }
+
+
+        @SerializedName("id")
+        @Expose
+        private Integer id;
+        @SerializedName("title")
+        @Expose
+        private String title;
+        @SerializedName("price")
+        @Expose
+        private Integer price;
+        @SerializedName("stockstatus")
+        @Expose
+        private String stockstatus;
+        @SerializedName("description")
+        @Expose
+        private String description;
+        @SerializedName("imageName")
+        @Expose
+        private ImageName imageName;
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public Integer getPrice() {
+            return price;
+        }
+
+        public void setPrice(Integer price) {
+            this.price = price;
+        }
+
+        public String getStockstatus() {
+            return stockstatus;
+        }
+
+        public void setStockstatus(String stockstatus) {
+            this.stockstatus = stockstatus;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public ImageName getImageName() {
+            return imageName;
+        }
+
+        public void setImageName(ImageName imageName) {
+            this.imageName = imageName;
+        }
     }
-
-    public void setImages(String images) {
-        this.images = images;
-    }
-
-    @SerializedName("id")
-    @Expose
-    private Integer id;
-    @SerializedName("title")
-    @Expose
-    private String title;
-    @SerializedName("price")
-    @Expose
-    private Integer price;
-    @SerializedName("stockstatus")
-    @Expose
-    private String stockstatus;
-    @SerializedName("description")
-    @Expose
-    private String description;
-    @SerializedName("imageName")
-    @Expose
-    private String imageName;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public String getStockstatus() {
-        return stockstatus;
-    }
-
-    public void setStockstatus(String stockstatus) {
-        this.stockstatus = stockstatus;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String  getImageName() {
-        return imageName;
-    }
-
-    public void setImageName(String  imageName) {
-        this.imageName = imageName;
-    }
-
 }
