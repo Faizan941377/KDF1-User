@@ -11,7 +11,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
     public static String IMAGE_BASE_URL = "https://kdfrestaurant.com/";
-    public static String IMAGE_BASE_URL1 = "https://kdfrestaurant.com/images/Products/";
     private static String BASE_URL = "https://kdfrestaurant.com/Admin/";
 
     private static RetrofitClient retrofitClient;

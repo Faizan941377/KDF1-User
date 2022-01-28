@@ -2,6 +2,7 @@ package com.nextsuntech.kdf1.Categories.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +11,19 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.nextsuntech.kdf1.Categories.CategoriesDetailActivity;
 import com.nextsuntech.kdf1.Model.CategoriesDataModel;
 import com.nextsuntech.kdf1.Model.GetProductDataModel;
@@ -40,6 +47,7 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
     List<GetProductDataModel> productDataModelList;
     List<GetProductDataModel> fetchProductDataModelList;
 
+
     public CategoriesDetailsAdapter(Context mContext, List<GetProductDataModel> productDataModelList) {
         this.mContext = mContext;
         this.productDataModelList = productDataModelList;
@@ -50,7 +58,7 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
     @NonNull
     @Override
     public CategoriesDetailsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.row_categories_details,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.row_categories_details, parent, false);
         return new ViewHolder(view);
     }
 
@@ -60,9 +68,23 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
         holder.priceTV.setText(productDataModelList.get(position).getPrice());
 
 
+        //progress bar
+        holder.imageDetailPB.setVisibility(View.VISIBLE);
+        String path = RetrofitClient.IMAGE_BASE_URL + productDataModelList.get(position).getImageName().getImages();
+        Glide.with(mContext).load(path)
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        holder.imageDetailPB.setVisibility(View.VISIBLE);
+                        return false;
+                    }
 
-        String  path = RetrofitClient.IMAGE_BASE_URL1 + productDataModelList.get(position).getTitle();
-        Glide.with(mContext).load(path).into(holder.detailPizzaIV);
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        holder.imageDetailPB.setVisibility(View.GONE);
+                        return false;
+                    }
+                }).into(holder.detailPizzaIV);
 
     }
 
@@ -107,6 +129,7 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
         TextView productName;
         TextView priceTV;
         ImageView detailPizzaIV;
+        ProgressBar imageDetailPB;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -114,6 +137,7 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
             productName = itemView.findViewById(R.id.tv_productName);
             priceTV = itemView.findViewById(R.id.tv_rowCategories_details_price);
             detailPizzaIV = itemView.findViewById(R.id.iv_rowCategoryDetailPizza);
+            imageDetailPB = itemView.findViewById(R.id.pb_rowCategoryDetail_image);
         }
     }
 }

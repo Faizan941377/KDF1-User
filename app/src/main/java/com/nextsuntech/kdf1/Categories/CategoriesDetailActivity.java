@@ -40,6 +40,7 @@ public class CategoriesDetailActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +49,9 @@ public class CategoriesDetailActivity extends AppCompatActivity {
 
         categoriesDetailRV = findViewById(R.id.rv_categoriesDetails);
         searchET = findViewById(R.id.et_rowCategoryDetail);
+
+
+
 
         progressDialog = new ProgressDialog(this);
 

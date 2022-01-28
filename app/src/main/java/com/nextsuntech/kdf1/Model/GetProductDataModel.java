@@ -2,6 +2,8 @@ package com.nextsuntech.kdf1.Model;
 
 import android.media.Image;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.nextsuntech.kdf1.Response.GetProductResponse;
 
 import java.util.ArrayList;
@@ -15,16 +17,18 @@ public class GetProductDataModel {
     String stockstatus;
     String description;
     String menu;
-    String image;
 
-    public GetProductDataModel(String id, String title, String price, String stockstatus, String description, String menu, String image) {
+    private GetProductResponse.ImageName imageName;
+
+    public GetProductDataModel(String id, String title, String price, String stockstatus,
+                               String description, String menu, GetProductResponse.ImageName imageName) {
         this.id = id;
         this.title = title;
         this.price = price;
         this.stockstatus = stockstatus;
         this.description = description;
         this.menu = menu;
-        this.image = image;
+        this.imageName = imageName;
     }
 
     public String getId() {
@@ -75,11 +79,11 @@ public class GetProductDataModel {
         this.menu = menu;
     }
 
-    public String getImage() {
-        return image;
+    public GetProductResponse.ImageName getImageName() {
+        return imageName;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageName(GetProductResponse.ImageName imageName) {
+        this.imageName = imageName;
     }
 }

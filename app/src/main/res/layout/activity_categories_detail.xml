@@ -4,20 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorOffWhite"
     tools:context=".Categories.CategoriesDetailActivity">
 
-    <EditText
-        android:id="@+id/et_rowCategoryDetail"
+    <RelativeLayout
+        android:id="@+id/action_bar"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="?actionBarSize"
+        android:background="@color/color_orange">
+
+
+        <TextView
+            android:id="@+id/tv_rowCategories_details_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:text="Add to Your Cart"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/action_bar"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/edit_text_style"/>
+        android:layout_marginRight="20dp">
+
+        <EditText
+            android:id="@+id/et_rowCategoryDetail"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/et_search_shap"
+            android:hint="Search &amp; Order"
+            android:paddingStart="35dp" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/ico_search"
+            android:backgroundTint="@color/lightGray" />
+
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_categoriesDetails"
-        android:layout_below="@+id/et_rowCategoryDetail"
+        android:layout_below="@+id/rl_searchBar"
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

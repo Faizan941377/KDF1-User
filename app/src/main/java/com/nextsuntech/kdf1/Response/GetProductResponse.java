@@ -4,21 +4,21 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.nextsuntech.kdf1.Model.GetProductDataModel;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class GetProductResponse {
 
-
     @SerializedName("result")
     @Expose
-    private List<GetProductDataModel> getProductDataModels = null;
+    private List<GetProductDataModel> getProductDataModelList = null;
 
     public List<GetProductDataModel> getProductDataModelList() {
-        return getProductDataModels;
+        return getProductDataModelList;
     }
 
-    public void setGetProductDataModels(List<GetProductDataModel> getProductDataModels) {
-        this.getProductDataModels = getProductDataModels;
+    public void setGetProductDataModelList(List<GetProductDataModel> getProductDataModelList) {
+        this.getProductDataModelList = getProductDataModelList;
     }
 
     public class ImageName {
@@ -27,6 +27,10 @@ public class GetProductResponse {
         @Expose
         private String images;
 
+        public ImageName(String images) {
+            this.images = images;
+        }
+
         public String getImages() {
             return images;
         }
@@ -34,6 +38,8 @@ public class GetProductResponse {
         public void setImages(String images) {
             this.images = images;
         }
+
+
 
 
         @SerializedName("id")
@@ -102,5 +108,6 @@ public class GetProductResponse {
         public void setImageName(ImageName imageName) {
             this.imageName = imageName;
         }
+
     }
 }
