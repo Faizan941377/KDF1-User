@@ -12,11 +12,11 @@ import retrofit2.http.POST;
 public interface WebServices {
 
 
-    @GET("getMenuCata")
+    @GET("GetMenuCata")
     Call<MenuResponse> menuResponse();
 
     @FormUrlEncoded
-    @POST("GetMenuProducts")
+    @POST("GetProductDetails")
     Call<GetProductResponse> getProductResponse(
             @Field("id") String id
     );

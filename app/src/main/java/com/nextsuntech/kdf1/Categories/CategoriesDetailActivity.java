@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -38,7 +39,7 @@ public class CategoriesDetailActivity extends AppCompatActivity {
     List<GetProductDataModel> productDataModelList;
     CategoriesDetailsAdapter categoriesDetailsAdapter;
     ProgressDialog progressDialog;
-
+    List<GetProductResponse.ImageName> imageNameList;
 
 
     @Override
@@ -87,8 +88,9 @@ public class CategoriesDetailActivity extends AppCompatActivity {
         categoriesDetailRV.setLayoutManager(staggeredGridLayoutManager);
 
         String id = getIntent().getExtras().getString("id");
-
+        Log.d("data" + productDataModelList,"Product Details");
         Call<GetProductResponse> call = RetrofitClient.getInstance().getApi().getProductResponse(id);
+        Log.d("data" + productDataModelList,"Product Details");
         call.enqueue(new Callback<GetProductResponse>() {
             @Override
             public void onResponse(Call<GetProductResponse> call, Response<GetProductResponse> response) {

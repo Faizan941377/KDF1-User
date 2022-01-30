@@ -65,12 +65,13 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
     @Override
     public void onBindViewHolder(@NonNull CategoriesDetailsAdapter.ViewHolder holder, int position) {
         holder.productName.setText(productDataModelList.get(position).getTitle());
-        holder.priceTV.setText(productDataModelList.get(position).getPrice());
+      //  holder.priceTV.setText(productDataModelList.get(position).getProductprice().getPrice());
+
 
 
         //progress bar
         holder.imageDetailPB.setVisibility(View.VISIBLE);
-        String path = RetrofitClient.IMAGE_BASE_URL + productDataModelList.get(position).getImageName().getImages();
+        String path = RetrofitClient.IMAGE_BASE_URL + productDataModelList.get(position).getImageName().get(0).getImages();
         Glide.with(mContext).load(path)
                 .listener(new RequestListener<Drawable>() {
                     @Override
