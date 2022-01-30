@@ -8,11 +8,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.nextsuntech.kdf1.Dashboard.Adapter.BeveragesAdapter;
 import com.nextsuntech.kdf1.Dashboard.Adapter.CategoriesAdapter;
 import com.nextsuntech.kdf1.Dashboard.Adapter.DealsAdapter;
 import com.nextsuntech.kdf1.Model.CategoriesDataModel;
@@ -28,10 +30,11 @@ import retrofit2.Response;
 
 public class DashboardActivity extends AppCompatActivity {
 
-    SwipeRefreshLayout swipeRefreshLayout;
     ProgressDialog progressDialog;
     RecyclerView categoriesRV;
+    RecyclerView beveragesRV;
     CategoriesAdapter categoriesAdapter;
+    BeveragesAdapter beveragesAdapter;
     RecyclerView dealsRV;
     EditText searchET;
     DealsAdapter dealsAdapter;
@@ -44,24 +47,14 @@ public class DashboardActivity extends AppCompatActivity {
 
         categoriesRV = findViewById(R.id.rv_categories);
         dealsRV = findViewById(R.id.rv_deals);
+        beveragesRV = findViewById(R.id.rv_beverages);
         searchET = findViewById(R.id.et_dashboard_search);
-        swipeRefreshLayout = findViewById(R.id.swipeLayout);
         progressDialog = new ProgressDialog(this);
 
 
         setCategoriesAdapter();
+        setBeveragesAdapter();
         setDealsAdapter();
-
-
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                //here we can pass to refresh the recycler view
-                setDealsAdapter();
-                setDealsAdapter();
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
 
         searchET.addTextChangedListener(new TextWatcher() {
             @Override
@@ -81,6 +74,13 @@ public class DashboardActivity extends AppCompatActivity {
         });
     }
 
+    private void setBeveragesAdapter() {
+        beveragesAdapter = new BeveragesAdapter(this);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3);
+        beveragesRV.setLayoutManager(gridLayoutManager);
+        beveragesRV.setAdapter(beveragesAdapter);
+    }
+
     private void setDealsAdapter() {
         dealsAdapter = new DealsAdapter(this);
         dealsRV.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
@@ -95,10 +95,10 @@ public class DashboardActivity extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
 
         categoriesRV.setHasFixedSize(true);
-        // categoriesRV.setLayoutManager(new GridLayoutManager(this, 2));
-        //categoriesRV.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
-        categoriesRV.setLayoutManager(staggeredGridLayoutManager);
+        categoriesRV.setLayoutManager(new GridLayoutManager(this, 2));
+        categoriesRV.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+       /* StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
+        categoriesRV.setLayoutManager(staggeredGridLayoutManager);*/
 
         Call<MenuResponse> call = RetrofitClient.getInstance().getApi().menuResponse();
         call.enqueue(new Callback<MenuResponse>() {

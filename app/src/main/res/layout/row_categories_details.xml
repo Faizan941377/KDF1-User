@@ -44,16 +44,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/iv_rowCategoryDetailPizza"
-                    android:layout_marginLeft="8dp"
+
                     android:layout_marginTop="16dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tv_productName"
-                        android:layout_width="100dp"
+                        android:layout_width="160dp"
                         android:layout_height="wrap_content"
-                        android:textSize="16dp"
-                        android:gravity="center"
+                        android:textSize="12dp"
                         android:text="Hot &amp; Spicy"
                         android:textColor="@color/colorBlack"
                         android:textStyle="bold"/>
@@ -61,8 +60,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_gravity="center">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -85,6 +83,32 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_rowCategories_details_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Desciption"
+                            android:maxLines="2"
+                            android:textColor="@color/lightGray"
+                            android:textSize="12dp"/>
+
+                        <TextView
+                            android:id="@+id/tv_rowCategories_details_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Stock"
+                            android:layout_gravity="center"
+                            android:textColor="@color/colorGreen"
+                            android:textStyle="bold"
+                            android:textSize="12dp"/>
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <ImageView
@@ -94,7 +118,7 @@
                     android:background="@drawable/ico_cart"
                     android:backgroundTint="@color/color_orange"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerInParent="true"
+                    android:layout_marginTop="16dp"
                     android:layout_marginRight="16dp"
                     android:padding="10dp"/>
 

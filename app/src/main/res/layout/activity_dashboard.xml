@@ -33,17 +33,11 @@
 
     </RelativeLayout>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/action_bar"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/action_bar">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -109,7 +103,7 @@
                     android:id="@+id/tv_categories"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:text="Categories"
                     android:textColor="@color/colorBlack"
@@ -121,7 +115,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_categories"
                     android:layout_width="match_parent"
-                    android:layout_height="320dp"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_categories"/>
 
 
@@ -135,17 +129,16 @@
                     android:textColor="@color/colorBlack"
                     android:layout_marginLeft="8dp"/>
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/ico_banner"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_beverages"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp">
+                </androidx.recyclerview.widget.RecyclerView>
 
             </LinearLayout>
 
 
         </ScrollView>
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"

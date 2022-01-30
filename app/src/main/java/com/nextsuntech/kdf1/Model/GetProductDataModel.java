@@ -20,6 +20,10 @@ public class GetProductDataModel {
     @Expose
     private List<GetProductResponse.ImageName> imageName = null;
 
+    @SerializedName("productprice")
+    @Expose
+    private List<GetProductResponse.Productprice> productprice = null;
+
 
     public GetProductDataModel(String id, String title, String price, String stockstatus, String description, String menu) {
         this.id = id;
@@ -52,6 +56,14 @@ public class GetProductDataModel {
 
     public void setImageName(List<GetProductResponse.ImageName> imageName) {
         this.imageName = imageName;
+    }
+
+    public List<GetProductResponse.Productprice> getProductprice() {
+        return productprice;
+    }
+
+    public void setProductprice(List<GetProductResponse.Productprice> productprice) {
+        this.productprice = productprice;
     }
 
     public String getPrice() {

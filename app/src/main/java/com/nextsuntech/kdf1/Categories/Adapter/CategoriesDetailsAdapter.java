@@ -1,7 +1,9 @@
 package com.nextsuntech.kdf1.Categories.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -65,8 +67,16 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
     @Override
     public void onBindViewHolder(@NonNull CategoriesDetailsAdapter.ViewHolder holder, int position) {
         holder.productName.setText(productDataModelList.get(position).getTitle());
-      //  holder.priceTV.setText(productDataModelList.get(position).getProductprice().getPrice());
+        holder.priceTV.setText(productDataModelList.get(position).getPrice());
+        holder.descriptionTV.setText(productDataModelList.get(position).getDescription());
 
+        holder.stockTV.setText(productDataModelList.get(position).getStockstatus());
+
+        if (holder.stockTV.length() == 8) {
+            holder.stockTV.setTextColor(Color.parseColor("#2b9f4c"));
+        } else if (holder.stockTV.length() == 12){
+            holder.stockTV.setTextColor(Color.parseColor("#FF0000"));
+        }
 
 
         //progress bar
@@ -129,8 +139,11 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
 
         TextView productName;
         TextView priceTV;
+        TextView descriptionTV;
+        TextView stockTV;
         ImageView detailPizzaIV;
         ProgressBar imageDetailPB;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -139,6 +152,8 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
             priceTV = itemView.findViewById(R.id.tv_rowCategories_details_price);
             detailPizzaIV = itemView.findViewById(R.id.iv_rowCategoryDetailPizza);
             imageDetailPB = itemView.findViewById(R.id.pb_rowCategoryDetail_image);
+            descriptionTV = itemView.findViewById(R.id.tv_rowCategories_details_description);
+            stockTV = itemView.findViewById(R.id.tv_rowCategories_details_status);
         }
     }
 }

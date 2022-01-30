@@ -64,7 +64,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.productName.setText(categoriesDataModelList.get(position).getTitle());
-        holder.priceTV.setText(categoriesDataModelList.get(position).getId());
 
         holder.progressBar.setVisibility(View.VISIBLE);
         String path = RetrofitClient.IMAGE_BASE_URL + categoriesDataModelList.get(position).getImage()+ "";
@@ -120,7 +119,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
             } else {
                 String filter = constraint.toString().toLowerCase().trim();
                 for (CategoriesDataModel dataItem : fetchCategoriesDataModelList) {
-                    if (dataItem.getId().toLowerCase().contains(filter)) {
+                    if (dataItem.getTitle().toLowerCase().contains(filter)) {
                         filterList.add(dataItem);
                     }
                 }
@@ -142,7 +141,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
 
         LinearLayout categoriesBT;
         TextView productName;
-        TextView priceTV;
         ImageView menuIV;
         ProgressBar progressBar;
 
@@ -151,7 +149,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
             categoriesBT = itemView.findViewById(R.id.bt_row_categories);
             productName = itemView.findViewById(R.id.tv_productName);
             menuIV = itemView.findViewById(R.id.iv_pizza);
-            priceTV = itemView.findViewById(R.id.tv_rowCategories_price);
             progressBar = itemView.findViewById(R.id.pb_rowCategory_image);
 
         }
