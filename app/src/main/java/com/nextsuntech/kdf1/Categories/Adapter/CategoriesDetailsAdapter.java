@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.ColorSpace;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ import com.nextsuntech.kdf1.Model.CategoriesDataModel;
 import com.nextsuntech.kdf1.Model.GetProductDataModel;
 import com.nextsuntech.kdf1.Network.RetrofitClient;
 import com.nextsuntech.kdf1.Network.WebServices;
+import com.nextsuntech.kdf1.ProductDetails.ProductDetailsActivity;
 import com.nextsuntech.kdf1.R;
 import com.nextsuntech.kdf1.Response.GetProductResponse;
 
@@ -97,6 +100,18 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
                     }
                 }).into(holder.detailPizzaIV);
 
+        holder.productDetailsBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               /* Intent intent = new Intent(mContext,ProductDetailsActivity.class);
+                intent.putExtra("description", productDataModelList.get(position).getDescription());
+                intent.putExtra("productTitle",productDataModelList.get(position).getTitle());
+                intent.putExtra("productImage",productDataModelList.get(position).getImageName().get(0).getImages());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.getApplicationContext().startActivity(intent);*/
+            }
+        });
+
     }
 
     @Override
@@ -143,6 +158,7 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
         TextView stockTV;
         ImageView detailPizzaIV;
         ProgressBar imageDetailPB;
+        RelativeLayout productDetailsBT;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -154,6 +170,7 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
             imageDetailPB = itemView.findViewById(R.id.pb_rowCategoryDetail_image);
             descriptionTV = itemView.findViewById(R.id.tv_rowCategories_details_description);
             stockTV = itemView.findViewById(R.id.tv_rowCategories_details_status);
+            productDetailsBT = itemView.findViewById(R.id.bt_rowCategoryDetails_productDetails);
         }
     }
 }

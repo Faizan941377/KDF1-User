@@ -88,9 +88,8 @@ public class CategoriesDetailActivity extends AppCompatActivity {
         categoriesDetailRV.setLayoutManager(staggeredGridLayoutManager);
 
         String id = getIntent().getExtras().getString("id");
-        Log.d("data" + productDataModelList,"Product Details");
+
         Call<GetProductResponse> call = RetrofitClient.getInstance().getApi().getProductResponse(id);
-        Log.d("data" + productDataModelList,"Product Details");
         call.enqueue(new Callback<GetProductResponse>() {
             @Override
             public void onResponse(Call<GetProductResponse> call, Response<GetProductResponse> response) {

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.http.SslCertificate;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,13 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -25,7 +28,10 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.nextsuntech.kdf1.Categories.CategoriesDetailActivity;
+import com.nextsuntech.kdf1.Dashboard.DashboardActivity;
 import com.nextsuntech.kdf1.Model.CategoriesDataModel;
 import com.nextsuntech.kdf1.Model.GetProductDataModel;
 import com.nextsuntech.kdf1.Network.RetrofitClient;
@@ -44,8 +50,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> implements Filterable {
 
     Context mContext;
-     List<CategoriesDataModel> categoriesDataModelList;
-     List<CategoriesDataModel> fetchCategoriesDataModelList;
+    List<CategoriesDataModel> categoriesDataModelList;
+    List<CategoriesDataModel> fetchCategoriesDataModelList;
 
     public CategoriesAdapter(Context mContext, List<CategoriesDataModel> categoriesDataModelList) {
         this.mContext = mContext;
@@ -64,9 +70,10 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.productName.setText(categoriesDataModelList.get(position).getTitle());
+        holder.priceTV.setText(categoriesDataModelList.get(position).getId());
 
         holder.progressBar.setVisibility(View.VISIBLE);
-        String path = RetrofitClient.IMAGE_BASE_URL + categoriesDataModelList.get(position).getImage()+ "";
+        String path = RetrofitClient.IMAGE_BASE_URL + categoriesDataModelList.get(position).getImage() + "";
         Glide.with(mContext).load(path)
                 .listener(new RequestListener<Drawable>() {
                     @Override
@@ -99,7 +106,15 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
             }
         });
 
+        //Opening Bottom sheet
+        holder.productDetailBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -140,7 +155,9 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         LinearLayout categoriesBT;
+        RelativeLayout productDetailBT;
         TextView productName;
+        TextView priceTV;
         ImageView menuIV;
         ProgressBar progressBar;
 
@@ -150,7 +167,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
             productName = itemView.findViewById(R.id.tv_productName);
             menuIV = itemView.findViewById(R.id.iv_pizza);
             progressBar = itemView.findViewById(R.id.pb_rowCategory_image);
-
+            productDetailBT = itemView.findViewById(R.id.rl_row_category_details);
+            priceTV = itemView.findViewById(R.id.tv_rowCategories_price);
         }
     }
 }
