@@ -1,11 +1,9 @@
 package com.nextsuntech.kdf1.Dashboard.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.http.SslCertificate;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +18,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -29,9 +26,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.nextsuntech.kdf1.Categories.CategoriesDetailActivity;
-import com.nextsuntech.kdf1.Dashboard.DashboardActivity;
 import com.nextsuntech.kdf1.Model.CategoriesDataModel;
 import com.nextsuntech.kdf1.Model.GetProductDataModel;
 import com.nextsuntech.kdf1.Network.RetrofitClient;
@@ -41,15 +36,10 @@ import com.nextsuntech.kdf1.R;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Locale;
-
-import javax.xml.namespace.QName;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> implements Filterable {
 
-    Context mContext;
+    private Context mContext;
     List<CategoriesDataModel> categoriesDataModelList;
     List<CategoriesDataModel> fetchCategoriesDataModelList;
 
@@ -70,7 +60,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.productName.setText(categoriesDataModelList.get(position).getTitle());
-        holder.priceTV.setText(categoriesDataModelList.get(position).getId());
+        // holder.priceTV.setText(categoriesDataModelList.get(position).getId());
 
         holder.progressBar.setVisibility(View.VISIBLE);
         String path = RetrofitClient.IMAGE_BASE_URL + categoriesDataModelList.get(position).getImage() + "";
@@ -110,6 +100,26 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
         holder.productDetailBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                BottomSheetDialog  builder = new BottomSheetDialog(v.getRootView().getContext());
+                View dialogView = LayoutInflater.from(v.getRootView().getContext()).inflate(R.layout.bottom_sheet_layout, null);
+
+                ImageView productImageIV;
+                TextView productNameTV;
+                TextView productPriceTV;
+                RelativeLayout addToCartBT;
+
+
+
+                productImageIV = dialogView.findViewById(R.id.iv_bottomSheet_productImage);
+                productNameTV = dialogView.findViewById(R.id.tv_bottomSheet_productName);
+                productPriceTV = dialogView.findViewById(R.id.tv_bottomSheet_productPrice);
+
+                productNameTV.setText(categoriesDataModelList.get(position).getTitle());
+
+                //builder.setView(dialogView);
+                builder.setContentView(dialogView);
+                builder.setCancelable(true);
+                builder.show();
             }
         });
 
@@ -156,6 +166,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
 
         LinearLayout categoriesBT;
         RelativeLayout productDetailBT;
+        RelativeLayout addToCart;
         TextView productName;
         TextView priceTV;
         ImageView menuIV;
@@ -169,6 +180,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
             progressBar = itemView.findViewById(R.id.pb_rowCategory_image);
             productDetailBT = itemView.findViewById(R.id.rl_row_category_details);
             priceTV = itemView.findViewById(R.id.tv_rowCategories_price);
+            // addToCart = itemView.findViewById(R.id.btn_addtocart);
         }
     }
 }

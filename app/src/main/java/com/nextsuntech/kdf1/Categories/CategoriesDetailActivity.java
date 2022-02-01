@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,15 +33,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class CategoriesDetailActivity extends AppCompatActivity {
+public class CategoriesDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText searchET;
     RecyclerView categoriesDetailRV;
     List<GetProductDataModel> productDataModelList;
     CategoriesDetailsAdapter categoriesDetailsAdapter;
     ProgressDialog progressDialog;
-    List<GetProductResponse.ImageName> imageNameList;
-
+    ImageView backIV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,10 @@ public class CategoriesDetailActivity extends AppCompatActivity {
 
         categoriesDetailRV = findViewById(R.id.rv_categoriesDetails);
         searchET = findViewById(R.id.et_rowCategoryDetail);
+        backIV = findViewById(R.id.iv_categoryDetails_back);
+
+
+        backIV.setOnClickListener(this);
 
 
 
@@ -117,5 +121,14 @@ public class CategoriesDetailActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_categoryDetails_back:
+                finish();
+                break;
+        }
     }
 }

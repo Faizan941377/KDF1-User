@@ -1,9 +1,11 @@
 package com.nextsuntech.kdf1.Dashboard;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -14,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.nextsuntech.kdf1.Cart.AddToCartActivity;
 import com.nextsuntech.kdf1.Dashboard.Adapter.BeveragesAdapter;
 import com.nextsuntech.kdf1.Dashboard.Adapter.CategoriesAdapter;
 import com.nextsuntech.kdf1.Dashboard.Adapter.DealsAdapter;
@@ -28,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity implements View.OnClickListener {
 
     ProgressDialog progressDialog;
     RecyclerView categoriesRV;
@@ -39,6 +43,7 @@ public class DashboardActivity extends AppCompatActivity {
     EditText searchET;
     DealsAdapter dealsAdapter;
     List<CategoriesDataModel> categoriesDataModelsList;
+    FloatingActionButton cartBT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +54,13 @@ public class DashboardActivity extends AppCompatActivity {
         dealsRV = findViewById(R.id.rv_deals);
         beveragesRV = findViewById(R.id.rv_beverages);
         searchET = findViewById(R.id.et_dashboard_search);
+        cartBT = findViewById(R.id.bt_dashboard_cartButton);
+
+
         progressDialog = new ProgressDialog(this);
 
+
+        cartBT.setOnClickListener(this);
 
         setCategoriesAdapter();
         setBeveragesAdapter();
@@ -76,7 +86,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void setBeveragesAdapter() {
         beveragesAdapter = new BeveragesAdapter(this);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 3);
         beveragesRV.setLayoutManager(gridLayoutManager);
         beveragesRV.setAdapter(beveragesAdapter);
     }
@@ -126,5 +136,15 @@ public class DashboardActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.bt_dashboard_cartButton:
+                Intent intent = new Intent(this, AddToCartActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

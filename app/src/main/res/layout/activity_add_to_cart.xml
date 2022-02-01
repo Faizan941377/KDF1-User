@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/colorOffWhite"
-    tools:context=".Categories.CategoriesDetailActivity">
+    tools:context=".Cart.AddToCartActivity">
 
     <RelativeLayout
         android:id="@+id/action_bar"
@@ -23,10 +24,10 @@
             android:textColor="@color/colorWhite"
             android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
-            android:text="Category Details"/>
+            android:text="Cart"/>
 
         <ImageView
-            android:id="@+id/iv_categoryDetails_back"
+            android:id="@+id/iv_AddToCart_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ico_back"
@@ -36,38 +37,21 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/rl_searchBar"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_rowAddToCart_myCartTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/action_bar"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="20dp">
-
-        <EditText
-            android:id="@+id/et_rowCategoryDetail"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/et_search_shap"
-            android:hint="Search &amp; Order"
-            android:paddingStart="35dp" />
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/ico_search"
-            android:backgroundTint="@color/lightGray" />
-
-    </RelativeLayout>
+        android:textColor="@color/color_orange"
+        android:textSize="25dp"
+        android:text="My Cart"
+        android:textStyle="bold"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="22dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_categoriesDetails"
-        android:layout_below="@+id/rl_searchBar"
-        android:layout_marginTop="8dp"
+        android:id="@+id/rv_addToCart"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-</RelativeLayout>
+</LinearLayout>

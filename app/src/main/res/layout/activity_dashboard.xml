@@ -22,14 +22,6 @@
             android:textSize="25dp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/ico_cart"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="8dp"
-            android:layout_centerVertical="true"
-            android:backgroundTint="@color/colorWhite"/>
 
     </RelativeLayout>
 
@@ -140,6 +132,7 @@
         </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bt_dashboard_cartButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
