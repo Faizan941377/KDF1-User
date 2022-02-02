@@ -61,6 +61,7 @@
 
 
                     <TextView
+                        android:id="@+id/tv_rowAddToCart_myCartQuantity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -113,6 +114,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_rowAddToCart_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="190"

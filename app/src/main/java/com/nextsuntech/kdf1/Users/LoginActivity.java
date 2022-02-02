@@ -10,7 +10,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.nextsuntech.kdf1.Dashboard.DashboardActivity;
+import com.nextsuntech.kdf1.Network.RetrofitClient;
 import com.nextsuntech.kdf1.R;
+import com.nextsuntech.kdf1.Response.LoginResponse;
+import com.nextsuntech.kdf1.SharedPref.SharedPrefManager;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,7 +38,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         progressDialog = new ProgressDialog(this);
 
-        emailET.setText("david@123.com");
+        emailET.setText("fayasz22@gmail.com");
         passwordET.setText("12345");
 
 
@@ -39,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
 
             case R.id.bt_login:
                 Login();
@@ -49,7 +57,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void Login() {
 
-        String email  = emailET.getText().toString().trim();
+        String email = emailET.getText().toString().trim();
         String password = passwordET.getText().toString().trim();
 
         if (emailET.length() == 0) {
@@ -70,6 +78,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             progressDialog.setMessage("Please wait it will take few moments");
             progressDialog.setCancelable(false);
             progressDialog.setIndeterminate(true);
+
+            Call<LoginResponse> call = RetrofitClient.getInstance().getApi().loginResponse(email, password);
+            call.enqueue(new Callback<LoginResponse>() {
+                @Override
+                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                    LoginResponse loginResponse = response.body();
+                    if (response.isSuccessful()) {
+                        progressDialog.dismiss();
+                        SharedPrefManager.getInstance(LoginActivity.this).saveLoginUser(loginResponse.getLoginDataModel());
+                        Intent intent = new Intent(LoginActivity.this,DashboardActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                        Toast.makeText(LoginActivity.this, loginResponse.getLoginModel(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<LoginResponse> call, Throwable t) {
+                    progressDialog.dismiss();
+                    try {
+                        Toast.makeText(LoginActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
 
 
         }

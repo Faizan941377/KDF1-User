@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,12 +19,15 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nextsuntech.kdf1.Cart.AddToCartActivity;
+import com.nextsuntech.kdf1.Categories.Adapter.CategoriesDetailsAdapter;
 import com.nextsuntech.kdf1.Dashboard.Adapter.BeveragesAdapter;
 import com.nextsuntech.kdf1.Dashboard.Adapter.CategoriesAdapter;
 import com.nextsuntech.kdf1.Dashboard.Adapter.DealsAdapter;
 import com.nextsuntech.kdf1.Model.CategoriesDataModel;
+import com.nextsuntech.kdf1.Model.GetCartDataModel;
 import com.nextsuntech.kdf1.Network.RetrofitClient;
 import com.nextsuntech.kdf1.R;
+import com.nextsuntech.kdf1.Response.GetCartResponse;
 import com.nextsuntech.kdf1.Response.MenuResponse;
 
 import java.util.List;
@@ -43,6 +47,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     EditText searchET;
     DealsAdapter dealsAdapter;
     List<CategoriesDataModel> categoriesDataModelsList;
+    List<GetCartDataModel> getCartDataModelList;
     FloatingActionButton cartBT;
 
     @Override
@@ -79,7 +84,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
             @Override
             public void afterTextChanged(Editable s) {
-                categoriesAdapter.getFilter().filter(s);
+//                categoriesAdapter.getFilter().filter(s);
             }
         });
     }
@@ -142,8 +147,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_dashboard_cartButton:
-                Intent intent = new Intent(this, AddToCartActivity.class);
-                startActivity(intent);
                 break;
         }
     }

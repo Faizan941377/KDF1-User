@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.nextsuntech.kdf1.Dashboard.DashboardActivity;
 import com.nextsuntech.kdf1.R;
+import com.nextsuntech.kdf1.Users.LoginActivity;
 
 
 public class SplashActivity extends AppCompatActivity {
@@ -24,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(com.nextsuntech.kdf1.Splash.SplashActivity.this, DashboardActivity.class);
+                Intent intent = new Intent(com.nextsuntech.kdf1.Splash.SplashActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }

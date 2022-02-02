@@ -1,6 +1,9 @@
 package com.nextsuntech.kdf1.Network;
 
+import com.nextsuntech.kdf1.Response.AddToCartResponse;
+import com.nextsuntech.kdf1.Response.GetCartResponse;
 import com.nextsuntech.kdf1.Response.GetProductResponse;
+import com.nextsuntech.kdf1.Response.LoginResponse;
 import com.nextsuntech.kdf1.Response.MenuResponse;
 
 import retrofit2.Call;
@@ -19,5 +22,27 @@ public interface WebServices {
     @POST("GetProductDetails")
     Call<GetProductResponse> getProductResponse(
             @Field("id") String id
+    );
+
+    @FormUrlEncoded
+    @POST("AddCart")
+    Call<AddToCartResponse> AddToCart(
+            @Field("ProductId") String ProductId,
+            @Field("UserRegistrationId") String UserRegistrationId,
+            @Field("TotalQuantity") String TotalQuantity,
+            @Field("Price") String Price
+    );
+
+    @FormUrlEncoded
+    @POST("GetCarts")
+    Call<GetCartResponse> getAddToCart(
+            @Field("id") String id
+    );
+
+    @FormUrlEncoded
+    @POST("LoginWaiter")
+    Call<LoginResponse> loginResponse(
+            @Field("email") String email,
+            @Field("password") String password
     );
 }

@@ -1,20 +1,15 @@
 package com.nextsuntech.kdf1.Categories.Adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.ColorSpace;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -29,23 +25,15 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.nextsuntech.kdf1.Categories.CategoriesDetailActivity;
-import com.nextsuntech.kdf1.Model.CategoriesDataModel;
 import com.nextsuntech.kdf1.Model.GetProductDataModel;
+import com.nextsuntech.kdf1.Model.LoginDataModel;
 import com.nextsuntech.kdf1.Network.RetrofitClient;
-import com.nextsuntech.kdf1.Network.WebServices;
 import com.nextsuntech.kdf1.ProductDetails.ProductDetailsActivity;
 import com.nextsuntech.kdf1.R;
-import com.nextsuntech.kdf1.Response.GetProductResponse;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDetailsAdapter.ViewHolder> implements Filterable {
 
@@ -74,12 +62,12 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
         holder.productName.setText(productDataModelList.get(position).getTitle());
         holder.priceTV.setText(productDataModelList.get(position).getPrice());
         holder.descriptionTV.setText(productDataModelList.get(position).getDescription());
-
         holder.stockTV.setText(productDataModelList.get(position).getStockstatus());
+
 
         if (holder.stockTV.length() == 8) {
             holder.stockTV.setTextColor(Color.parseColor("#2b9f4c"));
-        } else if (holder.stockTV.length() == 12){
+        } else if (holder.stockTV.length() == 12) {
             holder.stockTV.setTextColor(Color.parseColor("#FF0000"));
         }
 
@@ -103,16 +91,33 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
                 }).into(holder.detailPizzaIV);
 
 
-
+//send data to product Details activity
         holder.productDetailsBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext,ProductDetailsActivity.class);
+                Intent intent = new Intent(mContext, ProductDetailsActivity.class);
                 intent.putExtra("description", productDataModelList.get(position).getDescription());
-                intent.putExtra("productTitle",productDataModelList.get(position).getTitle());
+                intent.putExtra("productTitle", productDataModelList.get(position).getTitle());
                 intent.putExtra("img_url", RetrofitClient.IMAGE_BASE_URL + productDataModelList.get(position).getImageName().get(0).getImages());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.getApplicationContext().startActivity(intent);
+            }
+        });
+
+
+        //send data Add to cart activity
+        holder.addToCartIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String qty = "1";
+                String userId = "2";
+                Intent intent = new Intent("custom-message");
+                //            intent.putExtra("quantity",Integer.parseInt(quantity.getText().toString()));
+                intent.putExtra("quantity",qty);
+                intent.putExtra("productId",productDataModelList.get(position).getId());
+                intent.putExtra("userId",userId);
+                intent.putExtra("price",productDataModelList.get(position).getPrice());
+                LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
             }
         });
 
@@ -154,7 +159,7 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
         }
     };
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView productName;
         TextView priceTV;
@@ -179,15 +184,6 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
             addToCartIV = itemView.findViewById(R.id.iv_rowCategoryDetail_cart);
 
 
-            addToCartIV.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.iv_rowCategoryDetail_cart:
-                    Toast.makeText(mContext, "Added to Cart", Toast.LENGTH_SHORT).show();
-            }
         }
     }
 }
