@@ -10,7 +10,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -55,8 +54,6 @@ public class CategoriesDetailActivity extends AppCompatActivity implements View.
         backIV.setOnClickListener(this);
 
 
-
-
         progressDialog = new ProgressDialog(this);
 
         setCategoriesDetailsAdapter();
@@ -78,24 +75,7 @@ public class CategoriesDetailActivity extends AppCompatActivity implements View.
             }
         });
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
-                new IntentFilter("custom-message"));
     }
-
-    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String userId = intent.getStringExtra("userId");
-            String productId = intent.getStringExtra("productId");
-            String qty = intent.getStringExtra("quantity");
-            String price = intent.getStringExtra("price");
-
-            Log.e("userId",userId);
-            Log.e("productId",productId);
-            Log.e("qty",qty);
-            Log.e("price",price);
-        }
-    };
 
     private void setCategoriesDetailsAdapter() {
 
@@ -114,14 +94,14 @@ public class CategoriesDetailActivity extends AppCompatActivity implements View.
         call.enqueue(new Callback<GetProductResponse>() {
             @Override
             public void onResponse(Call<GetProductResponse> call, Response<GetProductResponse> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     productDataModelList = response.body().getProductDataModelList();
                     categoriesDetailRV.setAdapter(new CategoriesDetailsAdapter(getApplicationContext(), productDataModelList));
                     categoriesDetailsAdapter = new CategoriesDetailsAdapter(getApplicationContext(), productDataModelList);
                     categoriesDetailRV.setAdapter(categoriesDetailsAdapter);
                     progressDialog.dismiss();
-                }else {
-                    Toast.makeText(CategoriesDetailActivity.this,response.message(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(CategoriesDetailActivity.this, response.message(), Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 }
             }
@@ -132,7 +112,7 @@ public class CategoriesDetailActivity extends AppCompatActivity implements View.
                 try {
                     Toast.makeText(CategoriesDetailActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
-                }catch (Exception e){
+                } catch (Exception e) {
 
                 }
             }
@@ -142,10 +122,11 @@ public class CategoriesDetailActivity extends AppCompatActivity implements View.
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_categoryDetails_back:
                 finish();
                 break;
         }
     }
+
 }

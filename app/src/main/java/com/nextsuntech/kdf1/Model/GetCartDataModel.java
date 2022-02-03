@@ -1,5 +1,7 @@
 package com.nextsuntech.kdf1.Model;
 
+import com.nextsuntech.kdf1.Response.GetCartResponse;
+
 public class GetCartDataModel {
 
     String id;
@@ -10,8 +12,12 @@ public class GetCartDataModel {
     String totalQuantity;
     String cartAutoId;
 
-    public GetCartDataModel(String id, String productId, String description, String price,
-                            String userRegistrationId, String totalQuantity, String cartAutoId) {
+    public GetCartResponse.ImageName imageName;
+    public GetCartResponse.Message message;
+
+    public GetCartDataModel(String id, String productId, String description, String price, String userRegistrationId,
+                            String totalQuantity, String cartAutoId, GetCartResponse.ImageName imageName,
+                            GetCartResponse.Message message) {
         this.id = id;
         this.productId = productId;
         this.description = description;
@@ -19,6 +25,8 @@ public class GetCartDataModel {
         this.userRegistrationId = userRegistrationId;
         this.totalQuantity = totalQuantity;
         this.cartAutoId = cartAutoId;
+        this.imageName = imageName;
+        this.message = message;
     }
 
     public String getId() {
@@ -75,5 +83,21 @@ public class GetCartDataModel {
 
     public void setCartAutoId(String cartAutoId) {
         this.cartAutoId = cartAutoId;
+    }
+
+    public GetCartResponse.ImageName getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(GetCartResponse.ImageName imageName) {
+        this.imageName = imageName;
+    }
+
+    public GetCartResponse.Message getMessage() {
+        return message;
+    }
+
+    public void setMessage(GetCartResponse.Message message) {
+        this.message = message;
     }
 }

@@ -28,10 +28,6 @@ public class GetCartResponse {
         @Expose
         private String images;
 
-        public ImageName(String images) {
-            this.images = images;
-        }
-
         public String getImages() {
             return images;
         }

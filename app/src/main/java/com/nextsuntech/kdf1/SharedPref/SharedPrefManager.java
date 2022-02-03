@@ -25,7 +25,7 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putInt("id", Integer.parseInt((LoginDataModelList.getId())));
+        editor.putInt("id", Integer.parseInt(String.valueOf((LoginDataModelList.getId()))));
         editor.putString("userName", LoginDataModelList.getUserName());
         editor.putString("email", LoginDataModelList.getEmail());
         editor.putString("firstName", LoginDataModelList.getFirstName());
@@ -45,7 +45,7 @@ public class SharedPrefManager {
     public LoginDataModel getSavedUsers() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return new LoginDataModel(
-                sharedPreferences.getString("id", null),
+                sharedPreferences.getInt("id",0),
                 sharedPreferences.getString("userName", null),
                 sharedPreferences.getString("email", null),
                 sharedPreferences.getString("firstName", null),

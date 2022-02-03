@@ -25,15 +25,22 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.nextsuntech.kdf1.Cart.AddToCartActivity;
 import com.nextsuntech.kdf1.Model.GetProductDataModel;
 import com.nextsuntech.kdf1.Model.LoginDataModel;
 import com.nextsuntech.kdf1.Network.RetrofitClient;
 import com.nextsuntech.kdf1.ProductDetails.ProductDetailsActivity;
 import com.nextsuntech.kdf1.R;
+import com.nextsuntech.kdf1.Response.AddToCartResponse;
+import com.nextsuntech.kdf1.SharedPref.SharedPrefManager;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDetailsAdapter.ViewHolder> implements Filterable {
 
@@ -105,19 +112,35 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
         });
 
 
+        LoginDataModel loginDataModel = SharedPrefManager.getInstance(mContext).getSavedUsers();
+        int userId = loginDataModel.getId();
         //send data Add to cart activity
         holder.addToCartIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //String userId = "2";
                 String qty = "1";
-                String userId = "2";
-                Intent intent = new Intent("custom-message");
-                //            intent.putExtra("quantity",Integer.parseInt(quantity.getText().toString()));
-                intent.putExtra("quantity",qty);
-                intent.putExtra("productId",productDataModelList.get(position).getId());
-                intent.putExtra("userId",userId);
-                intent.putExtra("price",productDataModelList.get(position).getPrice());
-                LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
+                String price = productDataModelList.get(position).getPrice();
+                String productId = productDataModelList.get(position).getId();
+                Call<AddToCartResponse> call = RetrofitClient.getInstance().getApi().AddToCart(productId, userId, qty, price);
+                call.enqueue(new Callback<AddToCartResponse>() {
+                    @Override
+                    public void onResponse(Call<AddToCartResponse> call, Response<AddToCartResponse> response) {
+                        AddToCartResponse addToCartResponse = response.body();
+                        if (response.isSuccessful()) {
+                            Toast.makeText(mContext, addToCartResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AddToCartResponse> call, Throwable t) {
+                        try {
+                            Toast.makeText(mContext, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         });
 
@@ -182,7 +205,6 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
             stockTV = itemView.findViewById(R.id.tv_rowCategories_details_status);
             productDetailsBT = itemView.findViewById(R.id.bt_rowCategoryDetails_productDetails);
             addToCartIV = itemView.findViewById(R.id.iv_rowCategoryDetail_cart);
-
 
         }
     }

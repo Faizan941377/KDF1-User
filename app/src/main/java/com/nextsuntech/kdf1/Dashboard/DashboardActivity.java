@@ -47,7 +47,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     EditText searchET;
     DealsAdapter dealsAdapter;
     List<CategoriesDataModel> categoriesDataModelsList;
-    List<GetCartDataModel> getCartDataModelList;
     FloatingActionButton cartBT;
 
     @Override
@@ -147,6 +146,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_dashboard_cartButton:
+                // da button click lister dai
+                // Da ba km activity open ky?
+                // da cart activity
+                startActivity(new Intent(this, AddToCartActivity.class));
                 break;
         }
     }

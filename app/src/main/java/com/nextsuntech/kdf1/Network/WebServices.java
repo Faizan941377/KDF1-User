@@ -28,7 +28,7 @@ public interface WebServices {
     @POST("AddCart")
     Call<AddToCartResponse> AddToCart(
             @Field("ProductId") String ProductId,
-            @Field("UserRegistrationId") String UserRegistrationId,
+            @Field("UserRegistrationId") int UserRegistrationId,
             @Field("TotalQuantity") String TotalQuantity,
             @Field("Price") String Price
     );
@@ -36,7 +36,7 @@ public interface WebServices {
     @FormUrlEncoded
     @POST("GetCarts")
     Call<GetCartResponse> getAddToCart(
-            @Field("id") String id
+            @Field("id") int id
     );
 
     @FormUrlEncoded

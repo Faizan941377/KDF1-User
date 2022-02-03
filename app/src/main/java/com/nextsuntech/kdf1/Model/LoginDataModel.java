@@ -2,7 +2,7 @@ package com.nextsuntech.kdf1.Model;
 
 public class LoginDataModel {
 
-    String id ;
+    int id;
     String userName;
     String email;
     String firstName;
@@ -12,7 +12,7 @@ public class LoginDataModel {
     String status;
     String type;
 
-    public LoginDataModel(String id, String userName, String email, String firstName,
+    public LoginDataModel(int id, String userName, String email, String firstName,
                           String lastName, String password, String createAt, String status, String type) {
         this.id = id;
         this.userName = userName;
@@ -25,11 +25,11 @@ public class LoginDataModel {
         this.type = type;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

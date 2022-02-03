@@ -45,6 +45,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginBT.setOnClickListener(this);
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (SharedPrefManager.getInstance(this).isLoggedIn()) {
+            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

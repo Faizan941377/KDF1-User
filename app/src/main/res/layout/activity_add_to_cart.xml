@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorOffWhite"
+    android:orientation="vertical"
     tools:context=".Cart.AddToCartActivity">
 
     <RelativeLayout
@@ -19,39 +19,232 @@
             android:id="@+id/tv_rowCategories_details_heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:textColor="@color/colorWhite"
             android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
-            android:text="Cart"/>
+            android:text="Cart"
+            android:textColor="@color/colorWhite"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/iv_AddToCart_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ico_back"
-            android:layout_marginLeft="8dp"
             android:layout_centerVertical="true"
-            android:padding="10dp"/>
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/ico_back"
+            android:padding="10dp" />
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/tv_rowAddToCart_myCartTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/color_orange"
-        android:textSize="25dp"
-        android:text="My Cart"
-        android:textStyle="bold"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="22dp"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_addToCart"
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_above="@+id/cd_addToCard_detail"
+        android:layout_below="@id/action_bar"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"/>
 
-</LinearLayout>
+    <RelativeLayout
+        android:id="@+id/cd_addToCard_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bt_addToCart_checkout"
+        android:layout_marginBottom="20dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+<!--           &lt;!&ndash; <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Item Total"-->
+<!--                        android:textColor="@color/colorBlack"-->
+<!--                        android:textSize="20dp"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="end">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="400"-->
+<!--                        android:textColor="@color/colorBlack"-->
+<!--                        android:textSize="20dp"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                </LinearLayout>-->
+
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="12dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Tax"-->
+<!--                        android:textColor="@color/colorBlack"-->
+<!--                        android:textSize="20dp"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="end">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="0.00"-->
+<!--                        android:textColor="@color/colorBlack"-->
+<!--                        android:textSize="20dp"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                </LinearLayout>-->
+
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="12dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Delivery"-->
+<!--                        android:textColor="@color/colorBlack"-->
+<!--                        android:textSize="20dp"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="end">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="50.00"-->
+<!--                        android:textColor="@color/colorBlack"-->
+<!--                        android:textSize="20dp"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                </LinearLayout>-->
+
+<!--            </LinearLayout>&ndash;&gt;-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total :"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1500"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorGray" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bt_addToCart_checkout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/bt_ripple_effect">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="CheckOut"
+            android:textColor="@color/colorWhite"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
