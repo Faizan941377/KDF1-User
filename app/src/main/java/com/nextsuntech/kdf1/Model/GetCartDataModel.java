@@ -7,16 +7,16 @@ public class GetCartDataModel {
     String id;
     String productId;
     String description;
-    String price;
+    int price;
     String userRegistrationId;
-    String totalQuantity;
+    int totalQuantity;
     String cartAutoId;
 
     public GetCartResponse.ImageName imageName;
     public GetCartResponse.Message message;
 
-    public GetCartDataModel(String id, String productId, String description, String price, String userRegistrationId,
-                            String totalQuantity, String cartAutoId, GetCartResponse.ImageName imageName,
+    public GetCartDataModel(String id, String productId, String description, int price, String userRegistrationId,
+                            int totalQuantity, String cartAutoId, GetCartResponse.ImageName imageName,
                             GetCartResponse.Message message) {
         this.id = id;
         this.productId = productId;
@@ -53,11 +53,11 @@ public class GetCartDataModel {
         this.description = description;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -69,11 +69,11 @@ public class GetCartDataModel {
         this.userRegistrationId = userRegistrationId;
     }
 
-    public String getTotalQuantity() {
+    public int getTotalQuantity() {
         return totalQuantity;
     }
 
-    public void setTotalQuantity(String totalQuantity) {
+    public void setTotalQuantity(int totalQuantity) {
         this.totalQuantity = totalQuantity;
     }
 

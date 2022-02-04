@@ -60,7 +60,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.productName.setText(categoriesDataModelList.get(position).getTitle());
-        // holder.priceTV.setText(categoriesDataModelList.get(position).getId());
+        holder.descriptionTV.setText(categoriesDataModelList.get(position).getDescription());
 
         holder.progressBar.setVisibility(View.VISIBLE);
         String path = RetrofitClient.IMAGE_BASE_URL + categoriesDataModelList.get(position).getImage() + "";
@@ -95,34 +95,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
                 }
             }
         });
-
-        //Opening Bottom sheet
-        holder.productDetailBT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BottomSheetDialog  builder = new BottomSheetDialog(v.getRootView().getContext());
-                View dialogView = LayoutInflater.from(v.getRootView().getContext()).inflate(R.layout.bottom_sheet_layout, null);
-
-                ImageView productImageIV;
-                TextView productNameTV;
-                TextView productPriceTV;
-                RelativeLayout addToCartBT;
-
-
-
-                productImageIV = dialogView.findViewById(R.id.iv_bottomSheet_productImage);
-                productNameTV = dialogView.findViewById(R.id.tv_bottomSheet_productName);
-                productPriceTV = dialogView.findViewById(R.id.tv_bottomSheet_productPrice);
-
-                productNameTV.setText(categoriesDataModelList.get(position).getTitle());
-
-                //builder.setView(dialogView);
-                builder.setContentView(dialogView);
-                builder.setCancelable(true);
-                builder.show();
-            }
-        });
-
     }
 
 
@@ -166,9 +138,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
 
         LinearLayout categoriesBT;
         RelativeLayout productDetailBT;
-        RelativeLayout addToCart;
         TextView productName;
-        TextView priceTV;
+        TextView descriptionTV;
         ImageView menuIV;
         ProgressBar progressBar;
 
@@ -178,9 +149,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
             productName = itemView.findViewById(R.id.tv_productName);
             menuIV = itemView.findViewById(R.id.iv_pizza);
             progressBar = itemView.findViewById(R.id.pb_rowCategory_image);
-            productDetailBT = itemView.findViewById(R.id.rl_row_category_details);
-            priceTV = itemView.findViewById(R.id.tv_rowCategories_price);
-            // addToCart = itemView.findViewById(R.id.btn_addtocart);
+            descriptionTV = itemView.findViewById(R.id.tv_rowCategories_details_description);
+
         }
     }
 }

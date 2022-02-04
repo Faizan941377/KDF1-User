@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import com.nextsuntech.kdf1.Cart.AddToCartActivity;
 import com.nextsuntech.kdf1.Dashboard.DashboardActivity;
 import com.nextsuntech.kdf1.Model.GetCartDataModel;
 import com.nextsuntech.kdf1.Network.RetrofitClient;
+import com.nextsuntech.kdf1.Order.OrderActivity;
 import com.nextsuntech.kdf1.R;
 
 import java.util.List;
@@ -31,28 +33,40 @@ import java.util.List;
 public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.ViewHolder> {
 
     Context mContext;
-    List<GetCartDataModel> getCartDataModels;
+    List<GetCartDataModel> getCartDataModelList;
+    TextView addToCartTotalTV;
+    TextView totalItemTV;
+    RelativeLayout checkOutBT;
 
-    public AddToCartAdapter(Context mContext, List<GetCartDataModel> getCartDataModels) {
+    public AddToCartAdapter(Context mContext, List<GetCartDataModel> getCartDataModelList, TextView addToCartTotalTV, RelativeLayout checkOutBT, TextView totalItemTV) {
         this.mContext = mContext;
-        this.getCartDataModels = getCartDataModels;
+        this.getCartDataModelList = getCartDataModelList;
+        this.addToCartTotalTV = addToCartTotalTV;
+        this.checkOutBT = checkOutBT;
+        this.totalItemTV = totalItemTV;
     }
 
     @NonNull
     @Override
     public AddToCartAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.row_add_to_cart,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.row_add_to_cart, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AddToCartAdapter.ViewHolder holder, int position) {
+        holder.priceTV.setText(String.valueOf(getCartDataModelList.get(position).getPrice()));
+        holder.productTitle.setText(getCartDataModelList.get(position).getDescription());
+        holder.cartQuantityTV.setText(String.valueOf(getCartDataModelList.get(position).getTotalQuantity()));
 
-        holder.priceTV.setText(getCartDataModels.get(position).getPrice());
-        holder.productTitle.setText(getCartDataModels.get(position).getDescription());
-        holder.cartQuantityTV.setText(getCartDataModels.get(position).getTotalQuantity());
 
-        String path = RetrofitClient.IMAGE_BASE_URL + getCartDataModels.get(position).imageName.getImages();
+        if (holder.cartQuantityTV.getText().equals("1")){
+            holder.decrementTV.setEnabled(false);
+        }else {
+            holder.decrementTV.setEnabled(true);
+        }
+
+        String path = RetrofitClient.IMAGE_BASE_URL + getCartDataModelList.get(position).imageName.getImages();
         Glide.with(mContext).load(path).listener(new RequestListener<Drawable>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
@@ -74,14 +88,54 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
             }
         });
 
+
+        holder.incrementTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int qty = getCartDataModelList.get(position).getTotalQuantity();
+                qty++;
+                getCartDataModelList.get(position).setTotalQuantity(qty);
+                notifyDataSetChanged();
+                calculation();
+                qtyCalculate();
+            }
+        });
+
+        holder.decrementTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int qty = getCartDataModelList.get(position).getTotalQuantity();
+                qty--;
+                getCartDataModelList.get(position).setTotalQuantity(qty);
+                notifyDataSetChanged();
+                calculation();
+                qtyCalculate();
+            }
+        });
+
+        checkOutBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String totalPrice = addToCartTotalTV.getText().toString();
+                String totalItems = totalItemTV.getText().toString();
+                Intent intent = new Intent(mContext, OrderActivity.class);
+                intent.putExtra("totalPrice",totalPrice);
+                intent.putExtra("cartAutoId",getCartDataModelList.get(position).getCartAutoId());
+                intent.putExtra("totalItems",totalItems);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+            }
+        });
+
     }
+
 
     @Override
     public int getItemCount() {
-        return getCartDataModels.size();
+        return getCartDataModelList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView productTitle;
         ImageView productImage;
         ImageView deleteIV;
@@ -90,7 +144,6 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
         TextView incrementTV;
         TextView decrementTV;
         ProgressBar imagePB;
-        int count = 0;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -104,25 +157,20 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
             incrementTV = itemView.findViewById(R.id.tv_rowAddToCart_Increment);
             decrementTV = itemView.findViewById(R.id.tv_rowAddToCart_decrement);
             deleteIV = itemView.findViewById(R.id.iv_rowAddToCart_delete);
-
-
-            incrementTV.setOnClickListener(this);
-            decrementTV.setOnClickListener(this);
         }
+    }
 
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.tv_rowAddToCart_Increment:
-                    count ++;
-                    cartQuantityTV.setText(""+count);
-                    break;
-                case R.id.tv_rowAddToCart_decrement:
-                    if (count<=1) count = 1;
-                    else
-                        count--;
-                    cartQuantityTV.setText(""+count);
-            }
-        }
+    public void calculation() {
+        int sum = 0, i;
+        for (i = 0; i < getCartDataModelList.size(); i++)
+            sum = sum + (getCartDataModelList.get(i).getPrice() * getCartDataModelList.get(i).getTotalQuantity());
+        addToCartTotalTV.setText(String.valueOf(sum));
+    }
+
+    public void qtyCalculate(){
+        int totalItemSum=0,j;
+        for (j=0;j<getCartDataModelList.size();j++)
+            totalItemSum = totalItemSum+(getCartDataModelList.get(j).getTotalQuantity());
+        totalItemTV.setText(String.valueOf(totalItemSum));
     }
 }

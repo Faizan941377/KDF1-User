@@ -6,18 +6,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.nextsuntech.kdf1.Cart.Adapter.AddToCartAdapter;
 import com.nextsuntech.kdf1.Dashboard.Adapter.CategoriesAdapter;
 import com.nextsuntech.kdf1.Model.GetCartDataModel;
 import com.nextsuntech.kdf1.Model.LoginDataModel;
 import com.nextsuntech.kdf1.Network.RetrofitClient;
+import com.nextsuntech.kdf1.Order.OrderActivity;
 import com.nextsuntech.kdf1.R;
 import com.nextsuntech.kdf1.Response.AddToCartResponse;
 import com.nextsuntech.kdf1.Response.GetCartResponse;
@@ -37,6 +42,9 @@ public class AddToCartActivity extends AppCompatActivity implements View.OnClick
     AddToCartAdapter addToCartAdapter;
     List<GetCartDataModel> getCartDataModelList;
     TextView cartTV;
+    TextView addToCartTotalTV;
+    TextView totalItemTV;
+    RelativeLayout checkOutBT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +55,16 @@ public class AddToCartActivity extends AppCompatActivity implements View.OnClick
         addToCartRV = findViewById(R.id.rv_addToCart);
         backIV = findViewById(R.id.iv_AddToCart_back);
         cartTV = findViewById(R.id.tv_rowCategories_details_heading);
+        addToCartTotalTV = findViewById(R.id.tv_addToCart_total);
+        checkOutBT = findViewById(R.id.bt_addToCart_checkout);
+        totalItemTV= findViewById(R.id.tv_addToCart_totalItems);
         progressDialog = new ProgressDialog(this);
 
 
         backIV.setOnClickListener(this);
         cartTV.setOnClickListener(this);
+        checkOutBT.setOnClickListener(this);
         setAddToCartAdapter();
-
     }
 
     @Override
@@ -85,8 +96,19 @@ public class AddToCartActivity extends AppCompatActivity implements View.OnClick
                     progressDialog.dismiss();
                     getCartDataModelList = response.body().getCartDataModels();
                     // addToCartRV.setAdapter(new CategoriesAdapter(getApplicationContext(), getCartDataModelList));
-                    addToCartAdapter = new AddToCartAdapter(getApplicationContext(), getCartDataModelList);
+                    addToCartAdapter = new AddToCartAdapter(getApplicationContext(), getCartDataModelList,addToCartTotalTV,checkOutBT,totalItemTV);
                     addToCartRV.setAdapter(addToCartAdapter);
+
+                    // here we are add the product prices to the total amount
+                    int sum=0,i;
+                    for (i=0;i<getCartDataModelList.size();i++)
+                        sum=sum+(getCartDataModelList.get(i).getPrice()*getCartDataModelList.get(i).getTotalQuantity());
+                    addToCartTotalTV.setText(String.valueOf(sum));
+
+                    int totalItemSum=0,j;
+                    for (j=0;j<getCartDataModelList.size();j++)
+                        totalItemSum = totalItemSum+(getCartDataModelList.get(j).getTotalQuantity());
+                    totalItemTV.setText(String.valueOf(totalItemSum));
                 }
             }
 

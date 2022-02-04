@@ -118,37 +118,6 @@
 
                 </RelativeLayout>
 
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="16dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Rs : "
-                        android:textColor="@color/color_orange"
-                        android:textSize="12dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv_rowAddToCart_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="190"
-                        android:textColor="@color/color_orange"
-                        android:textSize="10dp"
-                        android:textStyle="bold" />
-
-
-                </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -168,11 +137,12 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_rowAddToCart_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="600"
+                        android:text="190"
                         android:textColor="@color/color_orange"
-                        android:textSize="13dp"
+                        android:textSize="12dp"
                         android:textStyle="bold" />
 
 

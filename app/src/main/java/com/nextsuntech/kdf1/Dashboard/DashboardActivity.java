@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,10 +26,12 @@ import com.nextsuntech.kdf1.Dashboard.Adapter.CategoriesAdapter;
 import com.nextsuntech.kdf1.Dashboard.Adapter.DealsAdapter;
 import com.nextsuntech.kdf1.Model.CategoriesDataModel;
 import com.nextsuntech.kdf1.Model.GetCartDataModel;
+import com.nextsuntech.kdf1.Model.LoginDataModel;
 import com.nextsuntech.kdf1.Network.RetrofitClient;
 import com.nextsuntech.kdf1.R;
 import com.nextsuntech.kdf1.Response.GetCartResponse;
 import com.nextsuntech.kdf1.Response.MenuResponse;
+import com.nextsuntech.kdf1.SharedPref.SharedPrefManager;
 
 import java.util.List;
 
@@ -45,6 +48,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     BeveragesAdapter beveragesAdapter;
     RecyclerView dealsRV;
     EditText searchET;
+    TextView userNameTV;
     DealsAdapter dealsAdapter;
     List<CategoriesDataModel> categoriesDataModelsList;
     FloatingActionButton cartBT;
@@ -59,6 +63,11 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         beveragesRV = findViewById(R.id.rv_beverages);
         searchET = findViewById(R.id.et_dashboard_search);
         cartBT = findViewById(R.id.bt_dashboard_cartButton);
+        userNameTV = findViewById(R.id.tv_dashboard_userName);
+
+        LoginDataModel loginDataModel = SharedPrefManager.getInstance(this).getSavedUsers();
+        String userName = loginDataModel.getUserName();
+        userNameTV.setText(userName);
 
 
         progressDialog = new ProgressDialog(this);

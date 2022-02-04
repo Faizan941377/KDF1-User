@@ -1,6 +1,9 @@
 package com.nextsuntech.kdf1.Network;
 
+import android.widget.TextView;
+
 import com.nextsuntech.kdf1.Response.AddToCartResponse;
+import com.nextsuntech.kdf1.Response.CheckOutResponse;
 import com.nextsuntech.kdf1.Response.GetCartResponse;
 import com.nextsuntech.kdf1.Response.GetProductResponse;
 import com.nextsuntech.kdf1.Response.LoginResponse;
@@ -44,5 +47,14 @@ public interface WebServices {
     Call<LoginResponse> loginResponse(
             @Field("email") String email,
             @Field("password") String password
+    );
+
+    @FormUrlEncoded
+    @POST("BookingDetailsAdd")
+    Call<CheckOutResponse> checkOut(
+            @Field("CustomerName") String CustomerName,
+            @Field("TotalQuantity") int TotalQuantity,
+            @Field("TotalPrice") int TotalPrice,
+            @Field("CartAutoId") int CartAutoId
     );
 }
