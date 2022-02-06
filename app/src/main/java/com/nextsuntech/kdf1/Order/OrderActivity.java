@@ -71,6 +71,10 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
 
     private void confirmOder() {
 
+        if (customerNameET.length() == 0) {
+            customerNameET.setError("Please enter the Table No!");
+        } else {
+
         progressDialog.show();
         progressDialog.setMessage("Loading...");
         progressDialog.setCancelable(false);
@@ -106,6 +110,9 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         });
+
+            orderConfirmBT.setEnabled(true);
+        }
 
     }
 }

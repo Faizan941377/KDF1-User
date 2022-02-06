@@ -27,8 +27,13 @@ import com.nextsuntech.kdf1.Model.GetCartDataModel;
 import com.nextsuntech.kdf1.Network.RetrofitClient;
 import com.nextsuntech.kdf1.Order.OrderActivity;
 import com.nextsuntech.kdf1.R;
+import com.nextsuntech.kdf1.Response.DeleteCartProductResponse;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.ViewHolder> {
 
@@ -84,7 +89,34 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
         holder.deleteIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Delete", Toast.LENGTH_SHORT).show();
+
+                int id = Integer.parseInt(getCartDataModelList.get(position).getId());
+
+                Call<DeleteCartProductResponse> call = RetrofitClient.getInstance().getApi().deleteProductByCart(id);
+                call.enqueue(new Callback<DeleteCartProductResponse>() {
+                    @Override
+                    public void onResponse(Call<DeleteCartProductResponse> call, Response<DeleteCartProductResponse> response) {
+                        DeleteCartProductResponse deleteCartProductResponse = response.body();
+                        if (response.isSuccessful()){
+                            getCartDataModelList.remove(position);
+                            notifyItemRemoved(position);
+                            calculation();
+                            qtyCalculate();
+                            Toast.makeText(mContext, deleteCartProductResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        }else {
+                            //Toast.makeText(mContext, deleteCartProductResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<DeleteCartProductResponse> call, Throwable t) {
+                        try {
+                            Toast.makeText(mContext, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         });
 

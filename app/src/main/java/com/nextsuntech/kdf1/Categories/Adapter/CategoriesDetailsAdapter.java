@@ -118,7 +118,6 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
         holder.addToCartIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //String userId = "2";
                 String qty = "1";
                 String price = productDataModelList.get(position).getPrice();
                 String productId = productDataModelList.get(position).getId();

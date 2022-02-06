@@ -148,18 +148,40 @@
 
         </ScrollView>
 
+    <FrameLayout
+        style="?attr/actionButtonStyle"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:focusable="true">
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/bt_dashboard_cartButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
         android:src="@drawable/ico_cart"
         app:backgroundTint="@color/colorWhite"
         app:rippleColor="@color/color_orange"
         app:tint="@color/color_orange"/>
 
+        <TextView
+            android:id="@+id/text_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="7dp"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:layout_alignParentRight="true"
+            android:textSize="12dp"
+            android:background="@drawable/badge_bg_cart_button"
+            tools:text="10" />
+
+    </FrameLayout>
 
 </RelativeLayout>

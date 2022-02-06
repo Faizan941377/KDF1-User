@@ -4,6 +4,7 @@ import android.widget.TextView;
 
 import com.nextsuntech.kdf1.Response.AddToCartResponse;
 import com.nextsuntech.kdf1.Response.CheckOutResponse;
+import com.nextsuntech.kdf1.Response.DeleteCartProductResponse;
 import com.nextsuntech.kdf1.Response.GetCartResponse;
 import com.nextsuntech.kdf1.Response.GetProductResponse;
 import com.nextsuntech.kdf1.Response.LoginResponse;
@@ -56,5 +57,11 @@ public interface WebServices {
             @Field("TotalQuantity") int TotalQuantity,
             @Field("TotalPrice") int TotalPrice,
             @Field("CartAutoId") int CartAutoId
+    );
+
+    @FormUrlEncoded
+    @POST("delete")
+    Call<DeleteCartProductResponse> deleteProductByCart(
+            @Field("id") int id
     );
 }
