@@ -1,5 +1,6 @@
 package com.nextsuntech.kdf1.Categories.Adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -105,6 +106,8 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
                 Intent intent = new Intent(mContext, ProductDetailsActivity.class);
                 intent.putExtra("description", productDataModelList.get(position).getDescription());
                 intent.putExtra("productTitle", productDataModelList.get(position).getTitle());
+                intent.putExtra("price",productDataModelList.get(position).getPrice());
+                intent.putExtra("productId",productDataModelList.get(position).getId());
                 intent.putExtra("img_url", RetrofitClient.IMAGE_BASE_URL + productDataModelList.get(position).getImageName().get(0).getImages());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.getApplicationContext().startActivity(intent);

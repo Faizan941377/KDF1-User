@@ -41,14 +41,16 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
     List<GetCartDataModel> getCartDataModelList;
     TextView addToCartTotalTV;
     TextView totalItemTV;
+    TextView emptyRecyclerViewTV;
     RelativeLayout checkOutBT;
 
-    public AddToCartAdapter(Context mContext, List<GetCartDataModel> getCartDataModelList, TextView addToCartTotalTV, RelativeLayout checkOutBT, TextView totalItemTV) {
+    public AddToCartAdapter(Context mContext, List<GetCartDataModel> getCartDataModelList, TextView addToCartTotalTV, RelativeLayout checkOutBT, TextView totalItemTV, TextView emptyRecyclerViewTV) {
         this.mContext = mContext;
         this.getCartDataModelList = getCartDataModelList;
         this.addToCartTotalTV = addToCartTotalTV;
         this.checkOutBT = checkOutBT;
         this.totalItemTV = totalItemTV;
+        this.emptyRecyclerViewTV = emptyRecyclerViewTV;
     }
 
     @NonNull
@@ -65,9 +67,9 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
         holder.cartQuantityTV.setText(String.valueOf(getCartDataModelList.get(position).getTotalQuantity()));
 
 
-        if (holder.cartQuantityTV.getText().equals("1")){
+        if (holder.cartQuantityTV.getText().equals("1")) {
             holder.decrementTV.setEnabled(false);
-        }else {
+        } else {
             holder.decrementTV.setEnabled(true);
         }
 
@@ -97,13 +99,14 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
                     @Override
                     public void onResponse(Call<DeleteCartProductResponse> call, Response<DeleteCartProductResponse> response) {
                         DeleteCartProductResponse deleteCartProductResponse = response.body();
-                        if (response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             getCartDataModelList.remove(position);
                             notifyItemRemoved(position);
                             calculation();
                             qtyCalculate();
+                            notifyDataSetChanged();
                             Toast.makeText(mContext, deleteCartProductResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                        }else {
+                        } else {
                             //Toast.makeText(mContext, deleteCartProductResponse.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -112,7 +115,7 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
                     public void onFailure(Call<DeleteCartProductResponse> call, Throwable t) {
                         try {
                             Toast.makeText(mContext, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -151,9 +154,9 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
                 String totalPrice = addToCartTotalTV.getText().toString();
                 String totalItems = totalItemTV.getText().toString();
                 Intent intent = new Intent(mContext, OrderActivity.class);
-                intent.putExtra("totalPrice",totalPrice);
-                intent.putExtra("cartAutoId",getCartDataModelList.get(position).getCartAutoId());
-                intent.putExtra("totalItems",totalItems);
+                intent.putExtra("totalPrice", totalPrice);
+                intent.putExtra("cartAutoId", getCartDataModelList.get(position).getCartAutoId());
+                intent.putExtra("totalItems", totalItems);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
@@ -164,6 +167,13 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
 
     @Override
     public int getItemCount() {
+        if (getCartDataModelList.size() == 0) {
+            checkOutBT.setEnabled(false);
+            emptyRecyclerViewTV.setVisibility(View.VISIBLE);
+        } else {
+            checkOutBT.setEnabled(true);
+            emptyRecyclerViewTV.setVisibility(View.GONE);
+        }
         return getCartDataModelList.size();
     }
 
@@ -199,10 +209,10 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
         addToCartTotalTV.setText(String.valueOf(sum));
     }
 
-    public void qtyCalculate(){
-        int totalItemSum=0,j;
-        for (j=0;j<getCartDataModelList.size();j++)
-            totalItemSum = totalItemSum+(getCartDataModelList.get(j).getTotalQuantity());
+    public void qtyCalculate() {
+        int totalItemSum = 0, j;
+        for (j = 0; j < getCartDataModelList.size(); j++)
+            totalItemSum = totalItemSum + (getCartDataModelList.get(j).getTotalQuantity());
         totalItemTV.setText(String.valueOf(totalItemSum));
     }
 }

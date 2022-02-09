@@ -44,6 +44,7 @@ public class AddToCartActivity extends AppCompatActivity implements View.OnClick
     TextView cartTV;
     TextView addToCartTotalTV;
     TextView totalItemTV;
+    TextView emptyRecyclerViewTV;
     RelativeLayout checkOutBT;
 
     @Override
@@ -58,6 +59,7 @@ public class AddToCartActivity extends AppCompatActivity implements View.OnClick
         addToCartTotalTV = findViewById(R.id.tv_addToCart_total);
         checkOutBT = findViewById(R.id.bt_addToCart_checkout);
         totalItemTV= findViewById(R.id.tv_addToCart_totalItems);
+        emptyRecyclerViewTV = findViewById(R.id.empty_view);
         progressDialog = new ProgressDialog(this);
 
 
@@ -77,6 +79,7 @@ public class AddToCartActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void setAddToCartAdapter() {
+        emptyRecyclerViewTV.setVisibility(View.VISIBLE);
 
         progressDialog.show();
         progressDialog.setMessage("Loading...");
@@ -93,10 +96,11 @@ public class AddToCartActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onResponse(Call<GetCartResponse> call, Response<GetCartResponse> response) {
                 if (response.isSuccessful()) {
+                    emptyRecyclerViewTV.setVisibility(View.GONE);
                     progressDialog.dismiss();
                     getCartDataModelList = response.body().getCartDataModels();
                     // addToCartRV.setAdapter(new CategoriesAdapter(getApplicationContext(), getCartDataModelList));
-                    addToCartAdapter = new AddToCartAdapter(getApplicationContext(), getCartDataModelList,addToCartTotalTV,checkOutBT,totalItemTV);
+                    addToCartAdapter = new AddToCartAdapter(getApplicationContext(), getCartDataModelList,addToCartTotalTV,checkOutBT,totalItemTV,emptyRecyclerViewTV);
                     addToCartRV.setAdapter(addToCartAdapter);
 
                     // here we are add the product prices to the total amount

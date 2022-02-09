@@ -92,7 +92,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
             @Override
             public void afterTextChanged(Editable s) {
-//                categoriesAdapter.getFilter().filter(s);
+                categoriesAdapter.getFilter().filter(s);
             }
         });
     }

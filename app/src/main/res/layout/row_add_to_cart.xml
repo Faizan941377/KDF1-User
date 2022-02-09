@@ -37,8 +37,8 @@
 
                 <ImageView
                     android:id="@+id/iv_rowAddToCart_delete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:background="@drawable/ico_delete"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="8dp"

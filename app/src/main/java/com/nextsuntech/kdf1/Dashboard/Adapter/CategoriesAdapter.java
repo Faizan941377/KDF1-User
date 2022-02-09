@@ -116,7 +116,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
             } else {
                 String filter = constraint.toString().toLowerCase().trim();
                 for (CategoriesDataModel dataItem : fetchCategoriesDataModelList) {
-                    if (dataItem.getTitle().toLowerCase().contains(filter)) {
+                    if (dataItem.getDescription().toLowerCase().contains(filter)) {
                         filterList.add(dataItem);
                     }
                 }
