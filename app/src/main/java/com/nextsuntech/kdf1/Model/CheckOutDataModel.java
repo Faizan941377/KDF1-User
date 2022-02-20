@@ -13,9 +13,14 @@ import java.util.List;
 public class CheckOutDataModel {
 
 
+    public static Object Cart;
     @SerializedName("cart")
     @Expose
     private List<Cart> cart = null;
+
+    public CheckOutDataModel(List<Cart> cart) {
+        this.cart = cart;
+    }
 
     public List<Cart> getCart() {
         return cart;
@@ -104,32 +109,4 @@ public class CheckOutDataModel {
             this.price = price;
         }
     }
-
-    public class CheckOutResponse {
-
-        @SerializedName("message")
-        @Expose
-        private String message;
-        @SerializedName("autoId")
-        @Expose
-        private Integer autoId;
-
-        public String getMessage() {
-            return message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
-
-        public Integer getAutoId() {
-            return autoId;
-        }
-
-        public void setAutoId(Integer autoId) {
-            this.autoId = autoId;
-        }
-
-    }
-
 }

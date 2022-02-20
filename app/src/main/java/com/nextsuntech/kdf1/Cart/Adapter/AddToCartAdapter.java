@@ -35,6 +35,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.nextsuntech.kdf1.Model.CheckOutDataModel;
 import com.nextsuntech.kdf1.Model.GetCartDataModel;
+import com.nextsuntech.kdf1.Model.LoginDataModel;
 import com.nextsuntech.kdf1.Network.RetrofitClient;
 import com.nextsuntech.kdf1.Order.OrderActivity;
 import com.nextsuntech.kdf1.R;
@@ -49,9 +50,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Body;
 
 import static android.content.ContentValues.TAG;
 
@@ -63,7 +67,6 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
     TextView totalItemTV;
     TextView emptyRecyclerViewTV;
     RelativeLayout checkOutBT;
-    List<CheckOutDataModel> checkOutDataModels;
 
 
     public AddToCartAdapter(Context mContext, List<GetCartDataModel> getCartDataModelList, TextView addToCartTotalTV, RelativeLayout checkOutBT, TextView totalItemTV, TextView emptyRecyclerViewTV) {
@@ -114,7 +117,7 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
             @Override
             public void onClick(View v) {
 
-                int id = Integer.parseInt(getCartDataModelList.get(position).getId());
+                int id = getCartDataModelList.get(position).getId();
 
                 Call<DeleteCartProductResponse> call = RetrofitClient.getInstance().getApi().deleteProductByCart(id);
                 call.enqueue(new Callback<DeleteCartProductResponse>() {
@@ -176,12 +179,7 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
             public void onClick(View v) {
                 String totalPrice = addToCartTotalTV.getText().toString();
                 String totalItems = totalItemTV.getText().toString();
-                Intent intent = new Intent(mContext, OrderActivity.class);
-                intent.putExtra("totalPrice", totalPrice);
-                intent.putExtra("cartAutoId", getCartDataModelList.get(position).getCartAutoId());
-                intent.putExtra("totalItems", totalItems);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
+
 
                 String status = "CheckOut";
 
@@ -198,24 +196,33 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
                         jsonObject.put("Status", status);
                         jsonObject.put("Price", getCartDataModel.getPrice());
                         cart.put(jsonObject);
+
+                        jsonObject1.put("cart", cart);
+                        Log.e("cart", String.valueOf(jsonObject1));
+
+                        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject1.toString());
+                        Call<CheckOutResponse> call = RetrofitClient.getInstance().getApi().postOrder(requestBody);
+                        call.enqueue(new Callback<CheckOutResponse>() {
+                            @Override
+                            public void onResponse(Call<CheckOutResponse> call, Response<CheckOutResponse> response) {
+                                CheckOutResponse checkOutResponse = response.body();
+
+                                String orderId = String.valueOf(checkOutResponse.getAutoId());
+                                Toast.makeText(mContext, checkOutResponse.getMessage() + checkOutResponse.getAutoId(), Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(mContext, OrderActivity.class);
+                                intent.putExtra("totalPrice", totalPrice);
+                                intent.putExtra("cartAutoId", orderId);
+                                intent.putExtra("totalItems", totalItems);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                mContext.startActivity(intent);
+                            }
+
+                            @Override
+                            public void onFailure(Call<CheckOutResponse> call, Throwable t) {
+
+                            }
+                        });
                     }
-                    jsonObject1.put("cart", cart);
-                    Log.e("cart", String.valueOf(jsonObject1));
-
-                    Call<CheckOutResponse> call = RetrofitClient.getInstance().getApi().send(cart);
-                    call.enqueue(new Callback<CheckOutResponse>() {
-                        @Override
-                        public void onResponse(Call<CheckOutResponse> call, Response<CheckOutResponse> response) {
-                            CheckOutResponse checkOutResponse = response.body();
-                            Log.d("reponse"+ checkOutResponse,"");
-                        }
-
-                        @Override
-                        public void onFailure(Call<CheckOutResponse> call, Throwable t) {
-
-                        }
-                    });
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

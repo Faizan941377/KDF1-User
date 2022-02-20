@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.http.Body;
@@ -82,5 +83,10 @@ public interface WebServices {
 
 
     @POST("CheckOut")
-    Call<CheckOutResponse> send(@Body JSONArray jsonObject1);
+   // Call<CheckOutResponse> send(@Body JSONArray jsonObject1);
+   // Call<CheckOutResponse> postOrder(@Body List<CheckOutDataModel.Cart> cart);
+
+    Call<CheckOutResponse> postOrder(@Body RequestBody requestBody);
+
+    // Call<JSONArray> postOrder(@Body JSONArray cart);
 }

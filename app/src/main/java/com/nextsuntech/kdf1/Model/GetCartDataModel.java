@@ -4,20 +4,19 @@ import com.nextsuntech.kdf1.Response.GetCartResponse;
 
 public class GetCartDataModel {
 
-    String id;
-    String productId;
+    int id;
+    int productId;
     String description;
     int price;
-    String userRegistrationId;
+    int userRegistrationId;
     int totalQuantity;
     String cartAutoId;
 
     public GetCartResponse.ImageName imageName;
     public GetCartResponse.Message message;
 
-    public GetCartDataModel(String id, String productId, String description, int price, String userRegistrationId,
-                            int totalQuantity, String cartAutoId, GetCartResponse.ImageName imageName,
-                            GetCartResponse.Message message) {
+    public GetCartDataModel(int id, int productId, String description, int price, int userRegistrationId, int totalQuantity,
+                            String cartAutoId, GetCartResponse.ImageName imageName, GetCartResponse.Message message) {
         this.id = id;
         this.productId = productId;
         this.description = description;
@@ -29,19 +28,19 @@ public class GetCartDataModel {
         this.message = message;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getProductId() {
+    public int getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(int productId) {
         this.productId = productId;
     }
 
@@ -61,11 +60,11 @@ public class GetCartDataModel {
         this.price = price;
     }
 
-    public String getUserRegistrationId() {
+    public int getUserRegistrationId() {
         return userRegistrationId;
     }
 
-    public void setUserRegistrationId(String userRegistrationId) {
+    public void setUserRegistrationId(int userRegistrationId) {
         this.userRegistrationId = userRegistrationId;
     }
 

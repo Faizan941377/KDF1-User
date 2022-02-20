@@ -92,7 +92,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
             @Override
             public void afterTextChanged(Editable s) {
-//                categoriesAdapter.getFilter().filter(s);
+                categoriesAdapter.getFilter().filter(s);
             }
         });
     }
@@ -118,7 +118,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         progressDialog.setIndeterminate(true);
 
         categoriesRV.setHasFixedSize(true);
-        categoriesRV.setLayoutManager(new GridLayoutManager(this, 2));
+       // categoriesRV.setLayoutManager(new GridLayoutManager(this, 2));
         categoriesRV.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
        /* StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
         categoriesRV.setLayoutManager(staggeredGridLayoutManager);*/
@@ -155,9 +155,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_dashboard_cartButton:
-                // da button click lister dai
-                // Da ba km activity open ky?
-                // da cart activity
                 startActivity(new Intent(this, AddToCartActivity.class));
                 break;
         }
