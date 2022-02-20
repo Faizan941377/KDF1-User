@@ -1,8 +1,10 @@
 package com.nextsuntech.kdf1.Network;
 
-import android.widget.TextView;
-
+import com.google.gson.JsonObject;
+import com.nextsuntech.kdf1.Model.CheckOutDataModel;
+import com.nextsuntech.kdf1.Model.GetCartDataModel;
 import com.nextsuntech.kdf1.Response.AddToCartResponse;
+import com.nextsuntech.kdf1.Response.BookingDetailsResponse;
 import com.nextsuntech.kdf1.Response.CheckOutResponse;
 import com.nextsuntech.kdf1.Response.DeleteCartProductResponse;
 import com.nextsuntech.kdf1.Response.GetCartResponse;
@@ -10,11 +12,24 @@ import com.nextsuntech.kdf1.Response.GetProductResponse;
 import com.nextsuntech.kdf1.Response.LoginResponse;
 import com.nextsuntech.kdf1.Response.MenuResponse;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface WebServices {
 
@@ -52,7 +67,7 @@ public interface WebServices {
 
     @FormUrlEncoded
     @POST("BookingDetailsAdd")
-    Call<CheckOutResponse> checkOut(
+    Call<BookingDetailsResponse> bookingDetails(
             @Field("CustomerName") String CustomerName,
             @Field("TotalQuantity") int TotalQuantity,
             @Field("TotalPrice") int TotalPrice,
@@ -64,4 +79,8 @@ public interface WebServices {
     Call<DeleteCartProductResponse> deleteProductByCart(
             @Field("id") int id
     );
+
+
+    @POST("CheckOut")
+    Call<CheckOutResponse> send(@Body JSONArray jsonObject1);
 }
