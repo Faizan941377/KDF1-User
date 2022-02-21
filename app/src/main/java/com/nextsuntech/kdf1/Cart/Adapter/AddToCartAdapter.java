@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -177,9 +178,6 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
         checkOutBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String totalPrice = addToCartTotalTV.getText().toString();
-                String totalItems = totalItemTV.getText().toString();
-
 
                 String status = "CheckOut";
 
@@ -207,25 +205,38 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
                             public void onResponse(Call<CheckOutResponse> call, Response<CheckOutResponse> response) {
                                 CheckOutResponse checkOutResponse = response.body();
 
-                                String orderId = String.valueOf(checkOutResponse.getAutoId());
-                                Toast.makeText(mContext, checkOutResponse.getMessage() + checkOutResponse.getAutoId(), Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(mContext, OrderActivity.class);
-                                intent.putExtra("totalPrice", totalPrice);
-                                intent.putExtra("cartAutoId", orderId);
-                                intent.putExtra("totalItems", totalItems);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                mContext.startActivity(intent);
+                                if (response.isSuccessful()) {
+                                    Toast.makeText(mContext, checkOutResponse.getMessage() + " OderId " + checkOutResponse.getAutoId(), Toast.LENGTH_SHORT).show();
+                                    String orderId = String.valueOf(checkOutResponse.getAutoId());
+                                    String totalPrice = addToCartTotalTV.getText().toString();
+                                    String totalItems = totalItemTV.getText().toString();
+                                    Intent intent = new Intent(mContext, OrderActivity.class);
+                                    intent.putExtra("totalPrice", totalPrice);
+                                    intent.putExtra("cartAutoId", orderId);
+                                    intent.putExtra("totalItems", totalItems);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    mContext.startActivity(intent);
+                                } else {
+                                    Toast.makeText(mContext, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                                }
                             }
 
                             @Override
                             public void onFailure(Call<CheckOutResponse> call, Throwable t) {
+                                try {
+                                    Toast.makeText(mContext, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
+
                         });
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
             }
         });
     }

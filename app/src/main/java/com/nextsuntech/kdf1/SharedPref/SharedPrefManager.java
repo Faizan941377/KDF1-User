@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.nextsuntech.kdf1.Model.LoginDataModel;
+import com.nextsuntech.kdf1.Response.CheckOutResponse;
 
 public class SharedPrefManager {
     public static final String SHARED_PREF_NAME = "credentials";
@@ -58,6 +59,7 @@ public class SharedPrefManager {
         );
 
     }
+
 
     public void clear() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
