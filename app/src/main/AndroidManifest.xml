@@ -13,10 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KDF1"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".Order.OrderActivity"
-            android:launchMode = "singleTop"
+        <activity android:name=".SubCategories.SubCategoriesActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"/>
+        <activity
+            android:name=".Order.OrderActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
             android:name=".Cart.AddToCartActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />

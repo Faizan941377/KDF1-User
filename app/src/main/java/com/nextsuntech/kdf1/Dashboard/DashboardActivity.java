@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,21 +14,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nextsuntech.kdf1.Cart.AddToCartActivity;
-import com.nextsuntech.kdf1.Categories.Adapter.CategoriesDetailsAdapter;
 import com.nextsuntech.kdf1.Dashboard.Adapter.BeveragesAdapter;
 import com.nextsuntech.kdf1.Dashboard.Adapter.CategoriesAdapter;
 import com.nextsuntech.kdf1.Dashboard.Adapter.DealsAdapter;
 import com.nextsuntech.kdf1.Model.CategoriesDataModel;
-import com.nextsuntech.kdf1.Model.GetCartDataModel;
 import com.nextsuntech.kdf1.Model.LoginDataModel;
 import com.nextsuntech.kdf1.Network.RetrofitClient;
 import com.nextsuntech.kdf1.R;
-import com.nextsuntech.kdf1.Response.GetCartResponse;
 import com.nextsuntech.kdf1.Response.MenuResponse;
 import com.nextsuntech.kdf1.SharedPref.SharedPrefManager;
 
@@ -53,6 +47,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     List<CategoriesDataModel> categoriesDataModelsList;
     FloatingActionButton cartBT;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +61,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         cartBT = findViewById(R.id.bt_dashboard_cartButton);
         userNameTV = findViewById(R.id.tv_dashboard_userName);
 
+
+        //SharedPreferences
         LoginDataModel loginDataModel = SharedPrefManager.getInstance(this).getSavedUsers();
         String userName = loginDataModel.getUserName();
         userNameTV.setText(userName);

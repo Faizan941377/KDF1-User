@@ -1,8 +1,6 @@
 package com.nextsuntech.kdf1.Categories.Adapter;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -18,7 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -26,14 +24,16 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.nextsuntech.kdf1.Cart.AddToCartActivity;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.nextsuntech.kdf1.Model.GetPricesDataModel;
 import com.nextsuntech.kdf1.Model.GetProductDataModel;
 import com.nextsuntech.kdf1.Model.LoginDataModel;
 import com.nextsuntech.kdf1.Network.RetrofitClient;
-import com.nextsuntech.kdf1.ProductDetails.ProductDetailsActivity;
 import com.nextsuntech.kdf1.R;
 import com.nextsuntech.kdf1.Response.AddToCartResponse;
+import com.nextsuntech.kdf1.Response.PricesResponse;
 import com.nextsuntech.kdf1.SharedPref.SharedPrefManager;
+import com.nextsuntech.kdf1.SubCategories.SubCategoriesBottomSheetAdapter;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -48,6 +48,8 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
     Context mContext;
     List<GetProductDataModel> productDataModelList;
     List<GetProductDataModel> fetchProductDataModelList;
+    List<GetPricesDataModel> getPricesDataModels;
+    SubCategoriesBottomSheetAdapter subCategoriesBottomSheetAdapter;
 
 
     public CategoriesDetailsAdapter(Context mContext, List<GetProductDataModel> productDataModelList) {
@@ -103,14 +105,62 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
         holder.productDetailsBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ProductDetailsActivity.class);
+                /*Intent intent = new Intent(mContext, ProductDetailsActivity.class);
                 intent.putExtra("description", productDataModelList.get(position).getDescription());
                 intent.putExtra("productTitle", productDataModelList.get(position).getTitle());
                 intent.putExtra("price",productDataModelList.get(position).getPrice());
                 intent.putExtra("productId",productDataModelList.get(position).getId());
                 intent.putExtra("img_url", RetrofitClient.IMAGE_BASE_URL + productDataModelList.get(position).getImageName().get(0).getImages());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.getApplicationContext().startActivity(intent);
+                mContext.getApplicationContext().startActivity(intent);*/
+
+
+                BottomSheetDialog builder = new BottomSheetDialog(v.getRootView().getContext());
+                View dialogView = LayoutInflater.from(v.getRootView().getContext()).inflate(R.layout.bottom_sheet_layout, null);
+
+
+                RecyclerView recyclerView;
+
+
+                recyclerView = dialogView.findViewById(R.id.bottom_sheet_rv);
+
+               // String id = productDataModelList.get(position).getId();
+
+                String id = "378";
+
+                Toast.makeText(mContext, id, Toast.LENGTH_SHORT).show();
+
+
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new LinearLayoutManager(v.getRootView().getContext(), RecyclerView.VERTICAL, false));
+
+                Call<PricesResponse> call = RetrofitClient.getInstance().getApi().getPrices(Integer.valueOf(id));
+                call.enqueue(new Callback<PricesResponse>() {
+                    @Override
+                    public void onResponse(Call<PricesResponse> call, Response<PricesResponse> response) {
+                        if (response.isSuccessful()) {
+                            getPricesDataModels = response.body().getPricesDataModelList();
+                            recyclerView.setAdapter(new SubCategoriesBottomSheetAdapter(mContext,getPricesDataModels));
+                            subCategoriesBottomSheetAdapter = new SubCategoriesBottomSheetAdapter(mContext, getPricesDataModels);
+                            recyclerView.setAdapter(subCategoriesBottomSheetAdapter);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<PricesResponse> call, Throwable t) {
+                        try {
+                            Toast.makeText(mContext, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+
+                //builder.setView(dialogView);
+                builder.setContentView(dialogView);
+                builder.setCancelable(true);
+                builder.show();
             }
         });
 

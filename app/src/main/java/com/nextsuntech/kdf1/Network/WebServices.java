@@ -11,6 +11,7 @@ import com.nextsuntech.kdf1.Response.GetCartResponse;
 import com.nextsuntech.kdf1.Response.GetProductResponse;
 import com.nextsuntech.kdf1.Response.LoginResponse;
 import com.nextsuntech.kdf1.Response.MenuResponse;
+import com.nextsuntech.kdf1.Response.PricesResponse;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -83,10 +84,11 @@ public interface WebServices {
 
 
     @POST("CheckOut")
-   // Call<CheckOutResponse> send(@Body JSONArray jsonObject1);
-   // Call<CheckOutResponse> postOrder(@Body List<CheckOutDataModel.Cart> cart);
-
     Call<CheckOutResponse> postOrder(@Body RequestBody requestBody);
 
-    // Call<JSONArray> postOrder(@Body JSONArray cart);
+    @FormUrlEncoded
+    @POST("GetPrices")
+    Call<PricesResponse> getPrices(
+            @Field("id") int id
+    );
 }
