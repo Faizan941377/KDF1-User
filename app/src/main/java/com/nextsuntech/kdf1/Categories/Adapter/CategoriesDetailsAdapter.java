@@ -1,5 +1,6 @@
 package com.nextsuntech.kdf1.Categories.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -117,6 +119,12 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
 
                 BottomSheetDialog builder = new BottomSheetDialog(v.getRootView().getContext());
                 View dialogView = LayoutInflater.from(v.getRootView().getContext()).inflate(R.layout.bottom_sheet_layout, null);
+                dialogView.findViewById(R.id.iv_rowBottomSheet_Close).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        builder.dismiss();
+                    }
+                });
 
 
                 RecyclerView recyclerView;

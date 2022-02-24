@@ -1,71 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet_container"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-
-
-   <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-       <androidx.recyclerview.widget.RecyclerView
-           android:id="@+id/bottom_sheet_rv"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"/>
-
-        <!--<TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="30dp"
-            android:text="Customer Name"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
-
-
-        <EditText
-            android:id="@+id/et_login_email"
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="26dp"
-            android:background="@drawable/edit_text_style"
-            android:hint="Customer Name"
-            android:inputType="text"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textColorHint="@color/color_orange"
-            android:textSize="12sp" />
+        android:layout_height="300dp"
+        android:layout_marginBottom="36dp">
 
         <RelativeLayout
-            android:id="@+id/bt_bottom_sheet_order"
+            android:id="@+id/rl_actionBar"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="36dp"
-            android:background="@drawable/bt_ripple_effect">
+            android:layout_height="35dp">
 
-            <TextView
+            <View
+                android:layout_width="40dp"
+                android:layout_height="5dp"
+                android:background="@color/colorGray"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"/>
+
+            <ImageView
+                android:id="@+id/iv_rowBottomSheet_Close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/ico_delete"
+                android:padding="15dp"
                 android:layout_centerInParent="true"
-                android:text="Order!"
-                android:textColor="@color/colorWhite"
-                android:textSize="12dp"
-                android:textStyle="bold" />
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="10dp"/>
 
+        </RelativeLayout>
 
-        </RelativeLayout>-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/bottom_sheet_rv"
+            android:layout_below="@+id/rl_actionBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>

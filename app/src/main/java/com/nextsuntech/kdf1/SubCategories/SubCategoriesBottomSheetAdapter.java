@@ -34,7 +34,6 @@ public class SubCategoriesBottomSheetAdapter extends RecyclerView.Adapter<SubCat
     @Override
     public void onBindViewHolder(@NonNull SubCategoriesBottomSheetAdapter.ViewHolder holder, int position) {
         holder.productNameTV.setText(getPricesDataModelList.get(position).getChoice());
-        holder.descriptionTV.setText(getPricesDataModelList.get(position).getChoice());
        // holder.pricesTV.setText(getPricesDataModelList.get(position).getPrice());
     }
 
@@ -47,14 +46,13 @@ public class SubCategoriesBottomSheetAdapter extends RecyclerView.Adapter<SubCat
 
         TextView productNameTV;
         TextView pricesTV;
-        TextView descriptionTV;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             productNameTV = itemView.findViewById(R.id.tv_productName);
             pricesTV = itemView.findViewById(R.id.tv_rowCategories_details_price);
-            descriptionTV = itemView.findViewById(R.id.tv_rowCategories_details_description);
         }
     }
 }
