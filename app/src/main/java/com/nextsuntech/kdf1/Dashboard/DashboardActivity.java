@@ -21,12 +21,16 @@ import com.nextsuntech.kdf1.Dashboard.Adapter.BeveragesAdapter;
 import com.nextsuntech.kdf1.Dashboard.Adapter.CategoriesAdapter;
 import com.nextsuntech.kdf1.Dashboard.Adapter.DealsAdapter;
 import com.nextsuntech.kdf1.Model.CategoriesDataModel;
+import com.nextsuntech.kdf1.Model.GetCartDataModel;
 import com.nextsuntech.kdf1.Model.LoginDataModel;
 import com.nextsuntech.kdf1.Network.RetrofitClient;
 import com.nextsuntech.kdf1.R;
+import com.nextsuntech.kdf1.Response.AddToCartResponse;
+import com.nextsuntech.kdf1.Response.GetCartResponse;
 import com.nextsuntech.kdf1.Response.MenuResponse;
 import com.nextsuntech.kdf1.SharedPref.SharedPrefManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -46,8 +50,11 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     DealsAdapter dealsAdapter;
     List<CategoriesDataModel> categoriesDataModelsList;
     FloatingActionButton cartBT;
+    TextView itemCount;
 
+   /* List<GetCartDataModel> getCartDataModelList;
 
+    private int cartQuantity = 0;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +67,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         searchET = findViewById(R.id.et_dashboard_search);
         cartBT = findViewById(R.id.bt_dashboard_cartButton);
         userNameTV = findViewById(R.id.tv_dashboard_userName);
-
+      //  itemCount = findViewById(R.id.text_count);
 
         //SharedPreferences
         LoginDataModel loginDataModel = SharedPrefManager.getInstance(this).getSavedUsers();
@@ -93,7 +100,18 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 //                categoriesAdapter.getFilter().filter(s);
             }
         });
+
+
+       /* int quantity = 0;
+        for (GetCartDataModel getCartDataModel : getCartDataModelist) {
+            quantity += getCartDataModel.getTotalQuantity();
+        }
+
+        cartQuantity = quantity;
+        itemCount.setText(String.valueOf(cartQuantity));*/
+
     }
+
 
     private void setBeveragesAdapter() {
         beveragesAdapter = new BeveragesAdapter(this);
@@ -116,7 +134,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         progressDialog.setIndeterminate(true);
 
         categoriesRV.setHasFixedSize(true);
-       // categoriesRV.setLayoutManager(new GridLayoutManager(this, 2));
+        // categoriesRV.setLayoutManager(new GridLayoutManager(this, 2));
         categoriesRV.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
        /* StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
         categoriesRV.setLayoutManager(staggeredGridLayoutManager);*/

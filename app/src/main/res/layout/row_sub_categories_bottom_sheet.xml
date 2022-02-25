@@ -14,11 +14,11 @@
             android:layout_width="match_parent"
             android:layout_height="90dp">
 
-            <ProgressBar
+           <!-- <ProgressBar
                 android:id="@+id/pb_rowCategoryDetail_image"
                 android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="30dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="30dp"
                 android:indeterminateTint="@color/color_orange" />
 
@@ -29,14 +29,15 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="8dp"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop" />-->
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-
                 android:layout_toRightOf="@+id/iv_rowCategoryDetailPizza"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -45,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:text="Hot &amp; Spicy"
                     android:textColor="@color/colorBlack"
-                    android:textSize="12dp"
+                    android:textSize="16dp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -57,8 +58,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="RS:"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="12dp"
+                        android:textColor="@color/colorGray"
+                        android:textSize="14dp"
                         android:textStyle="italic|bold" />
 
 
@@ -68,13 +69,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
                         android:text="1000"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="12dp"
+                        android:textColor="@color/colorGray"
+                        android:textSize="14dp"
                         android:textStyle="italic|bold" />
 
                 </LinearLayout>
 
-                <LinearLayout
+               <!-- <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -89,12 +90,12 @@
                         android:textSize="12dp"
                         android:textStyle="bold" />
 
-                </LinearLayout>
+                </LinearLayout>-->
 
             </LinearLayout>
 
             <RelativeLayout
-                android:id="@+id/iv_rowCategoryDetail_cart"
+                android:id="@+id/bt_rowSubCategoryBottomSheet"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"

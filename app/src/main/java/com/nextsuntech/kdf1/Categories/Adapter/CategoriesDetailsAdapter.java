@@ -1,6 +1,5 @@
 package com.nextsuntech.kdf1.Categories.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -17,7 +16,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,7 +33,6 @@ import com.nextsuntech.kdf1.R;
 import com.nextsuntech.kdf1.Response.AddToCartResponse;
 import com.nextsuntech.kdf1.Response.PricesResponse;
 import com.nextsuntech.kdf1.SharedPref.SharedPrefManager;
-import com.nextsuntech.kdf1.SubCategories.SubCategoriesBottomSheetAdapter;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -77,6 +74,22 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
         holder.stockTV.setText(productDataModelList.get(position).getStockstatus());
 
 
+        String price = productDataModelList.get(position).getPrice();
+
+        if (price.equals("0")) {
+            holder.RsTV.setText("");
+            holder.priceTV.setText("");
+            holder.addToCartIV.setVisibility(View.GONE);
+
+        } else if (holder.priceTV.length() > 0) {
+
+            holder.productDetailsBT.setEnabled(false);
+
+        } else {
+
+            holder.productDetailsBT.setEnabled(true);
+        }
+
         if (holder.stockTV.length() == 8) {
             holder.stockTV.setTextColor(Color.parseColor("#2b9f4c"));
         } else if (holder.stockTV.length() == 12) {
@@ -107,6 +120,7 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
         holder.productDetailsBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 /*Intent intent = new Intent(mContext, ProductDetailsActivity.class);
                 intent.putExtra("description", productDataModelList.get(position).getDescription());
                 intent.putExtra("productTitle", productDataModelList.get(position).getTitle());
@@ -126,18 +140,13 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
                     }
                 });
 
-
                 RecyclerView recyclerView;
-
 
                 recyclerView = dialogView.findViewById(R.id.bottom_sheet_rv);
 
-               // String id = productDataModelList.get(position).getId();
+                String id = productDataModelList.get(position).getId();
 
-                String id = "378";
-
-                Toast.makeText(mContext, id, Toast.LENGTH_SHORT).show();
-
+                //Toast.makeText(mContext, id, Toast.LENGTH_SHORT).show();
 
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new LinearLayoutManager(v.getRootView().getContext(), RecyclerView.VERTICAL, false));
@@ -148,7 +157,7 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
                     public void onResponse(Call<PricesResponse> call, Response<PricesResponse> response) {
                         if (response.isSuccessful()) {
                             getPricesDataModels = response.body().getPricesDataModelList();
-                            recyclerView.setAdapter(new SubCategoriesBottomSheetAdapter(mContext,getPricesDataModels));
+                            recyclerView.setAdapter(new SubCategoriesBottomSheetAdapter(mContext, getPricesDataModels));
                             subCategoriesBottomSheetAdapter = new SubCategoriesBottomSheetAdapter(mContext, getPricesDataModels);
                             recyclerView.setAdapter(subCategoriesBottomSheetAdapter);
                         }
@@ -158,7 +167,7 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
                     public void onFailure(Call<PricesResponse> call, Throwable t) {
                         try {
                             Toast.makeText(mContext, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -248,6 +257,7 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
         TextView priceTV;
         TextView descriptionTV;
         TextView stockTV;
+        TextView RsTV;
         ImageView detailPizzaIV;
         ImageView addToCartIV;
         ProgressBar imageDetailPB;
@@ -265,6 +275,7 @@ public class CategoriesDetailsAdapter extends RecyclerView.Adapter<CategoriesDet
             stockTV = itemView.findViewById(R.id.tv_rowCategories_details_status);
             productDetailsBT = itemView.findViewById(R.id.bt_rowCategoryDetails_productDetails);
             addToCartIV = itemView.findViewById(R.id.iv_rowCategoryDetail_cart);
+            RsTV = itemView.findViewById(R.id.tv_rowCategories_rs);
 
         }
     }

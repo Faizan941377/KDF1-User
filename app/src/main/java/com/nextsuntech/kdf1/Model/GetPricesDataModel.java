@@ -6,9 +6,9 @@ public class GetPricesDataModel {
     int productId;
     String product;
     String choice;
-    int price;
+    String price;
 
-    public GetPricesDataModel(int id, int productId, String product, String choice, int price) {
+    public GetPricesDataModel(int id, int productId, String product, String choice, String price) {
         this.id = id;
         this.productId = productId;
         this.product = product;
@@ -48,11 +48,11 @@ public class GetPricesDataModel {
         this.choice = choice;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 }

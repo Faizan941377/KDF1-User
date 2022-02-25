@@ -7,7 +7,6 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nextsuntech.kdf1.R;
-import com.nextsuntech.kdf1.SubCategories.SubCategoriesActivity;
 import com.nextsuntech.kdf1.Users.LoginActivity;
 
 

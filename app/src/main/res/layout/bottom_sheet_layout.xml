@@ -22,6 +22,14 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerInParent="true"/>
 
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorGray"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"/>
+
             <ImageView
                 android:id="@+id/iv_rowBottomSheet_Close"
                 android:layout_width="wrap_content"

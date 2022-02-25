@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.nextsuntech.kdf1.Cart.Adapter.AddToCartAdapter;
 import com.nextsuntech.kdf1.Dashboard.Adapter.CategoriesAdapter;
+import com.nextsuntech.kdf1.Dashboard.DashboardActivity;
 import com.nextsuntech.kdf1.Model.GetCartDataModel;
 import com.nextsuntech.kdf1.Model.LoginDataModel;
 import com.nextsuntech.kdf1.Network.RetrofitClient;
@@ -100,19 +102,20 @@ public class AddToCartActivity extends AppCompatActivity implements View.OnClick
                     progressDialog.dismiss();
                     getCartDataModelList = response.body().getCartDataModels();
                     // addToCartRV.setAdapter(new CategoriesAdapter(getApplicationContext(), getCartDataModelList));
-                    addToCartAdapter = new AddToCartAdapter(getApplicationContext(), getCartDataModelList,addToCartTotalTV,checkOutBT,totalItemTV,emptyRecyclerViewTV);
+                    addToCartAdapter = new AddToCartAdapter(getApplicationContext(), getCartDataModelList, addToCartTotalTV, checkOutBT, totalItemTV, emptyRecyclerViewTV);
                     addToCartRV.setAdapter(addToCartAdapter);
 
                     // here we are add the product prices to the total amount
-                    int sum=0,i;
-                    for (i=0;i<getCartDataModelList.size();i++)
-                        sum=sum+(getCartDataModelList.get(i).getPrice()*getCartDataModelList.get(i).getTotalQuantity());
+                    int sum = 0, i;
+                    for (i = 0; i < getCartDataModelList.size(); i++)
+                        sum = sum + (getCartDataModelList.get(i).getPrice() * getCartDataModelList.get(i).getTotalQuantity());
                     addToCartTotalTV.setText(String.valueOf(sum));
 
-                    int totalItemSum=0,j;
-                    for (j=0;j<getCartDataModelList.size();j++)
-                        totalItemSum = totalItemSum+(getCartDataModelList.get(j).getTotalQuantity());
+                    int totalItemSum = 0, j;
+                    for (j = 0; j < getCartDataModelList.size(); j++)
+                        totalItemSum = totalItemSum + (getCartDataModelList.get(j).getTotalQuantity());
                     totalItemTV.setText(String.valueOf(totalItemSum));
+
                 }
             }
 

@@ -1,7 +1,10 @@
 package com.nextsuntech.kdf1.Response;
 
+import android.content.Context;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.nextsuntech.kdf1.Dashboard.DashboardActivity;
 import com.nextsuntech.kdf1.Model.GetCartDataModel;
 
 import java.util.List;
