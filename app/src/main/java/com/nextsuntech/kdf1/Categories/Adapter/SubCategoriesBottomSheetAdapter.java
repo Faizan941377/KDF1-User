@@ -54,12 +54,12 @@ public class SubCategoriesBottomSheetAdapter extends RecyclerView.Adapter<SubCat
         holder.addToCartBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Item Added", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "Item Added", Toast.LENGTH_SHORT).show();
                 String qty = "1";
                 String price = getPricesDataModelList.get(position).getPrice();
-                int productId = getPricesDataModelList.get(position).getId();
+                String productId = getPricesDataModelList.get(position).getProductId();
 
-                Call<AddToCartResponse> call = RetrofitClient.getInstance().getApi().AddToCart(String.valueOf(productId), userId, qty, price);
+                Call<AddToCartResponse> call = RetrofitClient.getInstance().getApi().AddToCart(productId, userId, qty, price);
                 call.enqueue(new Callback<AddToCartResponse>() {
                     @Override
                     public void onResponse(Call<AddToCartResponse> call, Response<AddToCartResponse> response) {

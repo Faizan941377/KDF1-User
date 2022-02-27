@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,7 +31,9 @@ import com.nextsuntech.kdf1.Response.GetCartResponse;
 import com.nextsuntech.kdf1.Response.MenuResponse;
 import com.nextsuntech.kdf1.SharedPref.SharedPrefManager;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -149,6 +152,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                     categoriesAdapter = new CategoriesAdapter(getApplicationContext(), categoriesDataModelsList);
                     categoriesRV.setAdapter(categoriesAdapter);
                     progressDialog.dismiss();
+                    String currentDateAndTime = SimpleDateFormat.getDateTimeInstance().format(new Date());
+                    Log.e("DateAndTime",currentDateAndTime);
                 } else {
                     Toast.makeText(DashboardActivity.this, "Check your internet connection!", Toast.LENGTH_SHORT).show();
                 }

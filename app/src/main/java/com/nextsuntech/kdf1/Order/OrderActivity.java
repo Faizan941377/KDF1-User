@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,6 +15,9 @@ import android.widget.Toast;
 import com.nextsuntech.kdf1.Network.RetrofitClient;
 import com.nextsuntech.kdf1.R;
 import com.nextsuntech.kdf1.Response.BookingDetailsResponse;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -75,41 +79,44 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
             customerNameET.setError("Please enter the Table No!");
         } else {
 
-        progressDialog.show();
-        progressDialog.setMessage("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.setIndeterminate(true);
+            progressDialog.show();
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.setIndeterminate(true);
 
-        String customerName = customerNameET.getText().toString().trim();
-        int totalItem = Integer.parseInt(totalItemsTV.getText().toString());
-        int totalPrice = Integer.parseInt(totalPriceTV.getText().toString());
-        int cartAutoId = Integer.parseInt(cartAutoIdTV.getText().toString());
+            String customerName = customerNameET.getText().toString().trim();
+            int totalItem = Integer.parseInt(totalItemsTV.getText().toString());
+            int totalPrice = Integer.parseInt(totalPriceTV.getText().toString());
+            int cartAutoId = Integer.parseInt(cartAutoIdTV.getText().toString());
 
-        Call<BookingDetailsResponse> call = RetrofitClient.getInstance().getApi().bookingDetails(customerName, totalItem, totalPrice, cartAutoId);
-        call.enqueue(new Callback<BookingDetailsResponse>() {
-            @Override
-            public void onResponse(Call<BookingDetailsResponse> call, Response<BookingDetailsResponse> response) {
-                BookingDetailsResponse bookingDetailsResponse = response.body();
-                if (response.isSuccessful()) {
+            String currentDateAndTime = SimpleDateFormat.getDateTimeInstance().format(new Date());
+            Log.e("DateAndTime",currentDateAndTime);
+
+            Call<BookingDetailsResponse> call = RetrofitClient.getInstance().getApi().bookingDetails(customerName, totalItem, totalPrice, cartAutoId,currentDateAndTime);
+            call.enqueue(new Callback<BookingDetailsResponse>() {
+                @Override
+                public void onResponse(Call<BookingDetailsResponse> call, Response<BookingDetailsResponse> response) {
+                    BookingDetailsResponse bookingDetailsResponse = response.body();
+                    if (response.isSuccessful()) {
+                        progressDialog.dismiss();
+                        Toast.makeText(OrderActivity.this, bookingDetailsResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        customerNameET.setText("");
+                        totalItemsTV.setText("0.00");
+                        totalPriceTV.setText("0.00");
+                        cartAutoIdTV.setText("0.00");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<BookingDetailsResponse> call, Throwable t) {
                     progressDialog.dismiss();
-                    Toast.makeText(OrderActivity.this, bookingDetailsResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                    customerNameET.setText("");
-                    totalItemsTV.setText("0.00");
-                    totalPriceTV.setText("0.00");
-                    cartAutoIdTV.setText("0.00");
+                    try {
+                        Toast.makeText(OrderActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-
-            @Override
-            public void onFailure(Call<BookingDetailsResponse> call, Throwable t) {
-                progressDialog.dismiss();
-                try {
-                    Toast.makeText(OrderActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+            });
 
             orderConfirmBT.setEnabled(true);
         }

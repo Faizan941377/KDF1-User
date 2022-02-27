@@ -3,12 +3,12 @@ package com.nextsuntech.kdf1.Model;
 public class GetPricesDataModel {
 
     int id;
-    int productId;
+    String productId;
     String product;
     String choice;
     String price;
 
-    public GetPricesDataModel(int id, int productId, String product, String choice, String price) {
+    public GetPricesDataModel(int id, String productId, String product, String choice, String price) {
         this.id = id;
         this.productId = productId;
         this.product = product;
@@ -24,11 +24,11 @@ public class GetPricesDataModel {
         this.id = id;
     }
 
-    public int getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 

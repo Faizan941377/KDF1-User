@@ -1,6 +1,7 @@
 package com.nextsuntech.kdf1.Categories.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ import com.nextsuntech.kdf1.Model.GetPricesDataModel;
 import com.nextsuntech.kdf1.Model.GetProductDataModel;
 import com.nextsuntech.kdf1.Model.LoginDataModel;
 import com.nextsuntech.kdf1.Network.RetrofitClient;
+import com.nextsuntech.kdf1.ProductDetails.ProductDetailsActivity;
 import com.nextsuntech.kdf1.R;
 import com.nextsuntech.kdf1.Response.AddToCartResponse;
 import com.nextsuntech.kdf1.Response.PricesResponse;
