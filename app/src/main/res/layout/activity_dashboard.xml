@@ -22,6 +22,15 @@
             android:textSize="25dp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/iv_logout"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ico_logout"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="10dp"/>
+
 
     </RelativeLayout>
 
@@ -64,7 +73,7 @@
 
                 </LinearLayout>
 
-                <TextView
+              <!--  <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -72,15 +81,15 @@
                     android:text="Deals"
                     android:textColor="@color/colorBlack"
                     android:textSize="18dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold" />-->
 
 
-                <androidx.recyclerview.widget.RecyclerView
+               <!-- <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_deals"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent" />-->
 
-                <RelativeLayout
+                <!--<RelativeLayout
                     android:id="@+id/rl_searchBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -105,7 +114,7 @@
                         android:backgroundTint="@color/lightGray" />
 
                 </RelativeLayout>
-
+-->
 
 
                 <TextView
@@ -124,11 +133,11 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_categories"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="match_parent"
                     android:layout_below="@+id/tv_categories"/>
 
 
-                <TextView
+               <!-- <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -142,7 +151,7 @@
                     android:id="@+id/rv_beverages"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"></androidx.recyclerview.widget.RecyclerView>
-
+-->
             </LinearLayout>
 
 

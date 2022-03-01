@@ -39,9 +39,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog = new ProgressDialog(this);
 
         emailET.setText("fayasz22@gmail.com");
-        emailET.setEnabled(false);
+        emailET.setEnabled(true);
         passwordET.setText("12345");
-        passwordET.setEnabled(false);
+        passwordET.setEnabled(true);
 
 
         loginBT.setOnClickListener(this);

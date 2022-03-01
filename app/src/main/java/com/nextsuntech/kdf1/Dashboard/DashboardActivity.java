@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.nextsuntech.kdf1.Cart.AddToCartActivity;
 import com.nextsuntech.kdf1.Dashboard.Adapter.BeveragesAdapter;
 import com.nextsuntech.kdf1.Dashboard.Adapter.CategoriesAdapter;
@@ -30,6 +32,7 @@ import com.nextsuntech.kdf1.Response.AddToCartResponse;
 import com.nextsuntech.kdf1.Response.GetCartResponse;
 import com.nextsuntech.kdf1.Response.MenuResponse;
 import com.nextsuntech.kdf1.SharedPref.SharedPrefManager;
+import com.nextsuntech.kdf1.Users.LoginActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,6 +56,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     DealsAdapter dealsAdapter;
     List<CategoriesDataModel> categoriesDataModelsList;
     FloatingActionButton cartBT;
+    ImageView logoutIV;
     TextView itemCount;
 
    /* List<GetCartDataModel> getCartDataModelList;
@@ -65,11 +69,12 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_dashboard);
 
         categoriesRV = findViewById(R.id.rv_categories);
-        dealsRV = findViewById(R.id.rv_deals);
-        beveragesRV = findViewById(R.id.rv_beverages);
-        searchET = findViewById(R.id.et_dashboard_search);
+       /* dealsRV = findViewById(R.id.rv_deals);
+        beveragesRV = findViewById(R.id.rv_beverages);*/
+      //  searchET = findViewById(R.id.et_dashboard_search);
         cartBT = findViewById(R.id.bt_dashboard_cartButton);
         userNameTV = findViewById(R.id.tv_dashboard_userName);
+        logoutIV = findViewById(R.id.iv_logout);
       //  itemCount = findViewById(R.id.text_count);
 
         //SharedPreferences
@@ -82,12 +87,13 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
 
         cartBT.setOnClickListener(this);
+        logoutIV.setOnClickListener(this);
 
         setCategoriesAdapter();
-        setBeveragesAdapter();
-        setDealsAdapter();
+       // setBeveragesAdapter();
+       // setDealsAdapter();
 
-        searchET.addTextChangedListener(new TextWatcher() {
+      /*  searchET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -102,7 +108,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             public void afterTextChanged(Editable s) {
 //                categoriesAdapter.getFilter().filter(s);
             }
-        });
+        });*/
 
 
        /* int quantity = 0;
@@ -137,8 +143,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         progressDialog.setIndeterminate(true);
 
         categoriesRV.setHasFixedSize(true);
-        // categoriesRV.setLayoutManager(new GridLayoutManager(this, 2));
-        categoriesRV.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+         categoriesRV.setLayoutManager(new GridLayoutManager(this, 2));
+       // categoriesRV.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
        /* StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
         categoriesRV.setLayoutManager(staggeredGridLayoutManager);*/
 
@@ -177,6 +183,15 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         switch (v.getId()) {
             case R.id.bt_dashboard_cartButton:
                 startActivity(new Intent(this, AddToCartActivity.class));
+                break;
+
+            case R.id.iv_logout:
+                SharedPrefManager.getInstance(DashboardActivity.this).clear();
+                Intent intent = new Intent(DashboardActivity.this,LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+                Toast.makeText(this, "Logout Successful", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

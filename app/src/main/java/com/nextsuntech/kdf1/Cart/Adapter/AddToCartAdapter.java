@@ -216,6 +216,7 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
                                     intent.putExtra("totalItems", totalItems);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     mContext.startActivity(intent);
+                                    notifyDataSetChanged();
                                 } else {
                                     Toast.makeText(mContext, "Something went wrong!", Toast.LENGTH_SHORT).show();
                                 }
