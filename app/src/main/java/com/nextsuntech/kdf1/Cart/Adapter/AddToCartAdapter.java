@@ -34,6 +34,7 @@ import com.bumptech.glide.request.target.Target;
 import com.google.gson.JsonIOException;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.nextsuntech.kdf1.CustomerOrder.CustomerOrderActivity;
 import com.nextsuntech.kdf1.Model.CheckOutDataModel;
 import com.nextsuntech.kdf1.Model.GetCartDataModel;
 import com.nextsuntech.kdf1.Model.LoginDataModel;
@@ -207,7 +208,12 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
 
                                 if (response.isSuccessful()) {
                                     Toast.makeText(mContext, checkOutResponse.getMessage() + " OderId " + checkOutResponse.getAutoId(), Toast.LENGTH_SHORT).show();
-                                    String orderId = String.valueOf(checkOutResponse.getAutoId());
+                                    Intent intent = new Intent(mContext, CustomerOrderActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    mContext.startActivity(intent);
+
+
+                                    /*String orderId = String.valueOf(checkOutResponse.getAutoId());
                                     String totalPrice = addToCartTotalTV.getText().toString();
                                     String totalItems = totalItemTV.getText().toString();
                                     Intent intent = new Intent(mContext, OrderActivity.class);
@@ -215,7 +221,7 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
                                     intent.putExtra("cartAutoId", orderId);
                                     intent.putExtra("totalItems", totalItems);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    mContext.startActivity(intent);
+                                    mContext.startActivity(intent);*/
                                     notifyDataSetChanged();
                                 } else {
                                     Toast.makeText(mContext, "Something went wrong!", Toast.LENGTH_SHORT).show();

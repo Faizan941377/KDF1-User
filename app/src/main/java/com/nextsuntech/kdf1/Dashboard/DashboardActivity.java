@@ -75,7 +75,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         cartBT = findViewById(R.id.bt_dashboard_cartButton);
         userNameTV = findViewById(R.id.tv_dashboard_userName);
         logoutIV = findViewById(R.id.iv_logout);
-      //  itemCount = findViewById(R.id.text_count);
+        //  itemCount = findViewById(R.id.text_count);
 
         //SharedPreferences
         LoginDataModel loginDataModel = SharedPrefManager.getInstance(this).getSavedUsers();
@@ -143,8 +143,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         progressDialog.setIndeterminate(true);
 
         categoriesRV.setHasFixedSize(true);
-         categoriesRV.setLayoutManager(new GridLayoutManager(this, 2));
-       // categoriesRV.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+        // categoriesRV.setLayoutManager(new GridLayoutManager(this, 2));
+        categoriesRV.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
        /* StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
         categoriesRV.setLayoutManager(staggeredGridLayoutManager);*/
 
@@ -159,7 +159,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                     categoriesRV.setAdapter(categoriesAdapter);
                     progressDialog.dismiss();
                     String currentDateAndTime = SimpleDateFormat.getDateTimeInstance().format(new Date());
-                    Log.e("DateAndTime",currentDateAndTime);
+                    Log.e("DateAndTime", currentDateAndTime);
                 } else {
                     Toast.makeText(DashboardActivity.this, "Check your internet connection!", Toast.LENGTH_SHORT).show();
                 }
@@ -187,8 +187,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
             case R.id.iv_logout:
                 SharedPrefManager.getInstance(DashboardActivity.this).clear();
-                Intent intent = new Intent(DashboardActivity.this,LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
                 Toast.makeText(this, "Logout Successful", Toast.LENGTH_SHORT).show();
