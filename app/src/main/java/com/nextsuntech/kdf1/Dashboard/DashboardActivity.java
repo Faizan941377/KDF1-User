@@ -69,9 +69,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_dashboard);
 
         categoriesRV = findViewById(R.id.rv_categories);
-       /* dealsRV = findViewById(R.id.rv_deals);
-        beveragesRV = findViewById(R.id.rv_beverages);*/
-      //  searchET = findViewById(R.id.et_dashboard_search);
+        dealsRV = findViewById(R.id.rv_deals);
+        beveragesRV = findViewById(R.id.rv_beverages);
+        searchET = findViewById(R.id.et_dashboard_search);
         cartBT = findViewById(R.id.bt_dashboard_cartButton);
         userNameTV = findViewById(R.id.tv_dashboard_userName);
         logoutIV = findViewById(R.id.iv_logout);
@@ -90,8 +90,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         logoutIV.setOnClickListener(this);
 
         setCategoriesAdapter();
-       // setBeveragesAdapter();
-       // setDealsAdapter();
+        setBeveragesAdapter();
+        setDealsAdapter();
 
       /*  searchET.addTextChangedListener(new TextWatcher() {
             @Override
