@@ -51,13 +51,13 @@
             android:textColor="@color/colorBlack"/>
 
         <EditText
-            android:id="@+id/et_login_email"
+            android:id="@+id/et_customerOder_Phone"
             android:layout_width="match_parent"
             android:layout_height="46dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/edit_text_style"
             android:hint="Phone"
-            android:inputType="textEmailAddress"
+            android:inputType="phone"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textColorHint="@color/color_orange"
@@ -65,7 +65,7 @@
 
 
         <EditText
-            android:id="@+id/et_login_email"
+            android:id="@+id/et_customerOder_email"
             android:layout_width="match_parent"
             android:layout_height="46dp"
             android:layout_marginTop="8dp"
@@ -76,6 +76,7 @@
             android:textColor="@color/black"
             android:textColorHint="@color/color_orange"
             android:textSize="12sp" />
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -88,7 +89,7 @@
 
 
         <EditText
-            android:id="@+id/et_login_email"
+            android:id="@+id/et_customerOder_city"
             android:layout_width="match_parent"
             android:layout_height="46dp"
             android:layout_marginTop="8dp"
@@ -102,7 +103,7 @@
 
 
         <EditText
-            android:id="@+id/et_login_email"
+            android:id="@+id/et_customerOder_address"
             android:layout_width="match_parent"
             android:layout_height="46dp"
             android:layout_marginTop="8dp"
@@ -113,6 +114,125 @@
             android:textColor="@color/black"
             android:textColorHint="@color/color_orange"
             android:textSize="12sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Total Items :"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorBlack"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_weight="1">
+
+
+                <TextView
+                    android:id="@+id/tv_CustomerOrder_totalItems"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="0.00"
+                    android:textSize="16dp"
+                    android:textColor="@color/colorBlack"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Total Price :"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorBlack"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tv_customerOrder_totalPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="0.00"
+                    android:textSize="16dp"
+                    android:textColor="@color/colorBlack"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Cart Auto Id :"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorBlack"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tv_customerOrder_cartAutoId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="0.00"
+                    android:textSize="16dp"
+                    android:textColor="@color/colorBlack"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
 
 
     </LinearLayout>
