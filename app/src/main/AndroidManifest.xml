@@ -14,36 +14,42 @@
         android:theme="@style/Theme.KDF1"
         android:usesCleartextTraffic="true">
 
-        <activity android:name="com.nextsuntech.kdf1User.CustomerOrder.CustomerOrderActivity"
-            android:launchMode="singleTop"
+        <activity android:name=".Dashboard.Profile.ProfileActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"/>
         <activity
-            android:name="com.nextsuntech.kdf1User.Order.OrderActivity"
+            android:name=".Order.OrderHistory.OrderHistoryActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+        <activity
+            android:name=".CustomerOrder.CustomerOrderActivity"
             android:launchMode="singleTop"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
-            android:name="com.nextsuntech.kdf1User.Cart.AddToCartActivity"
+            android:name=".Order.OrderActivity"
+            android:launchMode="singleTop"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
-            android:name="com.nextsuntech.kdf1User.ProductDetails.ProductDetailsActivity"
+            android:name=".Cart.AddToCartActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
-            android:name="com.nextsuntech.kdf1User.Categories.CategoriesDetailActivity"
+            android:name=".ProductDetails.ProductDetailsActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
-            android:name="com.nextsuntech.kdf1User.Dashboard.DashboardActivity"
+            android:name=".Categories.CategoriesDetailActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
-            android:name="com.nextsuntech.kdf1User.MainActivity"
+            android:name=".Dashboard.DashboardActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
-            android:name="com.nextsuntech.kdf1User.Users.LoginActivity"
+            android:name=".MainActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
-            android:name="com.nextsuntech.kdf1User.Users.RegisterActivity"
+            android:name=".Users.LoginActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
-            android:name="com.nextsuntech.kdf1User.Splash.SplashActivity"
+            android:name=".Users.RegisterActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+        <activity
+            android:name=".Splash.SplashActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -50,7 +50,7 @@ public class AddToCartActivity extends AppCompatActivity implements View.OnClick
         cartTV = findViewById(R.id.tv_rowCategories_details_heading);
         addToCartTotalTV = findViewById(R.id.tv_addToCart_total);
         checkOutBT = findViewById(R.id.bt_addToCart_checkout);
-        totalItemTV= findViewById(R.id.tv_addToCart_totalItems);
+        totalItemTV = findViewById(R.id.tv_addToCart_totalItems);
         emptyRecyclerViewTV = findViewById(R.id.empty_view);
         progressDialog = new ProgressDialog(this);
 
@@ -83,7 +83,10 @@ public class AddToCartActivity extends AppCompatActivity implements View.OnClick
         LoginDataModel loginModel = SharedPrefManager.getInstance(this).getSavedUsers();
         int userId = Integer.parseInt(String.valueOf(loginModel.getId()));
 
+
         Call<GetCartResponse> call = RetrofitClient.getInstance().getApi().getAddToCart(userId);
+
+
         call.enqueue(new Callback<GetCartResponse>() {
             @Override
             public void onResponse(Call<GetCartResponse> call, Response<GetCartResponse> response) {
@@ -118,6 +121,7 @@ public class AddToCartActivity extends AppCompatActivity implements View.OnClick
                     e.printStackTrace();
                 }
             }
+
         });
     }
 }

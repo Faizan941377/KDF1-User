@@ -98,36 +98,40 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
         holder.deleteIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 int id = getCartDataModelList.get(position).getId();
 
-                Call<DeleteCartProductResponse> call = RetrofitClient.getInstance().getApi().deleteProductByCart(id);
-                call.enqueue(new Callback<DeleteCartProductResponse>() {
-                    @Override
-                    public void onResponse(Call<DeleteCartProductResponse> call, Response<DeleteCartProductResponse> response) {
-                        DeleteCartProductResponse deleteCartProductResponse = response.body();
-                        if (response.isSuccessful()) {
-                            getCartDataModelList.remove(position);
-                            notifyItemRemoved(position);
-                            calculation();
-                            qtyCalculate();
-                            notifyDataSetChanged();
-                            Toast.makeText(mContext, deleteCartProductResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                        } else {
-                            //Toast.makeText(mContext, deleteCartProductResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    Call<DeleteCartProductResponse> call = RetrofitClient.getInstance().getApi().deleteProductByCart(id);
+                    call.enqueue(new Callback<DeleteCartProductResponse>() {
+                        @Override
+                        public void onResponse(Call<DeleteCartProductResponse> call, Response<DeleteCartProductResponse> response) {
+                            DeleteCartProductResponse deleteCartProductResponse = response.body();
+                            if (response.isSuccessful()) {
+                                getCartDataModelList.remove(position);
+                                notifyItemRemoved(position);
+                                calculation();
+                                qtyCalculate();
+                                notifyDataSetChanged();
+                                Toast.makeText(mContext, deleteCartProductResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            } else {
+                                //Toast.makeText(mContext, deleteCartProductResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<DeleteCartProductResponse> call, Throwable t) {
-                        try {
-                            Toast.makeText(mContext, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        @Override
+                        public void onFailure(Call<DeleteCartProductResponse> call, Throwable t) {
+                            try {
+                                Toast.makeText(mContext, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
-                });
-            }
+                    });
+
+                }
+
+
+
+
         });
 
 
@@ -187,7 +191,7 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
                                 CheckOutResponse checkOutResponse = response.body();
 
                                 if (response.isSuccessful()) {
-                                   // Toast.makeText(mContext, checkOutResponse.getMessage() + " OderId " + checkOutResponse.getAutoId(), Toast.LENGTH_SHORT).show();
+                                    // Toast.makeText(mContext, checkOutResponse.getMessage() + " OderId " + checkOutResponse.getAutoId(), Toast.LENGTH_SHORT).show();
                                     String orderId = String.valueOf(checkOutResponse.getAutoId());
                                     String totalPrice = addToCartTotalTV.getText().toString();
                                     String totalItems = totalItemTV.getText().toString();

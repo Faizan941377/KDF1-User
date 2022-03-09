@@ -11,12 +11,14 @@ public class GetCartDataModel {
     int userRegistrationId;
     int totalQuantity;
     String cartAutoId;
+    String status;
 
     public GetCartResponse.ImageName imageName;
     public GetCartResponse.Message message;
 
-    public GetCartDataModel(int id, int productId, String description, int price, int userRegistrationId, int totalQuantity,
-                            String cartAutoId, GetCartResponse.ImageName imageName, GetCartResponse.Message message) {
+    public GetCartDataModel(int id, int productId, String description, int price, int userRegistrationId,
+                            int totalQuantity, String cartAutoId, String status, GetCartResponse.ImageName imageName,
+                            GetCartResponse.Message message) {
         this.id = id;
         this.productId = productId;
         this.description = description;
@@ -24,6 +26,7 @@ public class GetCartDataModel {
         this.userRegistrationId = userRegistrationId;
         this.totalQuantity = totalQuantity;
         this.cartAutoId = cartAutoId;
+        this.status = status;
         this.imageName = imageName;
         this.message = message;
     }
@@ -82,6 +85,14 @@ public class GetCartDataModel {
 
     public void setCartAutoId(String cartAutoId) {
         this.cartAutoId = cartAutoId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public GetCartResponse.ImageName getImageName() {

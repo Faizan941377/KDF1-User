@@ -31,6 +31,14 @@
             android:layout_centerInParent="true"
             android:layout_marginRight="10dp"/>
 
+        <ImageView
+            android:id="@+id/iv_dashboard_profile"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ico_dashboard_profile"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"/>
+
 
     </RelativeLayout>
 

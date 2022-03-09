@@ -20,9 +20,11 @@ import com.nextsuntech.kdf1User.Cart.AddToCartActivity;
 import com.nextsuntech.kdf1User.Dashboard.Adapter.BeveragesAdapter;
 import com.nextsuntech.kdf1User.Dashboard.Adapter.CategoriesAdapter;
 import com.nextsuntech.kdf1User.Dashboard.Adapter.DealsAdapter;
+import com.nextsuntech.kdf1User.Dashboard.Profile.ProfileActivity;
 import com.nextsuntech.kdf1User.Model.CategoriesDataModel;
 import com.nextsuntech.kdf1User.Model.LoginDataModel;
 import com.nextsuntech.kdf1User.Network.RetrofitClient;
+import com.nextsuntech.kdf1User.Order.OrderHistory.OrderHistoryActivity;
 import com.nextsuntech.kdf1User.R;
 import com.nextsuntech.kdf1User.Response.MenuResponse;
 import com.nextsuntech.kdf1User.SharedPref.SharedPrefManager;
@@ -50,6 +52,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     List<CategoriesDataModel> categoriesDataModelsList;
     FloatingActionButton cartBT;
     ImageView logoutIV;
+    ImageView profileIV;
     TextView itemCount;
 
    /* List<GetCartDataModel> getCartDataModelList;
@@ -68,6 +71,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         cartBT = findViewById(R.id.bt_dashboard_cartButton);
         userNameTV = findViewById(R.id.tv_dashboard_userName);
         logoutIV = findViewById(R.id.iv_logout);
+        profileIV = findViewById(R.id.iv_dashboard_profile);
         //  itemCount = findViewById(R.id.text_count);
 
         //SharedPreferences
@@ -81,6 +85,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
         cartBT.setOnClickListener(this);
         logoutIV.setOnClickListener(this);
+        profileIV.setOnClickListener(this);
 
         setCategoriesAdapter();
         setBeveragesAdapter();
@@ -185,6 +190,11 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 startActivity(intent);
                 finish();
                 Toast.makeText(this, "Logout Successful", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.iv_dashboard_profile:
+                Intent intent1 = new Intent(this, ProfileActivity.class);
+                startActivity(intent1);
                 break;
         }
     }
