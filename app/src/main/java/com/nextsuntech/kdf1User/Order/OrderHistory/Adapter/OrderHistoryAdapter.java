@@ -1,6 +1,7 @@
 package com.nextsuntech.kdf1User.Order.OrderHistory.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,23 +38,29 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     @NonNull
     @Override
     public OrderHistoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       View view = LayoutInflater.from(mContext).inflate(R.layout.row_orderhistory,parent,false);
-       return new ViewHolder(view);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.row_orderhistory, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull OrderHistoryAdapter.ViewHolder holder, int position) {
 
         holder.statusTV.setText(getCartDataModelList.get(position).getStatus());
+        holder.orderIdTV.setText(getCartDataModelList.get(position).getCartAutoId());
+        holder.productTitleTV.setText(String.valueOf(getCartDataModelList.get(position).getProductId()));
+        holder.quantityTV.setText(String.valueOf(getCartDataModelList.get(position).getTotalQuantity()));
 
         String status = getCartDataModelList.get(position).getStatus();
 
-        if (status.equals("Cart")){
-            holder.statusTV.setText("Your Order is pending");
-
-        }else if (status.equals("CheckOut")){
+        if (status.length() == 6) {
+            holder.statusTV.setText("Order Completed");
+            holder.statusTV.setTextColor(Color.parseColor("#2b9f4c"));
+        } else if (status.length() == 8) {
             holder.statusTV.setText("Pending");
-
+            holder.statusTV.setTextColor(Color.parseColor("#FF0000"));
+        } else if (status.length() == 4) {
+            holder.statusTV.setText("Cart pending");
+            holder.statusTV.setTextColor(Color.parseColor("#2b9f4c"));
         }
 
         String path = RetrofitClient.IMAGE_BASE_URL + getCartDataModelList.get(position).imageName.getImages();
@@ -81,6 +88,9 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView statusTV;
+        TextView productTitleTV;
+        TextView orderIdTV;
+        TextView quantityTV;
         ImageView productImage;
         ProgressBar progressBar;
 
@@ -90,6 +100,9 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             statusTV = itemView.findViewById(R.id.tv_rowOderHistory_status);
             productImage = itemView.findViewById(R.id.iv_rowOrderHistory_Image);
             progressBar = itemView.findViewById(R.id.pb_OderHistory);
+            productTitleTV = itemView.findViewById(R.id.tv_rowOderHistory_description);
+            orderIdTV = itemView.findViewById(R.id.tv_rowOderHistory_orderId);
+            quantityTV = itemView.findViewById(R.id.tv_rowOderHistory_quantity);
         }
     }
 }

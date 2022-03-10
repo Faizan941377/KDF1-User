@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -86,7 +87,6 @@ public class AddToCartActivity extends AppCompatActivity implements View.OnClick
 
         Call<GetCartResponse> call = RetrofitClient.getInstance().getApi().getAddToCart(userId);
 
-
         call.enqueue(new Callback<GetCartResponse>() {
             @Override
             public void onResponse(Call<GetCartResponse> call, Response<GetCartResponse> response) {
@@ -108,7 +108,6 @@ public class AddToCartActivity extends AppCompatActivity implements View.OnClick
                     for (j = 0; j < getCartDataModelList.size(); j++)
                         totalItemSum = totalItemSum + (getCartDataModelList.get(j).getTotalQuantity());
                     totalItemTV.setText(String.valueOf(totalItemSum));
-
                 }
             }
 
@@ -121,7 +120,6 @@ public class AddToCartActivity extends AppCompatActivity implements View.OnClick
                     e.printStackTrace();
                 }
             }
-
         });
     }
 }
