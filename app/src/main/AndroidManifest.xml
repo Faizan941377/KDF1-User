@@ -14,8 +14,12 @@
         android:theme="@style/Theme.KDF1"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".Dashboard.Profile.ProfileActivity"
+        <activity android:name=".Order.OrderHistoryDetail.OrderHistoryDetailActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"/>
+
+        <activity
+            android:name=".Dashboard.Profile.ProfileActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
             android:name=".Order.OrderHistory.OrderHistoryActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />

@@ -11,13 +11,16 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.nextsuntech.kdf1User.Cart.Adapter.AddToCartAdapter;
+import com.nextsuntech.kdf1User.Dashboard.Adapter.CategoriesAdapter;
 import com.nextsuntech.kdf1User.Model.GetCartDataModel;
+import com.nextsuntech.kdf1User.Model.GetOrderHistoryDataModel;
 import com.nextsuntech.kdf1User.Model.LoginDataModel;
 import com.nextsuntech.kdf1User.Network.RetrofitClient;
 import com.nextsuntech.kdf1User.Order.OrderHistory.Adapter.OrderHistoryAdapter;
 import com.nextsuntech.kdf1User.R;
 import com.nextsuntech.kdf1User.Response.CheckOutResponse;
 import com.nextsuntech.kdf1User.Response.GetCartResponse;
+import com.nextsuntech.kdf1User.Response.GetOrderHistoryResponse;
 import com.nextsuntech.kdf1User.SharedPref.SharedPrefManager;
 
 import java.util.List;
@@ -33,7 +36,7 @@ public class OrderHistoryActivity extends AppCompatActivity implements View.OnCl
     RecyclerView orderHistoryRV;
     ProgressDialog progressDialog;
     OrderHistoryAdapter orderHistoryAdapter;
-    List<GetCartDataModel> getCartDataModelList;
+    List<GetOrderHistoryDataModel> getOrderHistoryDataModelList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,32 +67,30 @@ public class OrderHistoryActivity extends AppCompatActivity implements View.OnCl
 
         orderHistoryRV.setHasFixedSize(true);
         orderHistoryRV.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-        LoginDataModel loginModel = SharedPrefManager.getInstance(this).getSavedUsers();
 
-        int userId = Integer.parseInt(String.valueOf(loginModel.getId()));
+       Call<GetOrderHistoryResponse> call = RetrofitClient.getInstance().getApi().getOrderHistory();
+       call.enqueue(new Callback<GetOrderHistoryResponse>() {
+           @Override
+           public void onResponse(Call<GetOrderHistoryResponse> call, Response<GetOrderHistoryResponse> response) {
+               if (response.isSuccessful()){
+                   getOrderHistoryDataModelList = response.body().getGetOrderHistoryDataModelList();
+                   orderHistoryRV.setAdapter(new OrderHistoryAdapter(getApplicationContext(), getOrderHistoryDataModelList));
+                   orderHistoryAdapter = new OrderHistoryAdapter(getApplicationContext(), getOrderHistoryDataModelList);
+                   orderHistoryRV.setAdapter(orderHistoryAdapter);
+                   progressDialog.dismiss();
+               }
+           }
 
-        Call<GetCartResponse> call = RetrofitClient.getInstance().getApi().getAddToCart(userId);
-        call.enqueue(new Callback<GetCartResponse>() {
-            @Override
-            public void onResponse(Call<GetCartResponse> call, Response<GetCartResponse> response) {
-                if (response.isSuccessful()){
-                    progressDialog.dismiss();
-                    getCartDataModelList = response.body().getCartDataModels();
-                    orderHistoryAdapter = new OrderHistoryAdapter(getApplicationContext(), getCartDataModelList);
-                    orderHistoryRV.setAdapter(orderHistoryAdapter);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GetCartResponse> call, Throwable t) {
-                progressDialog.dismiss();
-                try {
-                    Toast.makeText(OrderHistoryActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        });
+           @Override
+           public void onFailure(Call<GetOrderHistoryResponse> call, Throwable t) {
+               progressDialog.dismiss();
+               try {
+                   Toast.makeText(OrderHistoryActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+               }catch (Exception e){
+                   e.printStackTrace();
+               }
+           }
+       });
     }
 
     @Override

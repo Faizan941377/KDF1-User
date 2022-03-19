@@ -6,6 +6,8 @@ import com.nextsuntech.kdf1User.Response.CheckOutResponse;
 import com.nextsuntech.kdf1User.Response.CustomerBookingDetailsResponse;
 import com.nextsuntech.kdf1User.Response.DeleteCartProductResponse;
 import com.nextsuntech.kdf1User.Response.GetCartResponse;
+import com.nextsuntech.kdf1User.Response.GetOrderHistoryDetailResponse;
+import com.nextsuntech.kdf1User.Response.GetOrderHistoryResponse;
 import com.nextsuntech.kdf1User.Response.GetProductResponse;
 import com.nextsuntech.kdf1User.Response.LoginResponse;
 import com.nextsuntech.kdf1User.Response.MenuResponse;
@@ -60,7 +62,7 @@ public interface WebServices {
             @Field("TotalQuantity") int TotalQuantity,
             @Field("TotalPrice") int TotalPrice,
             @Field("CartAutoId") int CartAutoId,
-            @Field("CreateAt") String  CreateAt
+            @Field("CreateAt") String CreateAt
     );
 
     @FormUrlEncoded
@@ -90,5 +92,15 @@ public interface WebServices {
             @Field("Email") String Email,
             @Field("City") String City,
             @Field("Address") String Address
+    );
+
+    @GET("GetInvices")
+    Call<GetOrderHistoryResponse> getOrderHistory();
+
+
+    @FormUrlEncoded
+    @POST("GetInvicesDetails")
+    Call<GetOrderHistoryDetailResponse> getOrderHistoryDetails(
+            @Field("id") String id
     );
 }

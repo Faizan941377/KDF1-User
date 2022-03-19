@@ -84,7 +84,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
                 switch (v.getId()) {
                     case R.id.bt_row_categories:
                         Intent intent = new Intent(mContext.getApplicationContext(), CategoriesDetailActivity.class);
-                        Toast.makeText(mContext, "" + categoriesDataModelList.get(position).getId(), Toast.LENGTH_SHORT).show();
                         intent.putExtra("id", categoriesDataModelList.get(position).getId());
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         mContext.getApplicationContext().startActivity(intent);
