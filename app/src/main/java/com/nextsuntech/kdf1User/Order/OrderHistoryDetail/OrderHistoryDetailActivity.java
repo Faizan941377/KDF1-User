@@ -70,14 +70,7 @@ public class OrderHistoryDetailActivity extends AppCompatActivity implements Vie
         orderHistoryDetailRV.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
          String  CartAutoId = getIntent().getExtras().getString("CartAutoId");
-
-        // int  id = 6404;
-
-
-        Toast.makeText(this, CartAutoId, Toast.LENGTH_SHORT).show();
-
-      //  Log.d("dataFromServer", String.valueOf(CartAutoId));
-
+         Log.d("dataFromServer", CartAutoId);
 
         Call<GetOrderHistoryDetailResponse> call = RetrofitClient.getInstance().getApi().getOrderHistoryDetails(Integer.valueOf(CartAutoId));
         call.enqueue(new Callback<GetOrderHistoryDetailResponse>() {

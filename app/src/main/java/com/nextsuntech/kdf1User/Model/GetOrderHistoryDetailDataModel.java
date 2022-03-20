@@ -16,13 +16,16 @@ public class GetOrderHistoryDetailDataModel {
     private GetOrderHistoryDetailResponse.ImageName imageName;
     String description;
     String price;
-    String quantity;
+    String totalQuantity;
     String status;
     String date;
     Integer cartAutoId;
     String tableName;
 
-    public GetOrderHistoryDetailDataModel(String id, String productId, String productName, String customerName, String userId, GetOrderHistoryDetailResponse.ImageName imageName, String description, String price, String quantity, String status, String date, Integer cartAutoId, String tableName) {
+    public GetOrderHistoryDetailDataModel(String id, String productId, String productName,
+                                          String customerName, String userId, GetOrderHistoryDetailResponse.ImageName imageName,
+                                          String description, String price, String totalQuantity,
+                                          String status, String date, Integer cartAutoId, String tableName) {
         this.id = id;
         this.productId = productId;
         this.productName = productName;
@@ -31,7 +34,7 @@ public class GetOrderHistoryDetailDataModel {
         this.imageName = imageName;
         this.description = description;
         this.price = price;
-        this.quantity = quantity;
+        this.totalQuantity = totalQuantity;
         this.status = status;
         this.date = date;
         this.cartAutoId = cartAutoId;
@@ -102,12 +105,12 @@ public class GetOrderHistoryDetailDataModel {
         this.price = price;
     }
 
-    public String getQuantity() {
-        return quantity;
+    public String getTotalQuantity() {
+        return totalQuantity;
     }
 
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
+    public void setTotalQuantity(String totalQuantity) {
+        this.totalQuantity = totalQuantity;
     }
 
     public String getStatus() {

@@ -7,13 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.nextsuntech.kdf1User.Order.OrderHistory.OrderHistoryActivity;
 import com.nextsuntech.kdf1User.R;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
-    LinearLayout orderHistoryBT;
+    RelativeLayout orderHistoryBT;
     ImageView profileIV;
 
     @Override

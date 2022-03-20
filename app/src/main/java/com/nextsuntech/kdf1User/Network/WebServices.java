@@ -103,4 +103,10 @@ public interface WebServices {
     Call<GetOrderHistoryDetailResponse> getOrderHistoryDetails(
             @Field("CartAutoId") Integer  id
     );
+
+    @FormUrlEncoded
+    @POST("delete")
+    Call<DeleteCartProductResponse> deleteOder(
+            @Field("id") int id
+    );
 }
