@@ -101,6 +101,6 @@ public interface WebServices {
     @FormUrlEncoded
     @POST("GetInvicesDetails")
     Call<GetOrderHistoryDetailResponse> getOrderHistoryDetails(
-            @Field("id") String id
+            @Field("CartAutoId") Integer  id
     );
 }

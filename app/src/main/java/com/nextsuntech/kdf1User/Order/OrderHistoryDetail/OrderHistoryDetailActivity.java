@@ -44,6 +44,7 @@ public class OrderHistoryDetailActivity extends AppCompatActivity implements Vie
 
 
         backIV.setOnClickListener(this);
+
         setAdapter();
 
     }
@@ -68,23 +69,25 @@ public class OrderHistoryDetailActivity extends AppCompatActivity implements Vie
         orderHistoryDetailRV.setHasFixedSize(true);
         orderHistoryDetailRV.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
-        String  id = getIntent().getExtras().getString("CartAutoId");
+         String  CartAutoId = getIntent().getExtras().getString("CartAutoId");
 
-        Log.d("cartAutoIdid", id);
+        // int  id = 6404;
 
-        Call<GetOrderHistoryDetailResponse> call = RetrofitClient.getInstance().getApi().getOrderHistoryDetails(id);
+
+        Toast.makeText(this, CartAutoId, Toast.LENGTH_SHORT).show();
+
+      //  Log.d("dataFromServer", String.valueOf(CartAutoId));
+
+
+        Call<GetOrderHistoryDetailResponse> call = RetrofitClient.getInstance().getApi().getOrderHistoryDetails(Integer.valueOf(CartAutoId));
         call.enqueue(new Callback<GetOrderHistoryDetailResponse>() {
             @Override
             public void onResponse(Call<GetOrderHistoryDetailResponse> call, Response<GetOrderHistoryDetailResponse> response) {
-
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     progressDialog.dismiss();
-                    getOrderHistoryDetailDataModels = response.body().getResult();
-                    orderHistoryDetailRV.setAdapter(new OrderHistoryDetailAdapter(getApplicationContext(), getOrderHistoryDetailDataModels));
-                    orderHistoryDetailAdapter = new OrderHistoryDetailAdapter(getApplicationContext(), getOrderHistoryDetailDataModels);
+                    getOrderHistoryDetailDataModels = response.body().getOrderHistoryDetailDataModels();
+                    orderHistoryDetailAdapter = new OrderHistoryDetailAdapter(getApplicationContext(),getOrderHistoryDetailDataModels);
                     orderHistoryDetailRV.setAdapter(orderHistoryDetailAdapter);
-
-                    Toast.makeText(OrderHistoryDetailActivity.this, getOrderHistoryDetailDataModels.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -92,11 +95,10 @@ public class OrderHistoryDetailActivity extends AppCompatActivity implements Vie
             public void onFailure(Call<GetOrderHistoryDetailResponse> call, Throwable t) {
                 try {
                     Toast.makeText(OrderHistoryDetailActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
-
     }
 }

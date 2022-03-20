@@ -11,20 +11,18 @@ public class GetOrderHistoryDetailDataModel {
     String productName;
     String customerName;
     String userId;
-
     @SerializedName("imageName")
     @Expose
     private GetOrderHistoryDetailResponse.ImageName imageName;
-
     String description;
     String price;
     String quantity;
     String status;
     String date;
-    String cartAutoId;
+    Integer cartAutoId;
     String tableName;
 
-    public GetOrderHistoryDetailDataModel(String id, String productId, String productName, String customerName, String userId, GetOrderHistoryDetailResponse.ImageName imageName, String description, String price, String quantity, String status, String date, String cartAutoId, String tableName) {
+    public GetOrderHistoryDetailDataModel(String id, String productId, String productName, String customerName, String userId, GetOrderHistoryDetailResponse.ImageName imageName, String description, String price, String quantity, String status, String date, Integer cartAutoId, String tableName) {
         this.id = id;
         this.productId = productId;
         this.productName = productName;
@@ -128,11 +126,11 @@ public class GetOrderHistoryDetailDataModel {
         this.date = date;
     }
 
-    public String getCartAutoId() {
+    public Integer getCartAutoId() {
         return cartAutoId;
     }
 
-    public void setCartAutoId(String cartAutoId) {
+    public void setCartAutoId(Integer cartAutoId) {
         this.cartAutoId = cartAutoId;
     }
 

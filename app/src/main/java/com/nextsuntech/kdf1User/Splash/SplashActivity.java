@@ -7,6 +7,7 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nextsuntech.kdf1User.Order.OrderHistory.OrderHistoryActivity;
+import com.nextsuntech.kdf1User.Order.OrderHistoryDetail.OrderHistoryDetailActivity;
 import com.nextsuntech.kdf1User.R;
 import com.nextsuntech.kdf1User.Users.LoginActivity;
 

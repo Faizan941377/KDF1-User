@@ -65,7 +65,6 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, OrderHistoryDetailActivity.class);
                 intent.putExtra("CartAutoId",String.valueOf(getOrderHistoryDataModelList.get(position).getCartAutoId()));
-                Toast.makeText(mContext, String.valueOf( getOrderHistoryDataModelList.get(position).getCartAutoId()), Toast.LENGTH_SHORT).show();
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.getApplicationContext().startActivity(intent);
             }

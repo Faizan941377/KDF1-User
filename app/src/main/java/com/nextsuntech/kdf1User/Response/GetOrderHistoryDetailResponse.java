@@ -3,6 +3,7 @@ package com.nextsuntech.kdf1User.Response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.nextsuntech.kdf1User.Model.GetOrderHistoryDetailDataModel;
+import com.nextsuntech.kdf1User.Model.GetProductDataModel;
 
 import java.util.List;
 
@@ -10,16 +11,15 @@ public class GetOrderHistoryDetailResponse {
 
     @SerializedName("result")
     @Expose
-    private List<GetOrderHistoryDetailDataModel> result = null;
+    private List<GetOrderHistoryDetailDataModel> getOrderHistoryDetailDataModels = null;
 
-    public List<GetOrderHistoryDetailDataModel> getResult() {
-        return result;
+    public List<GetOrderHistoryDetailDataModel> getOrderHistoryDetailDataModels() {
+        return getOrderHistoryDetailDataModels;
     }
 
-    public void setResult(List<GetOrderHistoryDetailDataModel> result) {
-        this.result = result;
+    public void setGetOrderHistoryDetailDataModels(List<GetOrderHistoryDetailDataModel> getOrderHistoryDetailDataModels) {
+        this.getOrderHistoryDetailDataModels = getOrderHistoryDetailDataModels;
     }
-
 
     public class ImageName {
 
@@ -35,150 +35,150 @@ public class GetOrderHistoryDetailResponse {
             this.images = images;
         }
 
+    }
 
-        @SerializedName("id")
-        @Expose
-        private Integer id;
-        @SerializedName("productId")
-        @Expose
-        private Integer productId;
-        @SerializedName("productName")
-        @Expose
-        private String productName;
-        @SerializedName("customerName")
-        @Expose
-        private String customerName;
-        @SerializedName("userId")
-        @Expose
-        private Integer userId;
-        @SerializedName("imageName")
-        @Expose
-        private ImageName imageName;
-        @SerializedName("description")
-        @Expose
-        private String description;
-        @SerializedName("price")
-        @Expose
-        private Integer price;
-        @SerializedName("totalQuantity")
-        @Expose
-        private Integer totalQuantity;
-        @SerializedName("status")
-        @Expose
-        private String status;
-        @SerializedName("date")
-        @Expose
-        private String date;
-        @SerializedName("cartAutoId")
-        @Expose
-        private Integer cartAutoId;
-        @SerializedName("tableName")
-        @Expose
-        private String tableName;
 
-        public Integer getId() {
-            return id;
-        }
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("productId")
+    @Expose
+    private Integer productId;
+    @SerializedName("productName")
+    @Expose
+    private String productName;
+    @SerializedName("customerName")
+    @Expose
+    private String customerName;
+    @SerializedName("userId")
+    @Expose
+    private Integer userId;
+    @SerializedName("imageName")
+    @Expose
+    private ImageName imageName;
+    @SerializedName("description")
+    @Expose
+    private String description;
+    @SerializedName("price")
+    @Expose
+    private Integer price;
+    @SerializedName("totalQuantity")
+    @Expose
+    private Integer totalQuantity;
+    @SerializedName("status")
+    @Expose
+    private String status;
+    @SerializedName("date")
+    @Expose
+    private String date;
+    @SerializedName("cartAutoId")
+    @Expose
+    private Integer cartAutoId;
+    @SerializedName("tableName")
+    @Expose
+    private String tableName;
 
-        public void setId(Integer id) {
-            this.id = id;
-        }
+    public Integer getId() {
+        return id;
+    }
 
-        public Integer getProductId() {
-            return productId;
-        }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-        public void setProductId(Integer productId) {
-            this.productId = productId;
-        }
+    public Integer getProductId() {
+        return productId;
+    }
 
-        public String getProductName() {
-            return productName;
-        }
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
 
-        public void setProductName(String productName) {
-            this.productName = productName;
-        }
+    public String getProductName() {
+        return productName;
+    }
 
-        public String getCustomerName() {
-            return customerName;
-        }
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
-        public void setCustomerName(String customerName) {
-            this.customerName = customerName;
-        }
+    public String getCustomerName() {
+        return customerName;
+    }
 
-        public Integer getUserId() {
-            return userId;
-        }
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
 
-        public void setUserId(Integer userId) {
-            this.userId = userId;
-        }
+    public Integer getUserId() {
+        return userId;
+    }
 
-        public ImageName getImageName() {
-            return imageName;
-        }
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-        public void setImageName(ImageName imageName) {
-            this.imageName = imageName;
-        }
+    public ImageName getImageName() {
+        return imageName;
+    }
 
-        public String getDescription() {
-            return description;
-        }
+    public void setImageName(ImageName imageName) {
+        this.imageName = imageName;
+    }
 
-        public void setDescription(String description) {
-            this.description = description;
-        }
+    public String getDescription() {
+        return description;
+    }
 
-        public Integer getPrice() {
-            return price;
-        }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-        public void setPrice(Integer price) {
-            this.price = price;
-        }
+    public Integer getPrice() {
+        return price;
+    }
 
-        public Integer getTotalQuantity() {
-            return totalQuantity;
-        }
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
 
-        public void setTotalQuantity(Integer totalQuantity) {
-            this.totalQuantity = totalQuantity;
-        }
+    public Integer getTotalQuantity() {
+        return totalQuantity;
+    }
 
-        public String getStatus() {
-            return status;
-        }
+    public void setTotalQuantity(Integer totalQuantity) {
+        this.totalQuantity = totalQuantity;
+    }
 
-        public void setStatus(String status) {
-            this.status = status;
-        }
+    public String getStatus() {
+        return status;
+    }
 
-        public String getDate() {
-            return date;
-        }
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-        public void setDate(String date) {
-            this.date = date;
-        }
+    public String getDate() {
+        return date;
+    }
 
-        public Integer getCartAutoId() {
-            return cartAutoId;
-        }
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-        public void setCartAutoId(Integer cartAutoId) {
-            this.cartAutoId = cartAutoId;
-        }
+    public Integer getCartAutoId() {
+        return cartAutoId;
+    }
 
-        public String getTableName() {
-            return tableName;
-        }
+    public void setCartAutoId(Integer cartAutoId) {
+        this.cartAutoId = cartAutoId;
+    }
 
-        public void setTableName(String tableName) {
-            this.tableName = tableName;
-        }
+    public String getTableName() {
+        return tableName;
+    }
 
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
     }
 }
