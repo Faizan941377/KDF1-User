@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
+    TextView signUpTV;
     EditText emailET;
     EditText passwordET;
     RelativeLayout loginBT;
@@ -32,6 +34,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        signUpTV = findViewById(R.id.tv_login_signUp);
         emailET = findViewById(R.id.et_login_email);
         passwordET = findViewById(R.id.et_login_password);
         loginBT = findViewById(R.id.bt_login);
@@ -45,6 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
         loginBT.setOnClickListener(this);
+        signUpTV.setOnClickListener(this);
     }
 
 
@@ -64,6 +68,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.bt_login:
                 Login();
+                break;
+
+            case R.id.tv_login_signUp:
+                startActivity(new Intent(this,RegisterActivity.class));
+                finish();
                 break;
         }
     }
@@ -100,8 +109,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if (response.isSuccessful()) {
                         progressDialog.dismiss();
                         SharedPrefManager.getInstance(LoginActivity.this).saveLoginUser(loginResponse.getLoginDataModel());
-                        Intent intent = new Intent(LoginActivity.this,DashboardActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
                         Toast.makeText(LoginActivity.this, loginResponse.getLoginModel(), Toast.LENGTH_SHORT).show();

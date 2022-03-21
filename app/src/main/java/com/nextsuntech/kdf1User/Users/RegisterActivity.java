@@ -1,10 +1,12 @@
 package com.nextsuntech.kdf1User.Users;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +15,7 @@ import com.nextsuntech.kdf1User.R;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
+    TextView loginTV;
     EditText nameET;
     EditText contactET;
     EditText emailET;
@@ -26,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        loginTV = findViewById(R.id.tv_register_login);
         nameET = findViewById(R.id.et_register_name);
         contactET = findViewById(R.id.et_register_contact);
         emailET = findViewById(R.id.et_register_email);
@@ -43,6 +47,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
         registerBT.setOnClickListener(this);
+        loginTV.setOnClickListener(this);
 
     }
 
@@ -52,6 +57,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             case R.id.bt_register:
                 Register();
+                break;
+
+            case R.id.tv_register_login:
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
                 break;
         }
     }
@@ -72,7 +82,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             contactET.setError("Please check your mobile no");
         } else if (emailET.length() == 0) {
             emailET.setError("Enter your email");
-        }else if (passwordET.length() == 0) {
+        } else if (passwordET.length() == 0) {
             passwordET.setError("Enter your Password");
         } else if (passwordET.length() < 6) {
             passwordET.setError("password should be 6 characters");
@@ -85,7 +95,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             progressDialog.setMessage("Please wait it will take few moments");
             progressDialog.setCancelable(false);
             progressDialog.setIndeterminate(true);
-
 
 
         }

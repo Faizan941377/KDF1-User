@@ -181,6 +181,39 @@
 
             </LinearLayout>
 
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="12dp"
+                    android:padding="5dp"
+                    android:text="Already have account ?"/>
+
+                <TextView
+                    android:id="@+id/tv_register_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Login"
+                    android:textSize="12dp"
+                    android:padding="5dp"
+                    android:textColor="@color/colorBackBlue"
+                    android:layout_toRightOf="@+id/account"/>
+
+
+
+
+            </RelativeLayout>
+
+
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
