@@ -1,5 +1,6 @@
 package com.nextsuntech.kdf1User.Cart.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -22,6 +23,7 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.nextsuntech.kdf1User.Cart.AddToCartActivity;
 import com.nextsuntech.kdf1User.CustomerOrder.CustomerOrderActivity;
 import com.nextsuntech.kdf1User.Model.GetCartDataModel;
 import com.nextsuntech.kdf1User.Network.RetrofitClient;
@@ -202,6 +204,7 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
                                     intent.putExtra("totalItems", totalItems);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     mContext.startActivity(intent);
+                                    ((Activity)v.getContext()).finish();
                                     notifyDataSetChanged();
                                 } else {
                                     Toast.makeText(mContext, "Something went wrong!", Toast.LENGTH_SHORT).show();

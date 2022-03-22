@@ -154,6 +154,20 @@
                     android:padding="5dp"
                     android:text="Cancel Order"
                     android:textColor="@color/colorRed"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/bt_rowOrderHistoryDetail_makeACall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginBottom="5dp"
+                    android:padding="5dp"
+                    android:text="Make a call"
+                    android:textColor="@color/color_lightblue"
                     android:textSize="12dp"
                     android:textStyle="bold" />
 

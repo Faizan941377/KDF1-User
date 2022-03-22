@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,13 +59,21 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
 
         String status = getOrderHistoryDataModelList.get(position).getStatus();
 
-        if (status.length() == 6) {
+        if (status.equals("Dispatch")) {
+            holder.statusTV.setTextColor(Color.parseColor("#24B4C6"));
+            holder.statusTV.setText("Dispatch");
+            holder.deleteTV.setVisibility(View.GONE);
+            holder.makeACallTV.setVisibility(View.VISIBLE);
+
+        } else if (status.length() == 6) {
             holder.statusTV.setText("Order Completed");
             holder.deleteTV.setVisibility(View.GONE);
+            holder.makeACallTV.setVisibility(View.VISIBLE);
             holder.statusTV.setTextColor(Color.parseColor("#2b9f4c"));
         } else if (status.length() == 8) {
             holder.statusTV.setText("Pending");
             holder.deleteTV.setVisibility(View.VISIBLE);
+            holder.makeACallTV.setVisibility(View.GONE);
             holder.statusTV.setTextColor(Color.parseColor("#FF0000"));
         }
 
@@ -86,7 +95,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
                         .setTitle("Alert!")
                         .setMessage("Are you sure to delete this order!")
                         .setPositiveButton("Yes", null)
-                        .setNegativeButton("NO",null)
+                        .setNegativeButton("NO", null)
                         .show();
 
                 Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -100,19 +109,19 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
                         call.enqueue(new Callback<DeleteCartProductResponse>() {
                             @Override
                             public void onResponse(Call<DeleteCartProductResponse> call, Response<DeleteCartProductResponse> response) {
-                                if (response.isSuccessful()){
+                                if (response.isSuccessful()) {
                                     getOrderHistoryDataModelList.remove(position);
                                     notifyItemRemoved(position);
                                     notifyDataSetChanged();
-                                    Toast.makeText(mContext,"Order Deleted Successfully" , Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(mContext, "Order Deleted Successfully", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
                             @Override
                             public void onFailure(Call<DeleteCartProductResponse> call, Throwable t) {
-                                try{
+                                try {
                                     Toast.makeText(mContext, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                                }catch (Exception e){
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                             }
@@ -133,6 +142,16 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             }
         });
 
+        holder.makeACallTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:03159599530"));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.getApplicationContext().startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -149,6 +168,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         TextView dateTV;
         TextView totalPriceTV;
         TextView deleteTV;
+        TextView makeACallTV;
         LinearLayout orderHistoryDetailBT;
 
         public ViewHolder(@NonNull View itemView) {
@@ -162,6 +182,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             totalPriceTV = itemView.findViewById(R.id.tv_rowOderHistory_totalPrice);
             deleteTV = itemView.findViewById(R.id.bt_rowOrderHistoryDetail_delete);
             orderHistoryDetailBT = itemView.findViewById(R.id.bt_rowOrderHistoryDetail);
+            makeACallTV = itemView.findViewById(R.id.bt_rowOrderHistoryDetail_makeACall);
         }
     }
 }

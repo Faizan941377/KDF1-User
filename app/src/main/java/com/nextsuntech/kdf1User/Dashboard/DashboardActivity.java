@@ -14,23 +14,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nextsuntech.kdf1User.Cart.AddToCartActivity;
 import com.nextsuntech.kdf1User.Dashboard.Adapter.BeveragesAdapter;
 import com.nextsuntech.kdf1User.Dashboard.Adapter.CategoriesAdapter;
 import com.nextsuntech.kdf1User.Dashboard.Adapter.DealsAdapter;
+import com.nextsuntech.kdf1User.Dashboard.Adapter.SliderAdapter;
 import com.nextsuntech.kdf1User.Dashboard.Profile.ProfileActivity;
 import com.nextsuntech.kdf1User.Model.CategoriesDataModel;
 import com.nextsuntech.kdf1User.Model.LoginDataModel;
+import com.nextsuntech.kdf1User.Model.SliderDataModel;
 import com.nextsuntech.kdf1User.Network.RetrofitClient;
 import com.nextsuntech.kdf1User.Order.OrderHistory.OrderHistoryActivity;
 import com.nextsuntech.kdf1User.R;
 import com.nextsuntech.kdf1User.Response.MenuResponse;
 import com.nextsuntech.kdf1User.SharedPref.SharedPrefManager;
 import com.nextsuntech.kdf1User.Users.LoginActivity;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -65,8 +70,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_dashboard);
 
         categoriesRV = findViewById(R.id.rv_categories);
-        dealsRV = findViewById(R.id.rv_deals);
-        beveragesRV = findViewById(R.id.rv_beverages);
+       // dealsRV = findViewById(R.id.rv_deals);
+       // beveragesRV = findViewById(R.id.rv_beverages);
         searchET = findViewById(R.id.et_dashboard_search);
         cartBT = findViewById(R.id.bt_dashboard_cartButton);
         userNameTV = findViewById(R.id.tv_dashboard_userName);
@@ -88,8 +93,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         profileIV.setOnClickListener(this);
 
         setCategoriesAdapter();
-        setBeveragesAdapter();
-        setDealsAdapter();
+      //  setBeveragesAdapter();
+     //   setDealsAdapter();
 
       /*  searchET.addTextChangedListener(new TextWatcher() {
             @Override
@@ -117,6 +122,51 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         cartQuantity = quantity;
         itemCount.setText(String.valueOf(cartQuantity));*/
 
+
+        sliderImages();
+
+    }
+
+    private void sliderImages() {
+
+        // Urls of our images.
+        String url1 = "https://lh5.googleusercontent.com/p/AF1QipPD5CxRiTyKxs_qfaA4nHzgrRRBIBxTRY6SeMqj";
+        String url2 = "https://i0.wp.com/www.explorewithjeph.com/wp-content/uploads/2020/06/Arabic-Mixed-Grill-Platter.jpg?resize=640%2C400&ssl=1";
+        String url3 = "https://media-cdn.tripadvisor.com/media/photo-s/1a/11/c1/d5/1-kg-mix-grill-it-comes.jpg";
+        String url4 = "https://kdfrestaurant.com/website-static/images/bg/13.jpg";
+        // we are creating array list for storing our image urls.
+        ArrayList<SliderDataModel> sliderDataArrayList = new ArrayList<>();
+
+        // initializing the slider view.
+        SliderView sliderView = findViewById(R.id.slider);
+
+        // adding the urls inside array list
+        sliderDataArrayList.add(new SliderDataModel(url1));
+        sliderDataArrayList.add(new SliderDataModel(url2));
+        sliderDataArrayList.add(new SliderDataModel(url3));
+        sliderDataArrayList.add(new SliderDataModel(url4));
+
+        // passing this array list inside our adapter class.
+        SliderAdapter adapter = new SliderAdapter(this, sliderDataArrayList);
+
+        // below method is used to set auto cycle direction in left to
+        // right direction you can change according to requirement.
+        sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
+
+        // below method is used to
+        // setadapter to sliderview.
+        sliderView.setSliderAdapter(adapter);
+
+        // below method is use to set
+        // scroll time in seconds.
+        sliderView.setScrollTimeInSec(3);
+
+        // to set it scrollable automatically
+        // we use below method.
+        sliderView.setAutoCycle(true);
+
+        // to start autocycle below method is used.
+        sliderView.startAutoCycle();
     }
 
 
@@ -141,10 +191,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         progressDialog.setIndeterminate(true);
 
         categoriesRV.setHasFixedSize(true);
-        // categoriesRV.setLayoutManager(new GridLayoutManager(this, 2));
-        categoriesRV.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-       /* StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
-        categoriesRV.setLayoutManager(staggeredGridLayoutManager);*/
+        /*categoriesRV.setLayoutManager(new GridLayoutManager(this, 2));
+        categoriesRV.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));*/
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
+        categoriesRV.setLayoutManager(staggeredGridLayoutManager);
 
         Call<MenuResponse> call = RetrofitClient.getInstance().getApi().menuResponse();
         call.enqueue(new Callback<MenuResponse>() {

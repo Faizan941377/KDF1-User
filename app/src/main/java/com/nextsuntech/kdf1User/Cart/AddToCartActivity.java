@@ -68,6 +68,10 @@ public class AddToCartActivity extends AppCompatActivity implements View.OnClick
             case R.id.iv_AddToCart_back:
                 finish();
                 break;
+
+            case R.id.bt_addToCart_checkout:
+                finish();
+                break;
         }
     }
 
