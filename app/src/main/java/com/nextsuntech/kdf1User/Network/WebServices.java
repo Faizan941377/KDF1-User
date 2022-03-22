@@ -12,6 +12,7 @@ import com.nextsuntech.kdf1User.Response.GetProductResponse;
 import com.nextsuntech.kdf1User.Response.LoginResponse;
 import com.nextsuntech.kdf1User.Response.MenuResponse;
 import com.nextsuntech.kdf1User.Response.PricesResponse;
+import com.nextsuntech.kdf1User.Response.RegistrationResponse;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -53,6 +54,16 @@ public interface WebServices {
     Call<LoginResponse> loginResponse(
             @Field("email") String email,
             @Field("password") String password
+    );
+
+    @FormUrlEncoded
+    @POST("Register")
+    Call<RegistrationResponse> register(
+            @Field("UserName ")String UserName,
+            @Field("Email  ")String Email,
+            @Field("FirstName  ")String FirstName ,
+            @Field("LastName ")String LastName,
+            @Field("Password  ")String Password
     );
 
     @FormUrlEncoded

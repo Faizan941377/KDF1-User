@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="26dp"
                     android:layout_marginTop="8dp"
-                    android:text="Enter Name"
+                    android:text="User Name"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -53,14 +53,14 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="26dp"
                     android:background="@drawable/edit_text_style"
-                    android:hint="Enter Name"
+                    android:hint="User Name"
                     android:inputType="textEmailAddress"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textColorHint="@color/color_orange"
                     android:textSize="12sp" />
 
-                <TextView
+               <!-- <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="26dp"
@@ -82,7 +82,7 @@
                     android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textColorHint="@color/color_orange"
-                    android:textSize="12sp" />
+                    android:textSize="12sp" />-->
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -113,7 +113,55 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="26dp"
                     android:layout_marginTop="8dp"
-                    android:text="Enter Password"
+                    android:text="First Name"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/et_register_firstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="26dp"
+                    android:background="@drawable/edit_text_style"
+                    android:hint="First Name"
+                    android:inputType="text"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/color_orange"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Last Name"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/et_register_lastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="26dp"
+                    android:background="@drawable/edit_text_style"
+                    android:hint="Last Name"
+                    android:inputType="text"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/color_orange"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Password"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -127,30 +175,6 @@
                     android:background="@drawable/edit_text_style"
                     android:hint="Password"
                     android:inputType="textPassword"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/color_orange"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="26dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Enter Address"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/et_register_address"
-                    android:layout_width="match_parent"
-                    android:layout_height="46dp"
-                    android:layout_marginLeft="26dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="26dp"
-                    android:background="@drawable/edit_text_style"
-                    android:hint="Address"
-                    android:inputType="textPostalAddress"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textColorHint="@color/color_orange"

@@ -7,20 +7,27 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.nextsuntech.kdf1User.Network.RetrofitClient;
 import com.nextsuntech.kdf1User.R;
+import com.nextsuntech.kdf1User.Response.RegistrationResponse;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView loginTV;
     EditText nameET;
-    EditText contactET;
     EditText emailET;
+    EditText firstNameET;
+    EditText lastNameET;
     EditText passwordET;
-    EditText addressET;
     RelativeLayout registerBT;
     ProgressDialog progressDialog;
 
@@ -31,17 +38,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         loginTV = findViewById(R.id.tv_register_login);
         nameET = findViewById(R.id.et_register_name);
-        contactET = findViewById(R.id.et_register_contact);
         emailET = findViewById(R.id.et_register_email);
+        firstNameET = findViewById(R.id.et_register_firstName);
+        lastNameET = findViewById(R.id.et_register_lastName);
         passwordET = findViewById(R.id.et_register_password);
-        addressET = findViewById(R.id.et_register_address);
         registerBT = findViewById(R.id.bt_register);
 
-        nameET.setText("sha");
-        contactET.setText("+923000941388");
-        emailET.setText("s@gmail.com");
-        passwordET.setText("123456");
-        addressET.setText("Peshawar City");
+
 
         progressDialog = new ProgressDialog(this);
 
@@ -68,34 +71,59 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private void Register() {
 
-        String name = nameET.getText().toString().trim();
-        String contact = contactET.getText().toString().trim();
+        String userName = nameET.getText().toString().trim();
         String email = emailET.getText().toString().trim();
+        String firstName = firstNameET.getText().toString().trim();
+        String lastName = lastNameET.getText().toString().trim();
         String password = passwordET.getText().toString().trim();
-        String address = addressET.getText().toString().trim();
 
         if (nameET.length() == 0) {
-            nameET.setError("Enter your name");
-        } else if (contactET.length() == 0) {
-            contactET.setError("Enter your Mobile no");
-        } else if (contactET.length() < 11) {
-            contactET.setError("Please check your mobile no");
-        } else if (emailET.length() == 0) {
-            emailET.setError("Enter your email");
-        } else if (passwordET.length() == 0) {
-            passwordET.setError("Enter your Password");
-        } else if (passwordET.length() < 6) {
-            passwordET.setError("password should be 6 characters");
-        }
-        if (addressET.length() == 0) {
-            addressET.setError("Enter your address");
-        } else {
+
+            nameET.setError("Please enter your user name");
+        }else if (emailET.length()== 0){
+            emailET.setError("Please enter email address");
+        }else if (firstNameET.length()==0){
+            firstNameET.setError("Please enter your first name");
+        }else if (lastNameET.length()==0){
+            firstNameET.setError("Please enter your last name");
+        }else if (passwordET.length()==0){
+            passwordET.setError("Plase enter your password");
+        }else if (passwordET.length()<6) {
+            passwordET.setError("Password should be 6 characters");
+
+        }else {
 
             progressDialog.show();
             progressDialog.setMessage("Please wait it will take few moments");
             progressDialog.setCancelable(false);
             progressDialog.setIndeterminate(true);
 
+
+            Call<RegistrationResponse> call = RetrofitClient.getInstance().getApi().register(userName, email, firstName,lastName,password);
+            call.enqueue(new Callback<RegistrationResponse>() {
+                @Override
+                public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
+                    RegistrationResponse  registrationResponse = response.body();
+                    if (response.isSuccessful()){
+                        progressDialog.dismiss();
+                        Toast.makeText(RegisterActivity.this, registrationResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }else {
+                        progressDialog.dismiss();
+                        Toast.makeText(RegisterActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<RegistrationResponse> call, Throwable t) {
+                    progressDialog.dismiss();
+                    try {
+                        Toast.makeText(RegisterActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            });
 
         }
     }
