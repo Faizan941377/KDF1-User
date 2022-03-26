@@ -7,18 +7,22 @@ public class LoginDataModel {
     String email;
     String firstName;
     String lastName;
+    String address;
+    String mobileNo;
     String password;
     String createAt;
     String status;
     String type;
 
-    public LoginDataModel(int id, String userName, String email, String firstName,
-                          String lastName, String password, String createAt, String status, String type) {
+    public LoginDataModel(int id, String userName, String email, String firstName, String lastName,
+                          String address, String mobileNo, String password, String createAt, String status, String type) {
         this.id = id;
         this.userName = userName;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.address = address;
+        this.mobileNo = mobileNo;
         this.password = password;
         this.createAt = createAt;
         this.status = status;
@@ -63,6 +67,22 @@ public class LoginDataModel {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getMobileNo() {
+        return mobileNo;
+    }
+
+    public void setMobileNo(String mobileNo) {
+        this.mobileNo = mobileNo;
     }
 
     public String getPassword() {

@@ -50,20 +50,22 @@ public interface WebServices {
     );
 
     @FormUrlEncoded
-    @POST("LoginWaiter")
+    @POST("LoginCustomer")
     Call<LoginResponse> loginResponse(
-            @Field("email") String email,
-            @Field("password") String password
+            @Field("Email") String Email,
+            @Field("Password") String Password
     );
 
     @FormUrlEncoded
-    @POST("Register")
+    @POST("CustomerRegister")
     Call<RegistrationResponse> register(
-            @Field("UserName ")String UserName,
-            @Field("Email  ")String Email,
-            @Field("FirstName  ")String FirstName ,
-            @Field("LastName ")String LastName,
-            @Field("Password  ")String Password
+            @Field("UserName")String UserName,
+            @Field("Email")String Email,
+            @Field("FirstName")String FirstName,
+            @Field("LastName")String LastName,
+            @Field("Password")String Password,
+            @Field("Address")String Address,
+            @Field("MobileNo")String MobileNo
     );
 
     @FormUrlEncoded

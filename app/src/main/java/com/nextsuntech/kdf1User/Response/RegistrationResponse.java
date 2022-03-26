@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class RegistrationResponse {
 
+
     @SerializedName("message")
     @Expose
     private String message;

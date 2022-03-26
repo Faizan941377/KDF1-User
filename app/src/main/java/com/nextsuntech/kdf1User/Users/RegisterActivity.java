@@ -27,7 +27,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     EditText emailET;
     EditText firstNameET;
     EditText lastNameET;
+    EditText contactET;
     EditText passwordET;
+    EditText addressET;
     RelativeLayout registerBT;
     ProgressDialog progressDialog;
 
@@ -41,9 +43,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         emailET = findViewById(R.id.et_register_email);
         firstNameET = findViewById(R.id.et_register_firstName);
         lastNameET = findViewById(R.id.et_register_lastName);
+        contactET = findViewById(R.id.et_register_contact);
+        addressET = findViewById(R.id.et_register_address);
         passwordET = findViewById(R.id.et_register_password);
         registerBT = findViewById(R.id.bt_register);
-
 
 
         progressDialog = new ProgressDialog(this);
@@ -71,27 +74,33 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private void Register() {
 
-        String userName = nameET.getText().toString().trim();
-        String email = emailET.getText().toString().trim();
-        String firstName = firstNameET.getText().toString().trim();
-        String lastName = lastNameET.getText().toString().trim();
-        String password = passwordET.getText().toString().trim();
+        String userName = nameET.getText().toString();
+        String email = emailET.getText().toString();
+        String firstName = firstNameET.getText().toString();
+        String lastName = lastNameET.getText().toString();
+        String contact = contactET.getText().toString();
+        String address = addressET.getText().toString();
+        String password = passwordET.getText().toString();
 
         if (nameET.length() == 0) {
 
             nameET.setError("Please enter your user name");
-        }else if (emailET.length()== 0){
+        } else if (emailET.length() == 0) {
             emailET.setError("Please enter email address");
-        }else if (firstNameET.length()==0){
+        } else if (firstNameET.length() == 0) {
             firstNameET.setError("Please enter your first name");
-        }else if (lastNameET.length()==0){
+        } else if (lastNameET.length() == 0) {
             firstNameET.setError("Please enter your last name");
-        }else if (passwordET.length()==0){
+        } else if (contactET.length() < 11) {
+            contactET.setError("Phone number should be 11 numbers");
+        } else if (addressET.length() == 0) {
+            addressET.setError("Please enter your address");
+        } else if (passwordET.length() == 0) {
             passwordET.setError("Plase enter your password");
-        }else if (passwordET.length()<6) {
+        } else if (passwordET.length() < 6) {
             passwordET.setError("Password should be 6 characters");
 
-        }else {
+        } else {
 
             progressDialog.show();
             progressDialog.setMessage("Please wait it will take few moments");
@@ -99,16 +108,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             progressDialog.setIndeterminate(true);
 
 
-            Call<RegistrationResponse> call = RetrofitClient.getInstance().getApi().register(userName, email, firstName,lastName,password);
+            Call<RegistrationResponse> call = RetrofitClient.getInstance().getApi().register(userName, email, firstName, lastName,
+                    password, address, contact);
             call.enqueue(new Callback<RegistrationResponse>() {
                 @Override
                 public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
-                    RegistrationResponse  registrationResponse = response.body();
-                    if (response.isSuccessful()){
+                    RegistrationResponse registrationResponse = response.body();
+                    if (response.isSuccessful()) {
                         progressDialog.dismiss();
                         Toast.makeText(RegisterActivity.this, registrationResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
-                    }else {
+                    } else {
                         progressDialog.dismiss();
                         Toast.makeText(RegisterActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                     }
@@ -119,12 +129,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     progressDialog.dismiss();
                     try {
                         Toast.makeText(RegisterActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             });
-
         }
     }
 }

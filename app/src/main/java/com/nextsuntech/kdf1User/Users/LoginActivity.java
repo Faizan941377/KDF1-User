@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nextsuntech.kdf1User.Dashboard.DashboardActivity;
+import com.nextsuntech.kdf1User.Model.LoginDataModel;
 import com.nextsuntech.kdf1User.Network.RetrofitClient;
 import com.nextsuntech.kdf1User.R;
 import com.nextsuntech.kdf1User.Response.LoginResponse;
@@ -41,11 +42,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         progressDialog = new ProgressDialog(this);
 
-        emailET.setText("fayasz22@gmail.com");
-        emailET.setEnabled(true);
-        passwordET.setText("12345");
-        passwordET.setEnabled(true);
-
 
         loginBT.setOnClickListener(this);
         signUpTV.setOnClickListener(this);
@@ -71,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.tv_login_signUp:
-                startActivity(new Intent(this,RegisterActivity.class));
+                startActivity(new Intent(this, RegisterActivity.class));
                 finish();
                 break;
         }
@@ -101,34 +97,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             progressDialog.setCancelable(false);
             progressDialog.setIndeterminate(true);
 
+
             Call<LoginResponse> call = RetrofitClient.getInstance().getApi().loginResponse(email, password);
             call.enqueue(new Callback<LoginResponse>() {
                 @Override
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     LoginResponse loginResponse = response.body();
-                    if (response.isSuccessful()) {
-                        progressDialog.dismiss();
-                        SharedPrefManager.getInstance(LoginActivity.this).saveLoginUser(loginResponse.getLoginDataModel());
-                        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        finish();
-                        Toast.makeText(LoginActivity.this, loginResponse.getLoginModel(), Toast.LENGTH_SHORT).show();
+                    try {
+                        if (response.isSuccessful()) {
+                            progressDialog.dismiss();
+                            SharedPrefManager.getInstance(LoginActivity.this).saveLoginUser(loginResponse.getResult());
+                            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            Toast.makeText(LoginActivity.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(LoginActivity.this, "System is busy", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        Toast.makeText(LoginActivity.this,loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
-                    progressDialog.dismiss();
                     try {
-                        Toast.makeText(LoginActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             });
-
-
         }
     }
 }

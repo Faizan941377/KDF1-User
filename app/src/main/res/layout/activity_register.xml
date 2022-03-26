@@ -20,10 +20,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:text="Register Here!"
                 android:textColor="@color/colorBlack"
-                android:layout_gravity="center"
                 android:textSize="30dp" />
 
 
@@ -31,8 +31,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_marginTop="50dp"
+                android:layout_marginRight="20dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -60,29 +60,29 @@
                     android:textColorHint="@color/color_orange"
                     android:textSize="12sp" />
 
-               <!-- <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="26dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Enter Contact"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                <!-- <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginLeft="26dp"
+                     android:layout_marginTop="8dp"
+                     android:text="Enter Contact"
+                     android:textColor="@color/black"
+                     android:textSize="14sp" />
 
-                <EditText
-                    android:id="@+id/et_register_contact"
-                    android:layout_width="match_parent"
-                    android:layout_height="46dp"
-                    android:layout_marginLeft="26dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="26dp"
-                    android:background="@drawable/edit_text_style"
-                    android:hint="03xxxxxxxxx"
-                    android:inputType="phone"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/color_orange"
-                    android:textSize="12sp" />-->
+                 <EditText
+                     android:id="@+id/et_register_contact"
+                     android:layout_width="match_parent"
+                     android:layout_height="46dp"
+                     android:layout_marginLeft="26dp"
+                     android:layout_marginTop="8dp"
+                     android:layout_marginRight="26dp"
+                     android:background="@drawable/edit_text_style"
+                     android:hint="03xxxxxxxxx"
+                     android:inputType="phone"
+                     android:textAllCaps="false"
+                     android:textColor="@color/black"
+                     android:textColorHint="@color/color_orange"
+                     android:textSize="12sp" />-->
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -161,6 +161,55 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="26dp"
                     android:layout_marginTop="8dp"
+                    android:text="Contact"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/et_register_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="26dp"
+                    android:background="@drawable/edit_text_style"
+                    android:hint="Contact"
+                    android:inputType="phone"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/color_orange"
+                    android:textSize="12sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Address"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/et_register_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="26dp"
+                    android:background="@drawable/edit_text_style"
+                    android:hint="Address"
+                    android:inputType="textPostalAddress"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/color_orange"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="8dp"
                     android:text="Password"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -216,24 +265,21 @@
                     android:id="@+id/account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
+                    android:padding="5dp"
+                    android:text="Already have account ?"
                     android:textColor="@color/colorBlack"
                     android:textSize="12dp"
-                    android:padding="5dp"
-                    android:text="Already have account ?"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_register_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Login"
-                    android:textSize="12dp"
+                    android:layout_toRightOf="@+id/account"
                     android:padding="5dp"
+                    android:text="Login"
                     android:textColor="@color/colorBackBlue"
-                    android:layout_toRightOf="@+id/account"/>
-
-
-
+                    android:textSize="12dp" />
 
             </RelativeLayout>
 

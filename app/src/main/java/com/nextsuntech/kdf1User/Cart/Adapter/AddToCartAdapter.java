@@ -185,43 +185,18 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
                         jsonObject1.put("cart", cart);
                         Log.e("cart", String.valueOf(jsonObject1));
 
-                        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject1.toString());
-                        Call<CheckOutResponse> call = RetrofitClient.getInstance().getApi().postOrder(requestBody);
-                        call.enqueue(new Callback<CheckOutResponse>() {
-                            @Override
-                            public void onResponse(Call<CheckOutResponse> call, Response<CheckOutResponse> response) {
-                                CheckOutResponse checkOutResponse = response.body();
+                        String totalPrice = addToCartTotalTV.getText().toString();
+                        String totalItems = totalItemTV.getText().toString();
 
-                                if (response.isSuccessful()) {
-                                    // Toast.makeText(mContext, checkOutResponse.getMessage() + " OderId " + checkOutResponse.getAutoId(), Toast.LENGTH_SHORT).show();
-                                    String orderId = String.valueOf(checkOutResponse.getAutoId());
-                                    String totalPrice = addToCartTotalTV.getText().toString();
-                                    String totalItems = totalItemTV.getText().toString();
+                        Intent intent = new Intent(mContext, CustomerOrderActivity.class);
+                        intent.putExtra("jsonObject", jsonObject1.toString());
+                        intent.putExtra("totalPrice", totalPrice);
+                        intent.putExtra("totalItems", totalItems);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        mContext.startActivity(intent);
+                        ((Activity)v.getContext()).finish();
+                        notifyDataSetChanged();
 
-                                    Intent intent = new Intent(mContext, CustomerOrderActivity.class);
-                                    intent.putExtra("totalPrice", totalPrice);
-                                    intent.putExtra("cartAutoId", orderId);
-                                    intent.putExtra("totalItems", totalItems);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    mContext.startActivity(intent);
-                                    ((Activity)v.getContext()).finish();
-                                    notifyDataSetChanged();
-                                } else {
-                                    Toast.makeText(mContext, "Something went wrong!", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<CheckOutResponse> call, Throwable t) {
-                                try {
-                                    Toast.makeText(mContext, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-
-                        });
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

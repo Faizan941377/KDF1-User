@@ -30,6 +30,8 @@ public class SharedPrefManager {
         editor.putString("email", LoginDataModelList.getEmail());
         editor.putString("firstName", LoginDataModelList.getFirstName());
         editor.putString("lastName", LoginDataModelList.getLastName());
+        editor.putString("address",LoginDataModelList.getAddress());
+        editor.putString("mobileNo",LoginDataModelList.getMobileNo());
         editor.putString("password", LoginDataModelList.getPassword());
         editor.putString("createAt", LoginDataModelList.getCreateAt());
         editor.putString("status", LoginDataModelList.getStatus());
@@ -50,6 +52,8 @@ public class SharedPrefManager {
                 sharedPreferences.getString("email", null),
                 sharedPreferences.getString("firstName", null),
                 sharedPreferences.getString("lastName", null),
+                sharedPreferences.getString("address", null),
+                sharedPreferences.getString("mobileNo", null),
                 sharedPreferences.getString("password", null),
                 sharedPreferences.getString("createAt", null),
                 sharedPreferences.getString("status", null),
