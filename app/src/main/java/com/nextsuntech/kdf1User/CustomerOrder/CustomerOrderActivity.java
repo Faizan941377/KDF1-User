@@ -3,6 +3,7 @@ package com.nextsuntech.kdf1User.CustomerOrder;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nextsuntech.kdf1User.Dashboard.DashboardActivity;
 import com.nextsuntech.kdf1User.Model.LoginDataModel;
 import com.nextsuntech.kdf1User.Network.RetrofitClient;
 import com.nextsuntech.kdf1User.R;
@@ -87,7 +89,7 @@ public class CustomerOrderActivity extends AppCompatActivity implements View.OnC
                 break;
 
             case R.id.iv_orderConfirm_back:
-                finish();
+                startActivity(new Intent(this, DashboardActivity.class));
                 break;
         }
     }
@@ -144,6 +146,8 @@ public class CustomerOrderActivity extends AppCompatActivity implements View.OnC
                                     progressDialog.dismiss();
                                     cartAutoIdTV.setText(cartAutoID);
                                     Toast.makeText(CustomerOrderActivity.this, customerBookingDetailsResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                                    finish();
+                                    startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
                                 } else {
                                     Toast.makeText(CustomerOrderActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                 }

@@ -188,12 +188,12 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
                         String totalPrice = addToCartTotalTV.getText().toString();
                         String totalItems = totalItemTV.getText().toString();
 
-                        Intent intent = new Intent(v.getContext().getApplicationContext(), CustomerOrderActivity.class);
+                        Intent intent = new Intent(mContext, CustomerOrderActivity.class);
                         intent.putExtra("jsonObject", jsonObject1.toString());
                         intent.putExtra("totalPrice", totalPrice);
                         intent.putExtra("totalItems", totalItems);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         mContext.startActivity(intent);
                         ((Activity)v.getContext()).finish();
                         notifyDataSetChanged();
