@@ -26,11 +26,10 @@
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
             android:name=".CustomerOrder.CustomerOrderActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
             android:name=".Order.OrderActivity"
-            android:launchMode="singleTop"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
             android:name=".Cart.AddToCartActivity"
