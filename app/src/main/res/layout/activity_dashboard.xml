@@ -29,7 +29,8 @@
             android:background="@drawable/ico_logout"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true" />
 
         <ImageView
             android:id="@+id/iv_dashboard_profile"
