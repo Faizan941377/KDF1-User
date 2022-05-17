@@ -115,9 +115,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
                     RegistrationResponse registrationResponse = response.body();
                     if (response.isSuccessful()) {
-                        progressDialog.dismiss();
                         Toast.makeText(RegisterActivity.this, registrationResponse.getMessage(), Toast.LENGTH_SHORT).show();
-
+                        progressDialog.dismiss();
+                        startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                        finish();
                     } else {
                         progressDialog.dismiss();
                         Toast.makeText(RegisterActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();

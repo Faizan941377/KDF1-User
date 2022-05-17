@@ -105,12 +105,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     LoginResponse loginResponse = response.body();
                     try {
                         if (response.isSuccessful()) {
+                            Toast.makeText(LoginActivity.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                             SharedPrefManager.getInstance(LoginActivity.this).saveLoginUser(loginResponse.getResult());
                             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
-                            Toast.makeText(LoginActivity.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
                         }else {
                             Toast.makeText(LoginActivity.this, "System is busy", Toast.LENGTH_SHORT).show();
                         }
@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
                     try {
-                        Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
