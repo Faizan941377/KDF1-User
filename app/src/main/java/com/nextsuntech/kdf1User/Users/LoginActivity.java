@@ -104,18 +104,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     LoginResponse loginResponse = response.body();
                     try {
-                        if (response.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        if (loginResponse!=null){
+                            if (loginResponse.getResult()!=null){
+                                Toast.makeText(getApplicationContext(), "Login "+loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
+                                SharedPrefManager.getInstance(LoginActivity.this).saveLoginUser(loginResponse.getResult());
+                                Intent intent = new Intent(LoginActivity.this,DashboardActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            }else {
+                                progressDialog.dismiss();
+                                Toast.makeText(getApplicationContext(), "System is busy", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        /*if (response.isSuccessful()) {
+                            Toast.makeText(LoginActivity.this, "" + loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                             SharedPrefManager.getInstance(LoginActivity.this).saveLoginUser(loginResponse.getResult());
                             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
-                        }else {
+                        } else {
                             Toast.makeText(LoginActivity.this, "System is busy", Toast.LENGTH_SHORT).show();
-                        }
+                        }*/
                     } catch (Exception e) {
-                        Toast.makeText(LoginActivity.this,loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Some thing went wrong" + loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
                 }
@@ -123,7 +137,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
                     try {
-                        Toast.makeText(LoginActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this,"" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

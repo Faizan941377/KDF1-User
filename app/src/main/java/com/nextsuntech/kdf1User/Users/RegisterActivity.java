@@ -114,22 +114,24 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 @Override
                 public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
                     RegistrationResponse registrationResponse = response.body();
-                    if (response.isSuccessful()) {
-                        Toast.makeText(RegisterActivity.this, registrationResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    if (registrationResponse != null) {
+                        Toast.makeText(getApplicationContext(),"Register " + registrationResponse.getMessage(), Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
-                        startActivity(new Intent(getApplicationContext(),LoginActivity.class));
-                        finish();
-                    } else {
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    }else {
                         progressDialog.dismiss();
-                        Toast.makeText(RegisterActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "System is busy", Toast.LENGTH_SHORT).show();
                     }
+
+                    finish();
                 }
 
                 @Override
                 public void onFailure(Call<RegistrationResponse> call, Throwable t) {
                     progressDialog.dismiss();
                     try {
-                        Toast.makeText(RegisterActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
