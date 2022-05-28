@@ -35,9 +35,36 @@
 
     </RelativeLayout>
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/order_history_detail_shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:orientation="vertical">
+
+            <include layout="@layout/order_history_detail_shimmer"/>
+            <include layout="@layout/order_history_detail_shimmer"/>
+            <include layout="@layout/order_history_detail_shimmer"/>
+            <include layout="@layout/order_history_detail_shimmer"/>
+            <include layout="@layout/order_history_detail_shimmer"/>
+            <include layout="@layout/order_history_detail_shimmer"/>
+            <include layout="@layout/order_history_detail_shimmer"/>
+
+
+        </LinearLayout>
+
+
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_orderHistoryDetail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
 </LinearLayout>

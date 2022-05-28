@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.nextsuntech.kdf1User"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 31
         multiDexEnabled true
         versionCode 12
@@ -55,6 +55,17 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
-    // dependency sor slider view
+    // dependency f or slider view
     implementation 'com.github.smarteist:autoimageslider:1.3.9'
+
+    /* For Slider - Start */
+    // Material Components for Android. Replace the version with the latest version of Material Components library.
+    implementation 'com.google.android.material:material:1.5.0'
+    // Circle Indicator (To fix the xml preview "Missing classes" error)
+    implementation 'me.relex:circleindicator:2.1.6'
+    implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.1.0'
+    /* For Slider - End */
+
+    // shimmer effect
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 }

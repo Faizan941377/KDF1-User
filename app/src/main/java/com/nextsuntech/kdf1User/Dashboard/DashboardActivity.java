@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nextsuntech.kdf1User.Cart.AddToCartActivity;
 import com.nextsuntech.kdf1User.Dashboard.Adapter.BeveragesAdapter;
@@ -45,7 +46,6 @@ import retrofit2.Response;
 
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ProgressDialog progressDialog;
     RecyclerView categoriesRV;
     RecyclerView beveragesRV;
     CategoriesAdapter categoriesAdapter;
@@ -58,7 +58,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     FloatingActionButton cartBT;
     ImageView logoutIV;
     ImageView profileIV;
+    SliderView sliderView;
     TextView itemCount;
+    ShimmerFrameLayout shimmerFrameLayout;
 
    /* List<GetCartDataModel> getCartDataModelList;
 
@@ -70,13 +72,15 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_dashboard);
 
         categoriesRV = findViewById(R.id.rv_categories);
-       // dealsRV = findViewById(R.id.rv_deals);
-       // beveragesRV = findViewById(R.id.rv_beverages);
+        // dealsRV = findViewById(R.id.rv_deals);
+        // beveragesRV = findViewById(R.id.rv_beverages);
         searchET = findViewById(R.id.et_dashboard_search);
         cartBT = findViewById(R.id.bt_dashboard_cartButton);
         userNameTV = findViewById(R.id.tv_dashboard_userName);
         logoutIV = findViewById(R.id.iv_logout);
         profileIV = findViewById(R.id.iv_dashboard_profile);
+        sliderView = findViewById(R.id.slider);
+        shimmerFrameLayout = findViewById(R.id.dashboard_shimmer);
         //  itemCount = findViewById(R.id.text_count);
 
         //SharedPreferences
@@ -85,16 +89,16 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         userNameTV.setText(userName);
 
 
-        progressDialog = new ProgressDialog(this);
-
-
         cartBT.setOnClickListener(this);
         logoutIV.setOnClickListener(this);
         profileIV.setOnClickListener(this);
 
         setCategoriesAdapter();
-      //  setBeveragesAdapter();
-     //   setDealsAdapter();
+        shimmerFrameLayout.startShimmer();
+
+
+        //  setBeveragesAdapter();
+        //   setDealsAdapter();
 
       /*  searchET.addTextChangedListener(new TextWatcher() {
             @Override
@@ -137,9 +141,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         // we are creating array list for storing our image urls.
         ArrayList<SliderDataModel> sliderDataArrayList = new ArrayList<>();
 
-        // initializing the slider view.
-        SliderView sliderView = findViewById(R.id.slider);
-
         // adding the urls inside array list
         sliderDataArrayList.add(new SliderDataModel(url1));
         sliderDataArrayList.add(new SliderDataModel(url2));
@@ -167,8 +168,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
         // to start autocycle below method is used.
         sliderView.startAutoCycle();
-    }
 
+        //      sliderView.setVisibility(View.VISIBLE);
+//        shimmerFrameLayout.stopShimmer();
+    }
 
     private void setBeveragesAdapter() {
         beveragesAdapter = new BeveragesAdapter(this);
@@ -185,10 +188,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
     private void setCategoriesAdapter() {
 
-        progressDialog.show();
-        progressDialog.setMessage("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.setIndeterminate(true);
 
         categoriesRV.setHasFixedSize(true);
         /*categoriesRV.setLayoutManager(new GridLayoutManager(this, 2));
@@ -201,22 +200,24 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onResponse(Call<MenuResponse> call, Response<MenuResponse> response) {
                 if (response.isSuccessful()) {
+                    shimmerFrameLayout.stopShimmer();
+                    categoriesRV.setVisibility(View.VISIBLE);
+                    shimmerFrameLayout.setVisibility(View.GONE);
                     categoriesDataModelsList = response.body().getResult();
                     categoriesRV.setAdapter(new CategoriesAdapter(getApplicationContext(), categoriesDataModelsList));
                     categoriesAdapter = new CategoriesAdapter(getApplicationContext(), categoriesDataModelsList);
                     categoriesRV.setAdapter(categoriesAdapter);
-                    progressDialog.dismiss();
                     String currentDateAndTime = SimpleDateFormat.getDateTimeInstance().format(new Date());
                     Log.e("DateAndTime", currentDateAndTime);
                 } else {
+                    shimmerFrameLayout.stopShimmer();
                     Toast.makeText(DashboardActivity.this, "Check your internet connection!", Toast.LENGTH_SHORT).show();
                 }
-                progressDialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<MenuResponse> call, Throwable t) {
-                progressDialog.dismiss();
+                shimmerFrameLayout.stopShimmer();
                 try {
                     Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {

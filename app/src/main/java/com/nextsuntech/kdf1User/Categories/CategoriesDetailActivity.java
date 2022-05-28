@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nextsuntech.kdf1User.Categories.Adapter.CategoriesDetailsAdapter;
 import com.nextsuntech.kdf1User.Model.GetProductDataModel;
 import com.nextsuntech.kdf1User.Network.RetrofitClient;
@@ -32,8 +33,8 @@ public class CategoriesDetailActivity extends AppCompatActivity implements View.
     RecyclerView categoriesDetailRV;
     List<GetProductDataModel> productDataModelList;
     CategoriesDetailsAdapter categoriesDetailsAdapter;
-    ProgressDialog progressDialog;
     ImageView backIV;
+    ShimmerFrameLayout shimmerFrameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +45,13 @@ public class CategoriesDetailActivity extends AppCompatActivity implements View.
         categoriesDetailRV = findViewById(R.id.rv_categoriesDetails);
         searchET = findViewById(R.id.et_rowCategoryDetail);
         backIV = findViewById(R.id.iv_categoryDetails_back);
+        shimmerFrameLayout = findViewById(R.id.shimmer);
+        shimmerFrameLayout.startShimmer();
 
         backIV.setOnClickListener(this);
 
 
-        progressDialog = new ProgressDialog(this);
+        //progressDialog = new ProgressDialog(this);
 
         setCategoriesDetailsAdapter();
 
@@ -73,10 +76,10 @@ public class CategoriesDetailActivity extends AppCompatActivity implements View.
 
     private void setCategoriesDetailsAdapter() {
 
-        progressDialog.show();
+       /* progressDialog.show();
         progressDialog.setMessage("Loading...");
         progressDialog.setCancelable(false);
-        progressDialog.setIndeterminate(true);
+        progressDialog.setIndeterminate(true);*/
 
         categoriesDetailRV.setHasFixedSize(true);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL);
@@ -89,20 +92,25 @@ public class CategoriesDetailActivity extends AppCompatActivity implements View.
             @Override
             public void onResponse(Call<GetProductResponse> call, Response<GetProductResponse> response) {
                 if (response.isSuccessful()) {
+                    shimmerFrameLayout.stopShimmer();
+                    shimmerFrameLayout.setVisibility(View.GONE);
+                    categoriesDetailRV.setVisibility(View.VISIBLE);
                     productDataModelList = response.body().getProductDataModelList();
                     categoriesDetailRV.setAdapter(new CategoriesDetailsAdapter(getApplicationContext(), productDataModelList));
                     categoriesDetailsAdapter = new CategoriesDetailsAdapter(getApplicationContext(), productDataModelList);
                     categoriesDetailRV.setAdapter(categoriesDetailsAdapter);
-                    progressDialog.dismiss();
+                   // progressDialog.dismiss();
                 } else {
                     Toast.makeText(CategoriesDetailActivity.this, response.message(), Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
+                   // progressDialog.dismiss();
+                    shimmerFrameLayout.stopShimmer();
                 }
             }
 
             @Override
             public void onFailure(Call<GetProductResponse> call, Throwable t) {
-                progressDialog.dismiss();
+                //progressDialog.dismiss();
+                shimmerFrameLayout.stopShimmer();
                 try {
                     Toast.makeText(CategoriesDetailActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 

@@ -63,11 +63,35 @@
 
     </RelativeLayout>
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_searchBar"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/categories_details_shimmer"/>
+            <include layout="@layout/categories_details_shimmer"/>
+            <include layout="@layout/categories_details_shimmer"/>
+            <include layout="@layout/categories_details_shimmer"/>
+            <include layout="@layout/categories_details_shimmer"/>
+
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_categoriesDetails"
-        android:layout_below="@+id/rl_searchBar"
-        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_below="@+id/rl_searchBar"
+        android:layout_marginTop="8dp" />
 
 </RelativeLayout>

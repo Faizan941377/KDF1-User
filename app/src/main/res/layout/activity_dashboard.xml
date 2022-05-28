@@ -7,6 +7,7 @@
     android:background="@color/colorOffWhite"
     tools:context=".Dashboard.DashboardActivity">
 
+
     <RelativeLayout
         android:id="@+id/action_bar"
         android:layout_width="match_parent"
@@ -26,38 +27,38 @@
             android:id="@+id/iv_logout"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/ico_logout"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true" />
+            android:background="@drawable/ico_logout" />
 
         <ImageView
             android:id="@+id/iv_dashboard_profile"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/ico_dashboard_profile"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/ico_dashboard_profile" />
 
 
     </RelativeLayout>
 
 
-        <ScrollView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/action_bar">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/action_bar">
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -69,18 +70,18 @@
                     android:textSize="24dp"
                     android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tv_dashboard_userName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="Faizan"
-                        android:textColor="@color/color_orange"
-                        android:textSize="22dp"
-                        android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_dashboard_userName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Faizan"
+                    android:textColor="@color/color_orange"
+                    android:textSize="22dp"
+                    android:textStyle="bold" />
 
-                </LinearLayout>
+            </LinearLayout>
 
             <!--   <TextView
                     android:layout_width="wrap_content"
@@ -99,114 +100,112 @@
                     android:layout_height="match_parent" />-->
 
 
-                <com.smarteist.autoimageslider.SliderView
-                    android:id="@+id/slider"
+            <com.smarteist.autoimageslider.SliderView
+                android:id="@+id/slider"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="8dp"
+                app:sliderAnimationDuration="600"
+                app:sliderAutoCycleDirection="back_and_forth"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorEnabled="true"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorMargin="15dp"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorRadius="2dp"
+                app:sliderIndicatorSelectedColor="#5A5A5A"
+                app:sliderIndicatorUnselectedColor="#FFF"
+                app:sliderScrollTimeInSec="1" />
+
+
+            <RelativeLayout
+                android:id="@+id/rl_searchBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="20dp">
+
+                <EditText
+                    android:id="@+id/et_dashboard_search"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_centerInParent="true"
-                    app:sliderAnimationDuration="600"
-                    app:sliderAutoCycleDirection="back_and_forth"
-                    app:sliderIndicatorAnimationDuration="600"
-                    app:sliderIndicatorEnabled="true"
-                    android:layout_marginTop="8dp"
-                    app:sliderIndicatorGravity="center_horizontal|bottom"
-                    app:sliderIndicatorMargin="15dp"
-                    app:sliderIndicatorOrientation="horizontal"
-                    app:sliderIndicatorPadding="3dp"
-                    app:sliderIndicatorRadius="2dp"
-                    app:sliderIndicatorSelectedColor="#5A5A5A"
-                    app:sliderIndicatorUnselectedColor="#FFF"
-                    app:sliderScrollTimeInSec="1" />
+                    android:layout_height="45dp"
+                    android:background="@drawable/et_search_shap"
+                    android:hint="Search &amp; Order"
+                    android:paddingStart="35dp" />
 
-                <RelativeLayout
-                    android:id="@+id/rl_searchBar"
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/ico_search"
+                    android:backgroundTint="@color/lightGray" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tv_categories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Categories"
+                android:textColor="@color/colorBlack"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/dashboard_shimmer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="20dp">
+                    android:layout_height="wrap_content">
 
-                    <EditText
-                        android:id="@+id/et_dashboard_search"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:background="@drawable/et_search_shap"
-                        android:hint="Search &amp; Order"
-                        android:paddingStart="35dp" />
+                    <include layout="@layout/dashboard_shimmer" />
 
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="5dp"
-                        android:background="@drawable/ico_search"
-                        android:backgroundTint="@color/lightGray" />
-
-                </RelativeLayout>
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_categories"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tv_categories"
+                android:visibility="gone" />
 
-                <TextView
-                    android:id="@+id/tv_categories"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Categories"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+        </LinearLayout>
 
 
+    </ScrollView>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_categories"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/tv_categories"/>
-
-<!--
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
-                    android:text="Beverages"
-                    android:textColor="@color/colorBlack"
-                    android:layout_marginLeft="8dp"/>-->
-
-              <!--  <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_beverages"
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"></androidx.recyclerview.widget.RecyclerView>-->
-            </LinearLayout>
-
-
-        </ScrollView>
-
-    <FrameLayout
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         style="?attr/actionButtonStyle"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clipToPadding="false"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
-        android:padding="16dp"
-        android:focusable="true">
+        android:clipToPadding="false"
+        android:focusable="true"
+        android:padding="16dp">
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/bt_dashboard_cartButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ico_cart"
-        app:backgroundTint="@color/colorWhite"
-        app:rippleColor="@color/color_orange"
-        app:tint="@color/color_orange"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/bt_dashboard_cartButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ico_cart"
+            app:backgroundTint="@color/colorWhite"
+            app:rippleColor="@color/color_orange"
+            app:tint="@color/color_orange" />
 
         <!--<TextView
             android:id="@+id/text_count"

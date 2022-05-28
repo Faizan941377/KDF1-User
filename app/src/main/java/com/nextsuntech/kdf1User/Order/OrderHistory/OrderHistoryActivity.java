@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.nextsuntech.kdf1User.Cart.Adapter.AddToCartAdapter;
 import com.nextsuntech.kdf1User.Dashboard.Adapter.CategoriesAdapter;
 import com.nextsuntech.kdf1User.Model.GetCartDataModel;
@@ -34,9 +35,9 @@ public class OrderHistoryActivity extends AppCompatActivity implements View.OnCl
 
     ImageView backIV;
     RecyclerView orderHistoryRV;
-    ProgressDialog progressDialog;
     OrderHistoryAdapter orderHistoryAdapter;
     List<GetOrderHistoryDataModel> getOrderHistoryDataModelList;
+    ShimmerFrameLayout shimmerFrameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +46,9 @@ public class OrderHistoryActivity extends AppCompatActivity implements View.OnCl
 
         backIV = findViewById(R.id.iv_orderHistory_back);
         orderHistoryRV = findViewById(R.id.rv_orderHistory);
+        shimmerFrameLayout = findViewById(R.id.order_history_shimmer);
 
-
-        progressDialog = new ProgressDialog(this);
+        shimmerFrameLayout.startShimmer();
 
 
         backIV.setOnClickListener(this);
@@ -59,12 +60,6 @@ public class OrderHistoryActivity extends AppCompatActivity implements View.OnCl
 
     private void setAdapterOrderHistory() {
 
-
-        progressDialog.show();
-        progressDialog.setMessage("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.setIndeterminate(true);
-
         orderHistoryRV.setHasFixedSize(true);
         orderHistoryRV.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
@@ -73,17 +68,20 @@ public class OrderHistoryActivity extends AppCompatActivity implements View.OnCl
            @Override
            public void onResponse(Call<GetOrderHistoryResponse> call, Response<GetOrderHistoryResponse> response) {
                if (response.isSuccessful()){
+                   shimmerFrameLayout.stopShimmer();
+                   orderHistoryRV.setVisibility(View.VISIBLE);
+                   shimmerFrameLayout.setVisibility(View.GONE);
                    getOrderHistoryDataModelList = response.body().getGetOrderHistoryDataModelList();
                    orderHistoryRV.setAdapter(new OrderHistoryAdapter(getApplicationContext(), getOrderHistoryDataModelList));
                    orderHistoryAdapter = new OrderHistoryAdapter(getApplicationContext(), getOrderHistoryDataModelList);
                    orderHistoryRV.setAdapter(orderHistoryAdapter);
-                   progressDialog.dismiss();
+               }else {
+                   Toast.makeText(OrderHistoryActivity.this, "Please check your internet", Toast.LENGTH_SHORT).show();
                }
            }
 
            @Override
            public void onFailure(Call<GetOrderHistoryResponse> call, Throwable t) {
-               progressDialog.dismiss();
                try {
                    Toast.makeText(OrderHistoryActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                }catch (Exception e){
