@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bt_rowOrderHistoryDetail"
+    android:layout_width="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:elevation="10dp"
+            app:cardBackgroundColor="@color/colorWhite"
+            app:cardCornerRadius="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:id="@+id/tv_rowOderHistory_orderId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="1001"
+                    android:textColor="@color/lightGray"
+                    android:background="@color/lightGray"
+                    android:textSize="10dp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_toLeftOf="@+id/tv_rowOderHistory_orderId"
+                    android:text="Product Id :"
+                    android:textColor="@color/lightGray"
+                    android:background="@color/lightGray"
+                    android:textSize="10dp"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true">
+
+                    <ProgressBar
+                        android:id="@+id/pb_OderHistoryDetail"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:indeterminateTint="@color/lightGray"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerInParent="true"/>
+
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/iv_rowOrderHistoryDetail_Image"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@color/lightGray"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp" />
+
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/ll_orderDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/rl_image"
+                    android:layout_marginLeft="8dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_rowOderHistoryDetail_productName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Product Name :"
+                        android:textColor="@color/lightGray"
+                        android:background="@color/lightGray"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_rowOderHistory_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/lightGray"
+                        android:text="Cheese Burger"
+                        android:textColor="@color/lightGray"
+                        android:layout_toRightOf="@+id/tv_rowOderHistoryDetail_productName"
+                        android:textSize="10dp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/quantity"
+                        android:background="@color/lightGray"
+                        android:text="Description :"
+                        android:textColor="@color/lightGray"
+                        android:layout_marginTop="5sp"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/tv_rowOderHistoryDetail_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/quantity"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/status"
+                        android:text="Pending"
+                        android:background="@color/lightGray"
+                        android:textColor="@color/lightGray"
+                        android:textSize="10dp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/quantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_rowOderHistory_description"
+                        android:text="Quantity :"
+                        android:textColor="@color/lightGray"
+                        android:background="@color/lightGray"
+                        android:layout_marginTop="5sp"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_rowOderHistoryDetail_quantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_rowOderHistory_description"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/quantity"
+                        android:text="0"
+                        android:background="@color/lightGray"
+                        android:layout_marginTop="5sp"
+                        android:textColor="@color/lightGray"
+                        android:textSize="10dp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/tv_rowOderHistory_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/status"
+                        android:text="Total Price :"
+                        android:textColor="@color/lightGray"
+                        android:background="@color/lightGray"
+                        android:layout_marginTop="5sp"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_rowOderHistory_totalPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_rowOderHistoryDetail_description"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/tv_rowOderHistory_price"
+                        android:text="2000"
+                        android:textColor="@color/lightGray"
+                        android:background="@color/lightGray"
+                        android:layout_marginTop="5sp"
+                        android:textSize="10dp"
+                        android:textStyle="normal" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/lightGray"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/tv_rowOderHistory_price_createAt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CreateAt :"
+                        android:textColor="@color/lightGray"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_rowOderHistoryDetail_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/tv_rowOderHistory_price_createAt"
+                        android:text="12:00pm"
+                        android:textColor="@color/lightGray"
+                        android:textSize="10dp"
+                        android:textStyle="normal" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+</LinearLayout>
